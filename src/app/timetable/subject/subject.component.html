@@ -1,0 +1,112 @@
+<!-- Basic form layout section start -->
+<section id="basic-form-layouts" *ngIf="displaysubject">
+  <!-- <div class="row">
+    <div class="col-md-12">
+      <div class="content-header">Subject Form</div>
+    </div>
+  </div> -->
+
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title" id="basic-layout-form">Create Subject</h4>
+    </div>
+    <div class="card-body">
+      <div class="card-block">
+        <div class="px-3">
+          <form class="form" [formGroup]="subjectform" (ngSubmit)="AddSubject()">
+            <div class="form-body">
+
+              <div class="row">
+                <div class="col-md-6">
+                 
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="SubjectName">Subject Name</label>
+      
+                        <input type="text" id="SubjectName" class="form-control" name="SubjectName"  formControlName="SubjectName" [(ngModel)]="subject.SubjectName" required>
+                        <div *ngIf="subjectform.controls['SubjectName'].errors && (subjectform.controls['SubjectName'].dirty || subjectform.controls['SubjectName'].touched)">
+                          <small class="text-danger" *ngIf="subjectform.get('SubjectName').hasError('required')">Subject Name is required</small>
+                        </div>
+                      </div>
+                    </div>
+        
+                  </div>
+                  
+                </div>
+                <div class="col-md-6">
+
+                  </div>
+
+              </div>
+
+            </div>
+            <div class="form-actions">
+              <div class="savecl">
+                <button type="submit" class="btn btn-raised btn-raised btn-primary" [disabled]="!subjectform.valid">
+                    <i class="fa fa-check-square-o"></i> Save
+                  </button>
+              <button type="button" class="btn btn-raised btn-raised btn-warning mr-1" (click)="Cancel()">
+                <i class="ft-x"></i> Cancel
+              </button>
+            </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- // Basic form layout section end -->
+
+<section id="extended">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header" *ngIf="CrateSubjectButton">
+                    <h4 class="card-title">Subject</h4>
+                    <br>
+                    <a class="btn btn-info btn-raised font-medium-1"(click)="CreateSubject()">+AddSubject</a>
+                </div>
+                <div class="card-body">
+                    <div class="card-block">
+                        <table class="table table-responsive text-center">
+                            <thead>
+                              
+                                <tr>
+                                    <th>Subject</th>
+                                    <th>Action</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>                                
+                                <tr *ngFor='let subject of subjectlist' >
+                                    <td>{{subject.subjectName}}</td>
+                                    
+                                    <td>
+                                        <!-- <a class="info p-0" data-original-title="" title="">
+                                            <i class="ft-user font-medium-3 mr-2"></i>
+                                        </a> -->
+                                        <a class="success p-0" data-original-title="" title="" (click)="EditSubject(subject)">
+                                            <i class="ft-edit-2 font-medium-3 mr-2"></i>
+                                        </a>
+                                        <a class="danger p-0" data-original-title="" title="" (click)="DeleteSubject(subject.subjectID)">
+                                            <i class="ft-x font-medium-3 mr-2"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                
+                                <tr *ngIf="!subjectlist || subjectlist.length==0">
+                                  <td colspan="1">
+                                      No class to display
+                                  </td>
+                              </tr>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>

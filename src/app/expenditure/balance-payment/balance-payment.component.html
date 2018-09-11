@@ -1,0 +1,236 @@
+<!-- Basic form layout section start -->
+<section id="basic-form-layouts" *ngIf="Displaybalancepaymentform">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title" id="basic-layout-form">Create New Payment</h4>
+    </div>
+    <div class="card-body">
+      <div class="card-block">
+        <div class="px-3">
+          <form class="form" [formGroup]="balancepaymentform" (ngSubmit)="SaveBalancePayment()">
+            <div class="form-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <h4 class="form-section">
+                    <i class="ft-user"></i>New Payment Info</h4>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Category Name</label>
+                        <ng-multiselect-dropdown [placeholder]="'Select Category'" [data]="Categorylist" formControlName="CategoryName" [(ngModel)]="balancepaymentobj.CategoryName"
+                          [settings]="dropdownSettings">
+                        </ng-multiselect-dropdown>
+                        <!-- <input type="text" id="CategoryName" class="form-control" name="CategoryName" formControlName="CategoryName" [(ngModel)]="balancepaymentobj.CategoryName"
+                            required> -->
+                        <div *ngIf="balancepaymentform.controls['CategoryName'].errors && (balancepaymentform.controls['CategoryName'].dirty || balancepaymentform.controls['CategoryName'].touched)">
+                          <small class="text-danger" *ngIf="balancepaymentform.get('CategoryName').hasError('required')">CategoryName is required</small>
+                          <small class="text-danger" *ngIf="balancepaymentform.get('CategoryName').hasError('minlength') && !(balancepaymentform.get('CategoryName').hasError('pattern'))">Minimum 3 characters</small>
+                          <small class="text-danger" *ngIf="balancepaymentform.get('CategoryName').hasError('pattern')">Enter only characters</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Payment Type</label>
+                        <div class="input-group">
+                          <label class="display-inline-block custom-control custom-radio ml-1">
+                            <input type="radio" class="custom-control-input" [(ngModel)]="balancepaymentobj.PaymentType" formControlName="PaymentType"
+                              name="PaymentType" value='TotalPayment' (click)="setradio('TotalPayment')" required>
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description ml-0">Total Payment</span>
+                          </label>
+                          <label class="display-inline-block custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" [(ngModel)]="balancepaymentobj.PaymentType" formControlName="PaymentType"
+                              name="PaymentType" value='AdvancePayment' (click)="setradio('AdvancePayment')" required>
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description ml-0">Advance</span>
+                          </label>
+                          <div *ngIf="balancepaymentform.controls['PaymentType'].errors && (balancepaymentform.controls['PaymentType'].dirty || balancepaymentform.controls['PaymentType'].touched)">
+                            <small class="text-danger" *ngIf="balancepaymentform.get('PaymentType').hasError('required')">PaymentType is required </small>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4"></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6" *ngIf="DisplayTotalPaymentForm">
+                      <!-- <lable>Balance Total Amount Details</lable> -->
+                      <div class="form-group">
+                        <label>Date</label>
+                        <input type="date" id="BalancePaymentDate" class="form-control" name="BalancePaymentDate" formControlName="BalancePaymentDate"
+                          [(ngModel)]="balancepaymentobj.BalancePaymentDate" required>
+                        <div *ngIf="balancepaymentform.controls['BalancePaymentDate'].errors && (balancepaymentform.controls['BalancePaymentDate'].dirty || balancepaymentform.controls['BalancePaymentDate'].touched)">
+                          <small class="text-danger" *ngIf="balancepaymentform.get('BalancePaymentDate').hasError('required')">Date is required</small>
+                          <small class="text-danger" *ngIf="balancepaymentform.get('BalancePaymentDate').hasError('minlength') && !(balancepaymentform.get('BalancePaymentDate').hasError('pattern'))">Minimum 3 characters</small>
+                          <small class="text-danger" *ngIf="balancepaymentform.get('BalancePaymentDate').hasError('pattern')">Enter only characters</small>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label>Amount</label>
+                        <input type="number" id="BalancePaymentAmount" class="form-control" name="BalancePaymentAmount" formControlName="BalancePaymentAmount"
+                          [(ngModel)]="balancepaymentobj.BalancePaymentAmount" required>
+                        <div *ngIf="balancepaymentform.controls['BalancePaymentAmount'].errors && (balancepaymentform.controls['BalancePaymentAmount'].dirty || balancepaymentform.controls['BalancePaymentAmount'].touched)">
+                          <small class="text-danger" *ngIf="balancepaymentform.get('BalancePaymentAmount').hasError('required')">Amount is required</small>
+                          <small class="text-danger" *ngIf="balancepaymentform.get('BalancePaymentAmount').hasError('minlength') && !(balancepaymentform.get('BalancePaymentAmount').hasError('pattern'))">Minimum 3 characters</small>
+                          <small class="text-danger" *ngIf="balancepaymentform.get('BalancePaymentAmount').hasError('pattern')">Enter only characters</small>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label>Quantity</label>
+                        <input type="number" id="BalancePaymentQuantity" class="form-control" name="BalancePaymentQuantity" formControlName="BalancePaymentQuantity"
+                          [(ngModel)]="balancepaymentobj.BalancePaymentQuantity" required>
+                        <div *ngIf="balancepaymentform.controls['BalancePaymentQuantity'].errors && (balancepaymentform.controls['BalancePaymentQuantity'].dirty || balancepaymentform.controls['BalancePaymentQuantity'].touched)">
+                          <small class="text-danger" *ngIf="balancepaymentform.get('BalancePaymentQuantity').hasError('required')">Quantity is required</small>
+                          <small class="text-danger" *ngIf="balancepaymentform.get('BalancePaymentQuantity').hasError('minlength') && !(balancepaymentform.get('BalancePaymentQuantity').hasError('pattern'))">Minimum 3 characters</small>
+                          <small class="text-danger" *ngIf="balancepaymentform.get('BalancePaymentQuantity').hasError('pattern')">Enter only characters</small>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label>Comments</label>
+                        <textarea id="BalancePaymentComments" class="form-control" name="BalancePaymentComments" formControlName="BalancePaymentComments"
+                          [(ngModel)]="balancepaymentobj.BalancePaymentComments" required></textarea>
+                        <div *ngIf="balancepaymentform.controls['BalancePaymentComments'].errors && (balancepaymentform.controls['BalancePaymentComments'].dirty || balancepaymentform.controls['BalancePaymentComments'].touched)">
+                          <small class="text-danger" *ngIf="balancepaymentform.get('BalancePaymentComments').hasError('required')">Comments is required</small>
+                          <small class="text-danger" *ngIf="balancepaymentform.get('BalancePaymentComments').hasError('minlength') && !(balancepaymentform.get('BalancePaymentComments').hasError('pattern'))">Minimum 3 characters</small>
+                          <small class="text-danger" *ngIf="balancepaymentform.get('BalancePaymentComments').hasError('pattern')">Enter only characters</small>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label>Paid By</label>
+                        <input type="text" id="BalancePaymentPaidBy" class="form-control" name="BalancePaymentPaidBy" formControlName="BalancePaymentPaidBy"
+                          [(ngModel)]="balancepaymentobj.BalancePaymentPaidBy" required readonly>
+                        <div *ngIf="balancepaymentform.controls['BalancePaymentPaidBy'].errors && (balancepaymentform.controls['BalancePaymentPaidBy'].dirty || balancepaymentform.controls['BalancePaymentPaidBy'].touched)">
+                          <small class="text-danger" *ngIf="balancepaymentform.get('BalancePaymentPaidBy').hasError('required')">PaidBy is required</small>
+                          <small class="text-danger" *ngIf="balancepaymentform.get('BalancePaymentPaidBy').hasError('minlength') && !(balancepaymentform.get('BalancePaymentPaidBy').hasError('pattern'))">Minimum 3 characters</small>
+                          <small class="text-danger" *ngIf="balancepaymentform.get('BalancePaymentPaidBy').hasError('pattern')">Enter only characters</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6" *ngIf="DisplayAdvancePaymentForm">
+                      <!-- <lable>Balance Advance Details</lable> -->
+                      <div class="form-group">
+                        <label>Date</label>
+                        <input type="date" id="AdvanceDate" class="form-control" name="AdvanceDate" formControlName="AdvanceDate" [(ngModel)]="balancepaymentobj.AdvanceDate"
+                          required>
+                        <div *ngIf="balancepaymentform.controls['AdvanceDate'].errors && (balancepaymentform.controls['AdvanceDate'].dirty || balancepaymentform.controls['AdvanceDate'].touched)">
+                          <small class="text-danger" *ngIf="balancepaymentform.get('AdvanceDate').hasError('required')">Date is required</small>
+                          <small class="text-danger" *ngIf="balancepaymentform.get('AdvanceDate').hasError('minlength') && !(balancepaymentform.get('AdvanceDate').hasError('pattern'))">Minimum 3 characters</small>
+                          <small class="text-danger" *ngIf="balancepaymentform.get('AdvanceDate').hasError('pattern')">Enter only characters</small>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label>Amount</label>
+                        <input type="number" id="AdvanceAmount" class="form-control" name="AdvanceAmount" formControlName="AdvanceAmount" [(ngModel)]="balancepaymentobj.AdvanceAmount"
+                          required>
+                        <div *ngIf="balancepaymentform.controls['AdvanceAmount'].errors && (balancepaymentform.controls['AdvanceAmount'].dirty || balancepaymentform.controls['AdvanceAmount'].touched)">
+                          <small class="text-danger" *ngIf="balancepaymentform.get('AdvanceAmount').hasError('required')">Amount is required</small>
+                          <small class="text-danger" *ngIf="balancepaymentform.get('AdvanceAmount').hasError('minlength') && !(balancepaymentform.get('AdvanceAmount').hasError('pattern'))">Minimum 3 characters</small>
+                          <small class="text-danger" *ngIf="balancepaymentform.get('AdvanceAmount').hasError('pattern')">Enter only characters</small>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label>Quantity</label>
+                        <input type="number" id="AdvanceQuantity" class="form-control" name="AdvanceQuantity" formControlName="AdvanceQuantity" [(ngModel)]="balancepaymentobj.AdvanceQuantity"
+                          required>
+                        <div *ngIf="balancepaymentform.controls['AdvanceQuantity'].errors && (balancepaymentform.controls['AdvanceQuantity'].dirty || balancepaymentform.controls['AdvanceQuantity'].touched)">
+                          <small class="text-danger" *ngIf="balancepaymentform.get('AdvanceQuantity').hasError('required')">Quantity is required</small>
+                          <small class="text-danger" *ngIf="balancepaymentform.get('AdvanceQuantity').hasError('minlength') && !(balancepaymentform.get('AdvanceQuantity').hasError('pattern'))">Minimum 3 characters</small>
+                          <small class="text-danger" *ngIf="balancepaymentform.get('AdvanceQuantity').hasError('pattern')">Enter only characters</small>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label>Comments</label>
+                        <textarea id="AdvanceComments" class="form-control" name="AdvanceComments" formControlName="AdvanceComments" [(ngModel)]="balancepaymentobj.AdvanceComments"
+                          required></textarea>
+                        <div *ngIf="balancepaymentform.controls['AdvanceComments'].errors && (balancepaymentform.controls['AdvanceComments'].dirty || balancepaymentform.controls['AdvanceComments'].touched)">
+                          <small class="text-danger" *ngIf="balancepaymentform.get('AdvanceComments').hasError('required')">Comments is required</small>
+                          <small class="text-danger" *ngIf="balancepaymentform.get('AdvanceComments').hasError('minlength') && !(balancepaymentform.get('AdvanceComments').hasError('pattern'))">Minimum 3 characters</small>
+                          <small class="text-danger" *ngIf="balancepaymentform.get('AdvanceComments').hasError('pattern')">Enter only characters</small>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label>Paid By</label>
+                        <input type="text" id="AdvancePaidBy" class="form-control" name="AdvancePaidBy" formControlName="AdvancePaidBy" [(ngModel)]="balancepaymentobj.AdvancePaidBy"
+                          required>
+                        <div *ngIf="balancepaymentform.controls['AdvancePaidBy'].errors && (balancepaymentform.controls['AdvancePaidBy'].dirty || balancepaymentform.controls['AdvancePaidBy'].touched)">
+                          <small class="text-danger" *ngIf="balancepaymentform.get('AdvancePaidBy').hasError('required')">PaidBy is required</small>
+                          <small class="text-danger" *ngIf="balancepaymentform.get('AdvancePaidBy').hasError('minlength') && !(balancepaymentform.get('AdvancePaidBy').hasError('pattern'))">Minimum 3 characters</small>
+                          <small class="text-danger" *ngIf="balancepaymentform.get('AdvancePaidBy').hasError('pattern')">Enter only characters</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-actions">
+              <div class="savecl">
+                <button type="submit" class="btn btn-raised btn-raised btn-primary" [disabled]="!balancepaymentform.valid">
+                  <i class="fa fa-check-square-o"></i> Save
+                </button>
+                <button type="button" class="btn btn-raised btn-raised btn-warning mr-1" (click)="Cancel()">
+                  <i class="ft-x"></i> Cancel
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="row">
+  <div class="col-12">
+    <div class="content-header">
+      <a class="btn btn-info btn-raised font-medium-3" (click)="CreateBalancePayment()">Add New Payment</a>
+    </div>
+  </div>
+  <section id="extended">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="card-block">
+              <table class="table table-responsive text-center">
+                <thead>
+                  <tr>
+                    <th>Caterogy Name</th>
+                    <th>PaymentType</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor='let balancepaymentobj of BalancePaymentlist'>
+                    <td>{{balancepaymentobj.CategoryName}}</td>
+                    <td>{{balancepaymentobj.PaymentType}}</td>
+                    <td>
+                      <a class="success p-0" data-original-title="" title="" (click)="EditBalancePaymentRecord(newpaymentobj)">
+                        <i class="ft-edit-2 font-medium-3 mr-2"></i>
+                      </a>
+                      <a class="danger p-0" data-original-title="" title="" (click)="DeleteBalancePaymentRecord(balancepaymentobj.NewPaymentID)">
+                        <i class="ft-x font-medium-3 mr-2"></i>
+                      </a>
+                    </td>
+                  </tr>
+                  <tr *ngIf="!BalancePaymentlist || BalancePaymentlist.length==0">
+                    <td colspan="12">
+                      No Balance Payments to display
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!--Extended Table Ends-->

@@ -1,0 +1,402 @@
+<!-- Basic form layout section start -->
+<section id="basic-form-layouts" *ngIf="DisplayStudentForm">
+  <!-- <div class="row">
+    <div class="col-md-12">
+      <div class="content-header">Student Form</div> 
+    </div>
+  </div> -->
+
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title" id="basic-layout-form">Create Student</h4>
+    </div>
+    <div class="card-body">
+      <div class="card-block">
+        <div class="px-3">
+          <form class="form" [formGroup]="signupform" (ngSubmit)="Register()">
+            <div class="form-body">
+
+              <div class="row">
+                <div class="col-md-6">
+                  <h4 class="form-section">
+                    <i class="ft-user"></i> Personal Info</h4>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="fname">First Name</label>
+
+                        <input type="text" id="fname" class="form-control" name="fname" formControlName="FirstName" [(ngModel)]="student.FirstName"
+                          required>
+                        <div *ngIf="signupform.controls['FirstName'].errors && (signupform.controls['FirstName'].dirty || signupform.controls['FirstName'].touched)">
+                          <small class="text-danger" *ngIf="signupform.get('FirstName').hasError('required')">First Name is required</small>
+                          <small class="text-danger" *ngIf="signupform.get('FirstName').hasError('minlength') && !(signupform.get('FirstName').hasError('pattern'))">Minimum 3 characters</small>
+                          <small class="text-danger" *ngIf="signupform.get('FirstName').hasError('pattern')">Enter only characters</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="lname">Last Name</label>
+                        <input type="text" id="lname" class="form-control" name="lname" formControlName="LastName" [(ngModel)]="student.LastName"
+                          required>
+                        <div *ngIf="signupform.controls['LastName'].errors && (signupform.controls['LastName'].dirty || signupform.controls['LastName'].touched)">
+                          <small class="text-danger" *ngIf="signupform.get('LastName').hasError('required')">Last Name is required</small>
+                          <small class="text-danger" *ngIf="signupform.get('LastName').hasError('minlength') && !(signupform.get('LastName').hasError('pattern'))">Minimum 3 characters</small>
+                          <small class="text-danger" *ngIf="signupform.get('LastName').hasError('pattern')">Enter only character</small>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="DateOfBirth">Date of Birth</label>
+                        <input type="text" class="form-control" id="DateOfBirth" name="DateOfBirth" bsDatepicker formControlName="DateOfBirth" [(ngModel)]="student.DateOfBirth">
+                        <div *ngIf="signupform.controls['DateOfBirth'].errors && (signupform.controls['DateOfBirth'].dirty || signupform.controls['DateOfBirth'].touched)">
+                          <small class="text-danger" *ngIf="signupform.get('DateOfBirth').hasError('required')">Date Of Birth is required </small>
+                        </div>
+
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="AadharNumber">Aadhar Number</label>
+                        <input type="text" class="form-control" id="AadharNumber" name="AadharNumber" formControlName="AadharNumber" [(ngModel)]="student.AadharNumber"
+                          required>
+                        <div *ngIf="signupform.controls['AadharNumber'].errors && (signupform.controls['AadharNumber'].dirty || signupform.controls['AadharNumber'].touched)">
+                          <small class="text-danger" *ngIf="signupform.get('AadharNumber').hasError('required')">Aadhar Number is required</small>
+                          <small class="text-danger" *ngIf="signupform.get('AadharNumber').hasError('pattern')">Enter only Numbers</small>
+                          <small class="text-danger" *ngIf="signupform.get('AadharNumber').hasError('minlength') && !(signupform.get('AadharNumber').hasError('pattern'))">Enter 12 Numbers only</small>
+                          <small class="text-danger" *ngIf="signupform.get('AadharNumber').hasError('maxlength') && !(signupform.get('AadharNumber').hasError('pattern'))">Enter 12 Numbers only</small>
+
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Gender</label>
+                    <div class="input-group">
+                      <!-- <input type="radio" name="Gender" class="custom-control-input"   value='Male' formControlName="Gender" [(ngModel)]='student.Gender'>Male
+                        <input type="radio" name='Gender' class="custom-control-input" value='Female' formControlName="Gender" [(ngModel)]='student.Gender'>Female -->
+                      <label class="display-inline-block custom-control custom-radio ml-1">
+                        <input type="radio" class="custom-control-input" [(ngModel)]="student.Gender" formControlName="Gender" name="Gender" value='Male'
+                          required>
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description ml-0">Male</span>
+                      </label>
+                      <label class="display-inline-block custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" [(ngModel)]="student.Gender" formControlName="Gender" name="Gender" value='Female'
+                          required>
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description ml-0">Female</span>
+                      </label>
+                      <div *ngIf="signupform.controls['Gender'].errors && (signupform.controls['Gender'].dirty || signupform.controls['Gender'].touched)">
+                        <small class="text-danger" *ngIf="signupform.get('Gender').hasError('required')">Gender is required </small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <h4 class="form-section">
+                    <i class="ft-file-text"></i> Contact Information</h4>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="ParentName">Parent Name</label>
+                        <input type="text" class="form-control" id="ParentName" name="ParentName" formControlName="ParentName" [(ngModel)]="student.ParentName"
+                          required>
+                        <div *ngIf="signupform.controls['ParentName'].errors && (signupform.controls['ParentName'].dirty || signupform.controls['ParentName'].touched)">
+                          <small class="text-danger" *ngIf="signupform.get('ParentName').hasError('required')">Parent Name is required</small>
+                          <small class="text-danger" *ngIf="signupform.get('ParentName').hasError('minlength') && !(signupform.get('ParentName').hasError('pattern'))">Minimum 3 characters</small>
+                          <small class="text-danger" *ngIf="signupform.get('ParentName').hasError('pattern')">Enter only characters</small>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="ParentNumber">Parent Number</label>
+                        <input type="tel" class="form-control" id="ParentNumber" name="ParentNumber" formControlName="ParentNumber" [(ngModel)]="student.ParentNumber"
+                          required>
+                        <div *ngIf="signupform.controls['ParentNumber'].errors && (signupform.controls['ParentNumber'].dirty || signupform.controls['ParentNumber'].touched)">
+                          <small class="text-danger" *ngIf="signupform.get('ParentNumber').hasError('required')">Parent Number is required</small>
+                          <small class="text-danger" *ngIf="signupform.get('ParentNumber').hasError('pattern')">Enter valid Parent Number</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                </div>
+
+
+
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <h4 class="form-section">
+                    <i class="ft-map-pin"></i> Course Information</h4>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="Course">Course</label>
+                        <ng-multiselect-dropdown [placeholder]="'custom placeholder'" [data]="courseslist"  formControlName="Course" [(ngModel)]="student.Course" [settings]="dropdownSettings"  >
+                      </ng-multiselect-dropdown>
+
+                      <!-- <select id="Course" name="Course" class="form-control" [(ngModel)]="student.Course" formControlName="Course" required>
+                          <option disabled [ngValue]="null">Select Course</option>
+                          <option *ngFor="let item of courseslist" value={{item.CourseId}}>
+                            {{item.CourseName}}
+                          </option>
+                        </select> -->
+                        
+                      
+                          <!-- <option value="Yoga">Yoga</option>
+                                <option value="TutionFee">Tution Fee</option>
+                                <option value="BusFee">BusFee</option> -->
+                      </div>
+                     
+                    </div>
+                    <div class="col-md-6">
+
+                    </div>
+                  </div>
+
+
+                </div>
+                <div class="col-md-6">
+                  <h4 class="form-section">
+                    <i class="ft-file-text"></i> Student Education Information</h4>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="ClassName">Class</label>
+                        <select id="ClassName" name="ClassName" class="form-control" [(ngModel)]="student.ClassName" formControlName="ClassName" (change)="GetSections($event.target.value)"
+                          required>
+                          <option disabled [ngValue]="null">Select Class</option>
+                          <option *ngFor="let item of classeslist" value={{item.ClassID}}>
+                            {{item.Class}}
+                          </option>
+                          <!-- <option value="LKG">L.K.G</option>
+                          <option value="UKG">U.K.G</option>
+                          <option value="1stClass">1st Class</option>
+                          <option value="2stClass">2nd Class</option>
+                          <option value="3rdClass">3rd Class</option>
+                          <option value="4thClass">4th Class</option>
+                          <option value="5thClass">5th Class</option>
+                          <option value="6thClass">6th Class</option>
+                          <option value="7thClass">7th Class</option>
+                          <option value="8thClass">8th Class</option>
+                          <option value="9thClass">9th Class</option>
+                          <option value="10thClass">10th Class</option> -->
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="SectionName">Section</label>
+                        <select id="SectionName" name="SectionName" class="form-control" [(ngModel)]="student.SectionName" formControlName="SectionName" required>
+                          <!-- <option value="0" selected="" disabled="">Section</option> -->
+                          <option disabled [ngValue]="null">Select Section</option>
+                          <option *ngFor="let item of sectionlist" value="item.SectionID">
+                            {{item.SectionName}}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="RollNumber">Roll Number</label>
+                        <input type="text" class="form-control" id="RollNumber" name="RollNumber" formControlName="RollNumber" [(ngModel)]="student.RollNumber"
+                          required>
+                        <div *ngIf="signupform.controls['RollNumber'].errors && (signupform.controls['RollNumber'].dirty || signupform.controls['RollNumber'].touched)">
+                          <small class="text-danger" *ngIf="signupform.get('RollNumber').hasError('required')">Roll Number is required </small>
+
+
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="BusRouteNumber">Bus Route Number</label>
+                        <input type="tel" class="form-control" id="BusRouteNumber" name="BusRouteNumber" formControlName="BusRouteNumber" [(ngModel)]="student.BusRouteNumber"
+                          required>
+                        <div *ngIf="signupform.controls['BusRouteNumber'].errors && (signupform.controls['BusRouteNumber'].dirty || signupform.controls['BusRouteNumber'].touched)">
+                          <small class="text-danger" *ngIf="signupform.get('BusRouteNumber').hasError('required')">Bus Route Number is required </small>
+
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="BusRouteName">Bus Route Name</label>
+                        <input type="text" class="form-control" id="BusRouteName" name="BusRouteName" formControlName="BusRouteName" [(ngModel)]="student.BusRouteName"
+                          required>
+                        <div *ngIf="signupform.controls['BusRouteName'].errors && (signupform.controls['BusRouteName'].dirty || signupform.controls['BusRouteName'].touched)">
+                          <small class="text-danger" *ngIf="signupform.get('BusRouteName').hasError('required')">Bus Route Name is required </small>
+
+
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                    
+                  <h4 class="form-section">
+                    <i class="ft-file-text"></i> Address Information</h4>
+                  <div class="row">
+                    <div class="col-md-6">
+                        
+                      <div class="form-group" >
+
+                          <label for="Address">Address</label>
+                          <textarea id="Address" rows="5" class="form-control" name="Address" formControlName="Address" [(ngModel)]="student.Address"
+                            required></textarea>
+                          <div *ngIf="signupform.controls['Address'].errors && (signupform.controls['Address'].dirty || signupform.controls['Address'].touched)">
+                            <small class="text-danger" *ngIf="signupform.get('Address').hasError('required')">Address is required </small>
+  
+  
+                          </div>
+                        
+                        
+                        <br>
+                        <br>
+                        <br>
+                        <div class="row"></div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                    </div>
+                  </div>
+
+                </div>
+                <div class="col-md-6"></div>
+              </div>
+            </div>
+            <div class="form-actions">
+              <div class="savecl">
+                  <!-- [disabled]="!signupform.valid" -->
+                <button type="submit" class="btn btn-raised btn-raised btn-primary">
+                  <i class="fa fa-check-square-o"></i> Save
+                </button>
+                <button type="button" class="btn btn-raised btn-raised btn-warning mr-1" (click)="Cancel()">
+                  <i class="ft-x"></i> Cancel
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- // Basic form layout section end -->
+
+<!--Extended Table starts-->
+<div class="row"  *ngIf="CreateStudentButton">
+  <div class="col-12">
+    <div class="content-header"></div>
+
+    <a class="btn btn-info btn-raised font-medium-3" (click)="CreateStudent()">+AddStudent</a>
+
+
+  </div>
+</div>
+<section id="extended">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <!-- <h4 class="card-title">Student List</h4> -->
+        </div>
+        <div class="card-body">
+          <div class="card-block">
+            <table class="table table-responsive text-center">
+              <thead>
+
+                <tr>
+                  <!-- <th>#</th> -->
+                  <!-- <th></th> -->
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Gender</th>
+                  <th>Class</th>
+                  <th>Section</th>
+                  <th>RollNo</th>
+                  <th>DOB</th>
+                  <th>AadharNumber</th>
+                  <th>ParentName</th>
+                  <th>ParentNumber</th>
+                  <th>Address</th>
+                  <th>BusRouteNumber</th>
+                  <th>BusRouteName</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <tr *ngFor='let student of studentlist'>
+
+                  <td>{{student.firstName}}</td>
+                  <td> {{student.lastName}}</td>
+                  <td> {{student.gender}}</td>
+                  <td>{{student.class}}</td>
+                  <td>{{student.section}}</td>
+                  <td>{{student.rollNumber}}</td>
+                  <td>{{student.dateOfBirth}}</td>
+                  <td>{{student.aadharNumber}}</td>
+                  <td>{{student.parentName}}</td>
+                  <td>{{student.parentNumber}}</td>
+                  <td>{{student.address}}</td>
+                  <td>{{student.busRouteNumber}}</td>
+                  <td>{{student.busRouteName}}</td>
+                  <td>
+                    <!-- <a class="info p-0" data-original-title="" title="">
+                                          <i class="ft-user font-medium-3 mr-2"></i>
+                                      </a> -->
+                    <a class="success p-0" data-original-title="" title="" (click)="EditStudent(student)">
+                      <i class="ft-edit-2 font-medium-3 mr-2"></i>
+                    </a>
+                    <a class="danger p-0" data-original-title="" title="" (click)="DeleteStudent(student.studentID)">
+                      <i class="ft-x font-medium-3 mr-2"></i>
+                    </a>
+                  </td>
+                </tr>
+
+                <tr *ngIf="!studentlist || studentlist.length==0">
+                  <td colspan="12">
+                    No students to display
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--Extended Table Ends-->

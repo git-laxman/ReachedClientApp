@@ -1,0 +1,160 @@
+<!-- Basic form layout section start -->
+<section id="basic-form-layouts" *ngIf="DisplayExamForm">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title" id="basic-layout-form">Create Exam</h4>
+        </div>
+        <div class="card-body">
+            <div class="card-block">
+                <div class="px-3">
+                    <form class="form" [formGroup]="examform" (ngSubmit)="SaveExam()">
+                        <div class="form-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4 class="form-section">
+                                        <i class="ft-user"></i>Exam Info</h4>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Exam Name</label>
+                                                <input type="text" id="ExamName" class="form-control" name="ExamName" formControlName="ExamName" [(ngModel)]="exam.ExamName"
+                                                    required>
+                                                <div *ngIf="examform.controls['ExamName'].errors && (examform.controls['ExamName'].dirty || examform.controls['ExamName'].touched)">
+                                                    <small class="text-danger" *ngIf="examform.get('ExamName').hasError('required')">Exam Name is required</small>
+                                                    <small class="text-danger" *ngIf="examform.get('ExamName').hasError('minlength') && !(examform.get('ExamName').hasError('pattern'))">Minimum 3 characters</small>
+                                                    <small class="text-danger" *ngIf="examform.get('ExamName').hasError('pattern')">Enter only characters</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4"></div>
+                                        <div class="col-md-4"></div>
+                                        
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Exam From Date</label>
+                                                <input type="date" class="form-control" id="ExamFromDate" name="ExamFromDate" formControlName="ExamFromDate" [(ngModel)]="exam.ExamFromDate"
+                                                    required>
+                                                <!-- <input type="text" placeholder="Datepicker" class="form-control" bsDatepicker> -->
+                                            </div>
+                                            <div *ngIf="examform.controls['ExamFromDate'].errors && (examform.controls['ExamFromDate'].dirty || examform.controls['ExamFromDate'].touched)">
+                                                <small class="text-danger" *ngIf="examform.get('ExamFromDate').hasError('required')">Exam From Date is required </small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Exam To Date</label>
+                                                <input type="date" class="form-control" id="ExamToDate" name="ExamToDate" formControlName="ExamToDate" [(ngModel)]="exam.ExamToDate"
+                                                    required>
+                                                <!-- <input type="text" placeholder="Datepicker" class="form-control" bsDatepicker> -->
+                                            </div>
+                                            <div *ngIf="examform.controls['ExamFromDate'].errors && (examform.controls['ExamToDate'].dirty || examform.controls['ExamToDate'].touched)">
+                                                <small class="text-danger" *ngIf="examform.get('ExamToDate').hasError('required')">Exam To Date is required </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="lname">Class Name</label>
+                                                <select id="Class" name="ClassName" class="form-control" [(ngModel)]="exam.ClassName" formControlName="ClassName" required>
+                                                    <option [value]=null disabled></option>
+                                                    <option *ngFor="let class of classdd" [value]="class.Item1">{{class.Item2}}
+                                                    </option>
+                                                </select>
+                                                <div *ngIf="examform.controls['ClassName'].errors && (examform.controls['ClassName'].dirty || examform.controls['ClassName'].touched)">
+                                                    <small class="text-danger" *ngIf="examform.get('ClassName').hasError('required')">Class Name is required</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="lname">Grade Pool</label>
+                                                <select id="GradePool" name="GradePool" class="form-control" [(ngModel)]="exam.GradePool" formControlName="GradePool" required>
+                                                    <option [value]=null disabled></option>
+                                                    <option *ngFor="let grade of gradepooldd" [value]="grade.Item1">{{grade.Item2}}
+                                                    </option>
+                                                </select>
+                                                <div *ngIf="examform.controls['GradePool'].errors && (examform.controls['GradePool'].dirty || examform.controls['GradePool'].touched)">
+                                                    <small class="text-danger" *ngIf="examform.get('GradePool').hasError('required')">Grade Pool is required</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <div class="savecl">
+                                <button type="submit" class="btn btn-raised btn-raised btn-primary" [disabled]="!examform.valid">
+                                    <i class="fa fa-check-square-o"></i> Save
+                                </button>
+                                <button type="button" class="btn btn-raised btn-raised btn-warning mr-1" (click)="Cancel()">
+                                    <i class="ft-x"></i> Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="content-header">
+            <a class="btn btn-info btn-raised font-medium-3" (click)="CreateExam()">Add Exam</a>
+        </div>
+    </div>
+    <section id="extended">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-block">
+                            <table class="table table-responsive text-center">
+                                <thead>
+                                    <tr>
+                                        <th>Exam Name</th>
+                                        <th>Exam From Date</th>
+                                        <th>Exam To Date</th>
+                                        <th>Classes</th>
+                                        <th>GradePool</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor='let exam of Examlist'>
+                                        <td>{{exam.ExamName}}</td>
+                                        <td>{{exam.ExamFromDate}}</td>
+                                        <td>{{exam.ExamToDate}}</td>
+                                        <td>{{exam.Classes}}</td>
+                                        <td>{{exam.GradePool}}</td>
+                                        <td>
+                                            <a class="success p-0" data-original-title="" title="" (click)="EditExam(Exam)">
+                                                <i class="ft-edit-2 font-medium-3 mr-2"></i>
+                                            </a>
+                                            <a class="danger p-0" data-original-title="" title="" (click)="DeleteExam(Exam)">
+                                                <i class="ft-x font-medium-3 mr-2"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="!Examlist || Examlist.length==0">
+                                        <td colspan="12">
+                                            No Exams to display
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<!--Extended Table Ends-->

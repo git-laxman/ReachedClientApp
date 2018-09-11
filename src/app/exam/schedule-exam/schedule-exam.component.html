@@ -1,0 +1,158 @@
+<section id="basic-form-layouts" *ngIf="Displayscheduleexamlistform">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="content-header">Add Schedule Exam Form</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title" id="basic-layout-form">Create Schedule Exam</h4>
+    </div>
+    <div class="card-body">
+      <div class="card-block">
+        <div class="px-3">
+          <form class="form" [formGroup]="scheduleexamform" (ngSubmit)="saveScheduleExam()">
+            <div class="form-body">
+              <div class="row">
+                <div class="col-md-10">
+                  <h4 class="form-section">
+                    <i class="ft-user"></i> Schedule Exam Info</h4>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="ClassName">Class Name</label>
+                        <select id="ClassName" name="ClassName" class="form-control" [(ngModel)]="scheduleExamobj.ClassName" formControlName="ClassName"
+                          required>
+                          <option [value]=null disabled></option>
+                          <option *ngFor="let class of classdd" [value]="class.Item1">{{class.Item2}}
+                          </option>
+                        </select>
+                        <div *ngIf="scheduleexamform.controls['ClassName'].errors && (scheduleexamform.controls['ClassName'].dirty || scheduleexamform.controls['ClassName'].touched)">
+                          <small class="text-danger" *ngIf="scheduleexamform.get('ClassName').hasError('required')">Class Name is required</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="SubjectName">Subject Name</label>
+                        <select id="SubjectName" name="SubjectName" class="form-control" [(ngModel)]="scheduleExamobj.SubjectName" formControlName="SubjectName"
+                          required>
+                          <option [value]=null disabled></option>
+                          <option *ngFor="let sub of subjectdd" [value]="sub.Item1">{{sub.Item2}}
+                          </option>
+                        </select>
+                        <div *ngIf="scheduleexamform.controls['SubjectName'].errors && (scheduleexamform.controls['SubjectName'].dirty || scheduleexamform.controls['SubjectName'].touched)">
+                          <small class="text-danger" *ngIf="scheduleexamform.get('SubjectName').hasError('required')">Subject Name is required</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="ExamDate">Exam Date</label>
+                        <input type="text" placeholder="Exam Date" class="form-control" name="ExamDate" [(ngModel)]="scheduleExamobj.ExamDate" formControlName="ExamDate"
+                          bsDatepicker>
+                      </div>
+                      <div *ngIf="scheduleexamform.controls['ExamDate'].errors && (scheduleexamform.controls['ExamDate'].dirty || scheduleexamform.controls['ExamDate'].touched)">
+                        <small class="text-danger" *ngIf="scheduleexamform.get('ExamDate').hasError('required')">Exam Date is required</small>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="ExamStartTime">Exam Start Time</label>
+                        <input type="time" id="ExamStartTime" [(ngModel)]="scheduleExamobj.ExamStartTime" placeholder="Exam Time" class="form-control"
+                          name="ExamStartTime" formControlName="ExamStartTime" />
+                      </div>
+                      <div *ngIf="scheduleexamform.controls['ExamStartTime'].errors && (scheduleexamform.controls['ExamStartTime'].dirty || scheduleexamform.controls['ExamStartTime'].touched)">
+                        <small class="text-danger" *ngIf="scheduleexamform.get('ExamStartTime').hasError('required')">Exam Start Time is required</small>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="ExamEndTime">Exam To Time</label>
+                        <input type="time" id="ExamEndTime" [(ngModel)]="scheduleExamobj.ExamEndTime" placeholder="Exam Time" class="form-control"
+                          name="ExamEndTime" formControlName="ExamEndTime" />
+                      </div>
+                      <div *ngIf="scheduleexamform.controls['ExamEndTime'].errors && (scheduleexamform.controls['ExamEndTime'].dirty || scheduleexamform.controls['ExamEndTime'].touched)">
+                        <small class="text-danger" *ngIf="scheduleexamform.get('ExamEndTime').hasError('required')">Exam End Time is required</small>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-actions">
+                    <div class="savecl">
+                      <button type="submit" class="btn btn-raised btn-raised btn-primary" [disabled]="!scheduleexamform.valid">
+                        <i class="fa fa-check-square-o"></i> Save
+                      </button>
+                      <button type="button" class="btn btn-raised btn-raised btn-warning mr-1" (click)="Cancel()">
+                        <i class="ft-x"></i> Cancel
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="row">
+  <div class="col-12">
+    <div class="content-header">
+      <a class="btn btn-info btn-raised font-medium-3" (click)="CreateScheduleExam()">Add Schedule Exam </a>
+    </div>
+  </div>
+  <section id="extended">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-header">
+          </div>
+          <div class="card-body">
+            <div class="card-block">
+              <table class="table table-responsive text-center">
+                <thead>
+                  <tr>
+                    <th>Class Name</th>
+                    <th>Subject Name</th>
+                    <th>Exam Date</th>
+                    <th>Exam Start Time</th>
+                    <th>Exam To Time</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  <tr *ngFor='let schedule of scheduleexamlist'>
+                    <td>{{schedule.ClassName}}</td>
+                    <td>{{schedule.SubjectName}}</td>
+                    <td>{{schedule.ExamDate}}</td>
+                    <td>{{schedule.ExamStartTime}}</td>
+                    <td>{{schedule.ExamEndTime}}</td>
+                    <td>
+                      <a class="success p-0" data-original-title="" title="" (click)="Editscheduleexam(schedule)">
+                        <i class="ft-edit-2 font-medium-3 mr-2"></i>
+                      </a>
+                      <a class="danger p-0" data-original-title="" title="" (click)="Deletescheduleexam(schedule)">
+                        <i class="ft-x font-medium-3 mr-2"></i>
+                      </a>
+                    </td>
+                  </tr>
+
+                  <tr *ngIf="!scheduleexamlist || scheduleexamlist.length==0">
+                    <td colspan="12">
+                      No Schedule Exam to display
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

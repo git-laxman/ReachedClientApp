@@ -1,0 +1,213 @@
+<!-- Basic form layout section start -->
+<div  *ngIf="AddAdmin">
+<section id="basic-form-layouts">
+
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title" id="basic-layout-form">Create admin</h4>
+    </div>
+    <div class="card-body">
+      <div class="card-block">
+        <div class="px-3">
+          <form class="form" [formGroup]="adminform" (ngSubmit)="RegisterAdmin()">
+            <div class="form-body">
+              <div class="row">
+                <div class="col-md-8">
+                  <h4 class="form-section">
+                    <i class="ft-user"></i> Admin Info</h4>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="Name">Name</label>
+
+                        <input type="text" id="Name" class="form-control" name="Name" formControlName="Name" [(ngModel)]="admin.Name" required>
+                        <div *ngIf="adminform.controls['Name'].errors && (adminform.controls['Name'].dirty || adminform.controls['Name'].touched)">
+                          <small class="text-danger" *ngIf="adminform.get('Name').hasError('required')">Name is required</small>
+                          <small class="text-danger" *ngIf="adminform.get('Name').hasError('minlength') && !(adminform.get('Name').hasError('pattern'))">Minimum 3 characters</small>
+                          <small class="text-danger" *ngIf="adminform.get('Name').hasError('pattern')">Enter only characters</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="PhoneNumber">Phone Number</label>
+                        <input type="tel" class="form-control" id="PhoneNumber" name="PhoneNumber" formControlName="PhoneNumber" [(ngModel)]="admin.PhoneNumber"
+                          required>
+                        <div *ngIf="adminform.controls['PhoneNumber'].errors && (adminform.controls['PhoneNumber'].dirty || adminform.controls['PhoneNumber'].touched)">
+                          <small class="text-danger" *ngIf="adminform.get('PhoneNumber').hasError('required')">Phone Number is required</small>
+                          <small class="text-danger" *ngIf="adminform.get('PhoneNumber').hasError('pattern')">Enter valid Phone Number</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" id="email" name="Email" formControlName="Email" [(ngModel)]="admin.Email" placeholder="john@gmail.com">
+                        <div *ngIf="adminform.controls['Email'].errors && (adminform.controls['Email'].dirty || adminform.controls['Email'].touched)">
+                          <small class="text-danger" *ngIf="adminform.get('Email').hasError('required')">Email is required</small>
+                          <small class="text-danger" *ngIf="adminform.get('Email').hasError('pattern')">Enter Valid Email ID</small>
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="Address">Address</label>
+                        <textarea id="Address" rows="2" class="form-control" name="Address" formControlName="Address" [(ngModel)]="admin.Address"
+                          required></textarea>
+                        <div *ngIf="adminform.controls['Address'].errors && (adminform.controls['Address'].dirty || adminform.controls['Address'].touched)">
+                          <small class="text-danger" *ngIf="adminform.get('Address').hasError('required')">Address is required </small>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="Designation">Designation</label>
+
+                        <input type="text" id="Designation" class="form-control" name="Designation" formControlName="Designation" [(ngModel)]="admin.Designation"
+                          required>
+                        <div *ngIf="adminform.controls['Designation'].errors && (adminform.controls['Designation'].dirty || adminform.controls['Designation'].touched)">
+                          <small class="text-danger" *ngIf="adminform.get('Designation').hasError('required')">Designation is required</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Roles</label>
+                        <label class="custom-control custom-checkbox m-0">
+                          <input type="checkbox" class="custom-control-input" [(ngModel)]="admin.CanCreateSchool" name="CanCreateSchool" formControlName="CanCreateSchool"
+                            value="CanCreateSchool">
+                          <span class="custom-control-indicator"></span>
+                          Can Create School
+                        </label>
+                        <label class="custom-control custom-checkbox m-0">
+                          <input type="checkbox" class="custom-control-input" [(ngModel)]="admin.CanCreateAdmin" name="CanCreateAdmin" formControlName="CanCreateAdmin"
+                            value="CanCreateAdmin">
+                          <span class="custom-control-indicator"></span>
+                          Can Create Admin
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="UserName">UserName</label>
+
+                        <input type="text" id="UserName" class="form-control" name="UserName" formControlName="UserName" [(ngModel)]="admin.UserName"
+                          required>
+                        <div *ngIf="adminform.controls['UserName'].errors && (adminform.controls['UserName'].dirty || adminform.controls['UserName'].touched)">
+                          <small class="text-danger" *ngIf="adminform.get('UserName').hasError('required')">UserName is required</small>
+                          <small class="text-danger" *ngIf="adminform.get('UserName').hasError('minlength') && !(adminform.get('UserName').hasError('pattern'))">Minimum 3 characters</small>
+                          <small class="text-danger" *ngIf="adminform.get('UserName').hasError('pattern')">Enter only characters</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+
+                        <label for="pwd">Password:</label>
+
+                        <label class="custom-control custom-checkbox float-right">
+                          <input type="checkbox" formControlName="showpass" id="test1" [(ngModel)]="passwordCheckbox" (click)="hideShowPassword()"
+                            class="custom-control-input">
+                          <span class="custom-control-indicator"></span>
+
+                          <span class="custom-control-description" *ngIf="!passwordCheckbox">Show Password</span>
+                          <span class="custom-control-description" *ngIf="passwordCheckbox">Hide Password</span>
+
+                        </label>
+                        <input type={{inputType}} class="form-control" name="Password" formControlName="Password" [(ngModel)]="admin.Password" id="pwd"
+                          placeholder="Use Letters,Symbols and Numbers">
+                        <div *ngIf="adminform.controls['Password'].errors && (adminform.controls['Password'].dirty || adminform.controls['Password'].touched)">
+                          <small class="text-danger" *ngIf="adminform.get('Password').hasError('required')">Password is required</small>
+                          <small class="text-danger" *ngIf="adminform.get('Password').hasError('pattern')"> Password must consists of at least 8 characters and not more than 15 characters</small>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                </div>
+                <div class="col-md-4">
+                </div>
+              </div>
+            </div>
+            <div class="form-actions">
+              <div class="savecl">
+                <button type="submit" class="btn btn-raised btn-raised btn-primary" [disabled]="!adminform.valid">
+                  <i class="fa fa-check-square-o"></i> Save
+                </button>
+                <button type="button" class="btn btn-raised btn-raised btn-warning mr-1" (click)="Cancel()">
+                  <i class="ft-x"></i> Cancel
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- // Basic form layout section end -->
+<div class="card" *ngIf="DisplyAdmin">
+
+
+  <div class="card-header">
+          <a class="btn btn-info btn-raised font-medium-3"(click)="CreateAdmin()">+AddAdmin</a>
+  </div>
+  <!-- // School form layout section end -->
+  <div class="table-responsive">
+    <table id="example" class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Edit</th>
+          <th>Delete</th>
+          <th>Name</th>
+          <th>PhoneNumber</th>
+          <th>Email</th>
+          <th>Address</th>
+          <th>Designation</th>
+          <th>CanCreateSchool</th>
+          <th>CanCreateAdmin</th>
+  
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of adminllist">
+          <td>
+            <button (click)="EditAdmin(item)">Edit</button>
+          </td>
+          <td>
+
+            <button (click)="DeleteAdmin(item.RAdminID)">Delete</button>
+          </td>
+          <td>{{item.Name}}</td>
+          <td>{{item.PhoneNumber}}</td>
+          <td>{{item.Email}}</td>
+          <td>{{item.Address}}</td>
+          <td>{{item.Designation}}</td>
+          <td>{{item.CanCreateSchool}}</td>
+          <td>{{item.CanCreateAdmin}}</td>
+         
+        </tr>
+        <tr *ngIf="adminllist.length==0" style="height:200px">
+          <td colspan="16">No data to display</td>
+        </tr>
+      </tbody>
+    </table>
+
+
+  </div>
+</div>

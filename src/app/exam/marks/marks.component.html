@@ -1,0 +1,385 @@
+<!-- <section id="basic-form-layouts" [hidden]="dispalystudentform">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="content-header">Marks Form</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title" id="basic-layout-form">Create Marks</h4>
+    </div>
+    <div class="card-body">
+      <div class="card-block">
+        <div class="px-3">
+          <form class="form" [formGroup]="signupform" (ngSubmit)="Register()">
+            <div class="form-body">
+
+              <div class="row">
+                <div class="col-md-6">
+                  <h4 class="form-section">
+                    <i class="ft-user"></i> Personal Info</h4>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="fname">First Name</label>
+
+                        <input type="text" id="fname" class="form-control" name="fname" formControlName="FirstName" [(ngModel)]="student.FirstName"
+                          required>
+                        <div *ngIf="signupform.controls['FirstName'].errors && (signupform.controls['FirstName'].dirty || signupform.controls['FirstName'].touched)">
+                          <small class="text-danger" *ngIf="signupform.get('FirstName').hasError('required')">First Name is required</small>
+                          <small class="text-danger" *ngIf="signupform.get('FirstName').hasError('minlength') && !(signupform.get('FirstName').hasError('pattern'))">Minimum 3 characters</small>
+                          <small class="text-danger" *ngIf="signupform.get('FirstName').hasError('pattern')">Enter only characters</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="lname">Last Name</label>
+                        <input type="text" id="lname" class="form-control" name="lname" formControlName="LastName" [(ngModel)]="student.LastName"
+                          required>
+                        <div *ngIf="signupform.controls['LastName'].errors && (signupform.controls['LastName'].dirty || signupform.controls['LastName'].touched)">
+                          <small class="text-danger" *ngIf="signupform.get('LastName').hasError('required')">Last Name is required</small>
+                          <small class="text-danger" *ngIf="signupform.get('LastName').hasError('minlength') && !(signupform.get('LastName').hasError('pattern'))">Minimum 3 characters</small>
+                          <small class="text-danger" *ngIf="signupform.get('LastName').hasError('pattern')">Enter only character</small>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="date2">Date of Birth</label>
+                        <input type="date" class="form-control" id="date2" name="date2" formControlName="DateOfBirth" [(ngModel)]="student.DateOfBirth"
+                          required>
+                        <div *ngIf="signupform.controls['DateOfBirth'].errors && (signupform.controls['DateOfBirth'].dirty || signupform.controls['DateOfBirth'].touched)">
+                          <small class="text-danger" *ngIf="signupform.get('DateOfBirth').hasError('required')">Date Of Birth is required </small>
+                        </div>
+
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="AadharNumber">Aadhar Number</label>
+                        <input type="text" class="form-control" id="AadharNumber" name="AadharNumber" formControlName="AadharNumber" [(ngModel)]="student.AadharNumber"
+                          required>
+                        <div *ngIf="signupform.controls['AadharNumber'].errors && (signupform.controls['AadharNumber'].dirty || signupform.controls['AadharNumber'].touched)">
+                          <small class="text-danger" *ngIf="signupform.get('AadharNumber').hasError('required')">Aadhar Number is required</small>
+                          <small class="text-danger" *ngIf="signupform.get('AadharNumber').hasError('pattern')">Enter only Numbers</small>
+                          <small class="text-danger" *ngIf="signupform.get('AadharNumber').hasError('minlength') && !(signupform.get('AadharNumber').hasError('pattern'))">Enter 16 Numbers only</small>
+                          <small class="text-danger" *ngIf="signupform.get('AadharNumber').hasError('maxlength') && !(signupform.get('AadharNumber').hasError('pattern'))">Enter 16 Numbers only</small>
+
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Gender</label>
+                    <div class="input-group">
+                      <label class="display-inline-block custom-control custom-radio ml-1">
+                        <input type="radio" class="custom-control-input" [(ngModel)]="student.Gender" formControlName="Gender" name="Gender" value='Male'
+                          required>
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description ml-0">Male</span>
+                      </label>
+                      <label class="display-inline-block custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" [(ngModel)]="student.Gender" formControlName="Gender" name="Gender" value='Female'
+                          required>
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description ml-0">Female</span>
+                      </label>
+                      <div *ngIf="signupform.controls['Gender'].errors && (signupform.controls['Gender'].dirty || signupform.controls['Gender'].touched)">
+                        <small class="text-danger" *ngIf="signupform.get('Gender').hasError('required')">Gender is required </small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <h4 class="form-section">
+                    <i class="ft-file-text"></i> Contact Information</h4>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="ParentName">Parent Name</label>
+                        <input type="text" class="form-control" id="ParentName" name="ParentName" formControlName="ParentName" [(ngModel)]="student.ParentName"
+                          required>
+                        <div *ngIf="signupform.controls['ParentName'].errors && (signupform.controls['ParentName'].dirty || signupform.controls['ParentName'].touched)">
+                          <small class="text-danger" *ngIf="signupform.get('ParentName').hasError('required')">Parent Name is required</small>
+                          <small class="text-danger" *ngIf="signupform.get('ParentName').hasError('minlength') && !(signupform.get('ParentName').hasError('pattern'))">Minimum 3 characters</small>
+                          <small class="text-danger" *ngIf="signupform.get('ParentName').hasError('pattern')">Enter only characters</small>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="ParentNumber">Parent Number</label>
+                        <input type="tel" class="form-control" id="ParentNumber" name="ParentNumber" formControlName="ParentNumber" [(ngModel)]="student.ParentNumber"
+                          required>
+                        <div *ngIf="signupform.controls['ParentNumber'].errors && (signupform.controls['ParentNumber'].dirty || signupform.controls['ParentNumber'].touched)">
+                          <small class="text-danger" *ngIf="signupform.get('ParentNumber').hasError('required')">Parent Number is required</small>
+                          <small class="text-danger" *ngIf="signupform.get('ParentNumber').hasError('pattern')">Enter valid Parent Number</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                </div>
+
+
+
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <h4 class="form-section">
+                    <i class="ft-map-pin"></i> Address Information</h4>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="Address">Address</label>
+                        <textarea id="Address" rows="5" class="form-control" name="Address" formControlName="Address" [(ngModel)]="student.Address"
+                          required></textarea>
+                        <div *ngIf="signupform.controls['Address'].errors && (signupform.controls['Address'].dirty || signupform.controls['Address'].touched)">
+                          <small class="text-danger" *ngIf="signupform.get('Address').hasError('required')">Address is required </small>
+
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+
+                    </div>
+                  </div>
+
+
+                </div>
+                <div class="col-md-6">
+                  <h4 class="form-section">
+                    <i class="ft-file-text"></i> Student Education Information</h4>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="Class">Class</label>
+                        <select id="Class" name="Class" class="form-control" [(ngModel)]="student.Class" formControlName="Class" required>
+
+                          <option disabled [ngValue]="null">Select Class</option>
+                          <option value="LKG">L.K.G</option>
+                          <option value="UKG">U.K.G</option>
+                          <option value="1stClass">1st Class</option>
+                          <option value="2stClass">2nd Class</option>
+                          <option value="3rdClass">3rd Class</option>
+                          <option value="4thClass">4th Class</option>
+                          <option value="5thClass">5th Class</option>
+                          <option value="6thClass">6th Class</option>
+                          <option value="7thClass">7th Class</option>
+                          <option value="8thClass">8th Class</option>
+                          <option value="9thClass">9th Class</option>
+                          <option value="10thClass">10th Class</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="Section">Section</label>
+                        <select id="Section" name="Section" class="form-control" [(ngModel)]="student.Section" formControlName="Section" required>
+                          <option disabled [ngValue]="null">Select Section</option>
+                          <option value="A">A</option>
+                          <option value="B">B</option>
+                          <option value="C">C</option>
+                          <option value="D">D</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="RollNumber">Roll Number</label>
+                        <input type="text" class="form-control" id="RollNumber" name="RollNumber" formControlName="RollNumber" [(ngModel)]="student.RollNumber"
+                          required>
+                        <div *ngIf="signupform.controls['RollNumber'].errors && (signupform.controls['RollNumber'].dirty || signupform.controls['RollNumber'].touched)">
+                          <small class="text-danger" *ngIf="signupform.get('RollNumber').hasError('required')">Roll Number is required </small>
+
+
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="BusRouteNumber">Bus Route Number</label>
+                        <input type="tel" class="form-control" id="BusRouteNumber" name="BusRouteNumber" formControlName="BusRouteNumber" [(ngModel)]="student.BusRouteNumber"
+                          required>
+                        <div *ngIf="signupform.controls['BusRouteNumber'].errors && (signupform.controls['BusRouteNumber'].dirty || signupform.controls['BusRouteNumber'].touched)">
+                          <small class="text-danger" *ngIf="signupform.get('BusRouteNumber').hasError('required')">Bus Route Number is required </small>
+
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="BusRouteName">Bus Route Name</label>
+                        <input type="text" class="form-control" id="BusRouteName" name="BusRouteName" formControlName="BusRouteName" [(ngModel)]="student.BusRouteName"
+                          required>
+                        <div *ngIf="signupform.controls['BusRouteName'].errors && (signupform.controls['BusRouteName'].dirty || signupform.controls['BusRouteName'].touched)">
+                          <small class="text-danger" *ngIf="signupform.get('BusRouteName').hasError('required')">Bus Route Name is required </small>
+
+
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-actions">
+              <div class="savecl">
+                <button type="submit" class="btn btn-raised btn-raised btn-primary" [disabled]="!signupform.valid">
+                  <i class="fa fa-check-square-o"></i> Save
+                </button>
+                <button type="button" class="btn btn-raised btn-raised btn-warning mr-1">
+                  <i class="ft-x"></i> Cancel
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<input type="file" style="display: inline-block;" (change)="incomingfile($event)" placeholder="Upload file" accept=".xlsx">
+<button type="button" class="btn btn-raised btn-primary" (click)="Upload()">Upload</button>
+
+<table class="table table-striped table-bordered" style="width:100%">
+  <thead>
+    <tr>
+      <!-- <th>Edit</th> -->
+      <th>Delete</th>
+      <th>ExamName</th>
+      <th>ClassName</th>
+      <th>SectionName</th>
+      <th>StudentName</th>
+      <th>SubjectName1</th>
+      <th>SubjectName2</th>
+      <th>SubjectName3</th>
+      <th>SubjectName4</th>
+      <th>SubjectName5</th>
+      <th>SubjectName6</th>
+      <th>SubjectName7</th>
+      <th>SubjectName8</th>
+      <th>SubjectName9</th>
+      <th>SubjectName10</th>
+      <th>SubjectName11</th>
+      <th>SubjectName12</th>
+      <th>MarksScored</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of MarksDataList">
+      <!-- <td>
+        <button (click)="editstudent(item)">Edit</button>
+      </td> -->
+      <td>
+
+        <button (click)="OnDeleteClick(item,i,deletemark)">Delete</button>
+      </td>
+      <td>{{item.ExamName}}</td>
+      <td>{{item.ClassName}}</td>
+      <td>{{item.SectionName}}</td>
+      <td>{{item.StudentName}}</td>
+      <td>{{item.SubjectName1}}</td>
+      <td>{{item.SubjectName2}}</td>
+      <td>{{item.SubjectName3}}</td>
+      <td>{{item.SubjectName4}}</td>
+      <td>{{item.SubjectName5}}</td>
+      <td>{{item.SubjectName6}}</td>
+      <td>{{item.SubjectName7}}</td>
+      <td>{{item.SubjectName8}}</td>
+      <td>{{item.SubjectName9}}</td>
+      <td>{{item.SubjectName10}}</td>
+      <td>{{item.SubjectName11}}</td>
+      <td>{{item.SubjectName12}}</td>
+      <td>{{item.MarksScored}}</td>
+
+    </tr>
+    <tr *ngIf="MarksDataList.length==0" style="height:200px">
+      <td colspan="16">No data to display</td>
+    </tr>
+  </tbody>
+</table>
+<!-- <table class="table tbl_footer">
+  <tfoot>
+    <tr>
+      <td colspan="16">
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </td>
+    </tr>
+  </tfoot>
+</table> -->
+
+
+
+<div class="container-fluid">
+  <div class="row">
+    <button id="btnSubmit" class="btn btn-raised btn-primary">Submit</button>
+  </div>
+</div>
+
+
+<!--File Upload  -->
+
+<!-- <ng-template #importfile>
+  <div class="modal-header" style="background-color:#2dada6">
+    <h4 class="modal-title " style="color:white">File Upload</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="col-md-12" style="padding-top:20px;padding-bottom:20px">
+    <div class="form-group">
+      <input type="file" style="display: inline-block;" (change)="incomingfile($event)" placeholder="Upload file" accept=".xlsx">
+      <button type="button" [disabled]="IsUploadBtn" class="btn btn-info" (click)="Upload()">Upload</button>
+    </div>
+    <div class="col-md-12" style="margin-top: 20px"></div>
+  </div>
+</ng-template> -->
+
+
+<!-- Deleting Confirmation Popup -->
+<ng-template #deletemark>
+  <div class="modal-header" style="background-color:#2dada6">
+    <h4 class="modal-title " style="color:white">Are you sure do you want to delete?</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="col-md-12">
+    <div class="form-group" style="text-align:center;margin-top: 18px;">
+      <button type="button" class="btn btn-success" aria-label="Delete" (click)="ConfirmedTodeletemarkDetails(delInvoiceNumber,delindex)"
+        style="width:70px;margin-right:5px">
+        <span style="color:black;">YES</span>
+      </button>
+      <button type="button" class="btn btn-warning" aria-label="Cancel" (click)="modalRef.hide()" style="width:70px;margin-left:5px">
+        <span style="color: black;">NO</span>
+      </button>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,1022 @@
+<!-- Basic form layout section start -->
+<section id="basic-form-layouts" *ngIf="DispalyInstallmentForm">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="content-header">Add Installment Form</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title" id="basic-layout-form">Create Installment</h4>
+    </div>
+    <div class="card-body">
+      <div class="card-block">
+        <div class="px-3">
+          <form class="form" [formGroup]="installmentform" (ngSubmit)="SaveInstallment()">
+            <div class="form-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <h4 class="form-section">
+                    <i class="ft-user"></i> Installment Info</h4>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="lname">Class Name</label>
+                        <select id="Class" name="ClassName" class="form-control" [(ngModel)]="Installmentobj.ClassName" formControlName="ClassName"
+                          required>
+                          <option [value]=null disabled></option>
+                          <option *ngFor="let class of classdd" [value]="class.Item1">{{class.Item2}}
+                          </option>
+                        </select>
+                        <div *ngIf="installmentform.controls['ClassName'].errors && (installmentform.controls['ClassName'].dirty || installmentform.controls['ClassName'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('ClassName').hasError('required')">Class Name is required</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="SectionName">Section Name</label>
+                        <select id="SectionName" name="SectionName" class="form-control" [(ngModel)]="Installmentobj.SectionName" formControlName="SectionName"
+                          required>
+                          <option [value]=null disabled></option>
+                          <option *ngFor="let section of sectiondd" [value]="section.Item1">{{section.Item2}}
+                          </option>
+                        </select>
+                        <div *ngIf="installmentform.controls['SectionName'].errors && (installmentform.controls['SectionName'].dirty || installmentform.controls['SectionName'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('SectionName').hasError('required')">Section Name is required</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="FeeAmount">Fee Amount</label>
+                        <select id="FeeAmount" name="FeeAmount" class="form-control" [(ngModel)]="Installmentobj.FeeAmount" formControlName="FeeAmount"
+                          readonly>
+                          <option [value]=null disabled></option>
+                          <option *ngFor="let fee of FeeAmountDD" [value]="Installmentobj.Item1">{{Installmentobj.Item2}}
+                          </option>
+                        </select>
+                        <div *ngIf="installmentform.controls['FeeAmount'].errors && (installmentform.controls['FeeAmount'].dirty || installmentform.controls['FeeAmount'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('FeeAmount').hasError('required')">Section Name is required</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="fname">No of Installments</label>
+                        <select id="Class" name="InstallmentsCount" class="form-control" [(ngModel)]="Installmentobj.InstallmentsCount" formControlName="InstallmentsCount"
+                          required>
+                          <option [value]=null disabled></option>
+                          <option>2</option>
+                          <option>3</option>
+                          <option>4</option>
+                          <option>5</option>
+                          <option>6</option>
+                          <option>7</option>
+                          <option>8</option>
+                          <option>9</option>
+                          <option>10</option>
+                          <option>11</option>
+                          <option>12</option>
+                        </select>
+                        <div *ngIf="installmentform.controls['InstallmentsCount'].errors && (installmentform.controls['InstallmentsCount'].dirty || installmentform.controls['InstallmentsCount'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('InstallmentsCount').hasError('required')">InstallmentsCount is required</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row" *ngIf="Installmentobj.InstallmentsCount ==2">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="installment1">Installment 1</label>
+                        <input type="number" id="installment1" class="form-control" name="installment1" formControlName="installment1" [(ngModel)]="Installmentobj.installment1"
+                          required>
+                        <div *ngIf="installmentform.controls['installment1'].errors && (installmentform.controls['installment1'].dirty || installmentform.controls['installment1'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment1').hasError('required')">installment1 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment1').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="installment2">Installment 2</label>
+                        <input type="number" id="installment2" class="form-control" name="installment2" formControlName="installment2" [(ngModel)]="Installmentobj.installment2"
+                          required>
+                        <div *ngIf="installmentform.controls['installment2'].errors && (installmentform.controls['installment2'].dirty || installmentform.controls['installment2'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment2').hasError('required')">installment1 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment2').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row" *ngIf="Installmentobj.InstallmentsCount ==3">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="installment1">Installment 1</label>
+                        <input type="number" id="installment1" class="form-control" name="installment1" formControlName="installment1" [(ngModel)]="Installmentobj.installment1"
+                          required>
+                        <div *ngIf="installmentform.controls['installment1'].errors && (installmentform.controls['installment1'].dirty || installmentform.controls['installment1'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment1').hasError('required')">installment1 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment1').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="installment2">Installment 2</label>
+                        <input type="number" id="installment2" class="form-control" name="installment2" formControlName="installment2" [(ngModel)]="Installmentobj.installment2"
+                          required>
+                        <div *ngIf="installmentform.controls['installment2'].errors && (installmentform.controls['installment2'].dirty || installmentform.controls['installment2'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment2').hasError('required')">installment1 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment2').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="installment3">Installment 3</label>
+                        <input type="number" id="installment3" class="form-control" name="installment3" formControlName="installment3" [(ngModel)]="Installmentobj.installment3"
+                          required>
+                        <div *ngIf="installmentform.controls['installment3'].errors && (installmentform.controls['installment3'].dirty || installmentform.controls['installment3'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment3').hasError('required')">installment1 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment3').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row" *ngIf="Installmentobj.InstallmentsCount ==4">
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment1">Installment 1</label>
+                        <input type="number" id="installment1" class="form-control" name="installment1" formControlName="installment1" [(ngModel)]="Installmentobj.installment1"
+                          required>
+                        <div *ngIf="installmentform.controls['installment1'].errors && (installmentform.controls['installment1'].dirty || installmentform.controls['installment1'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment1').hasError('required')">installment1 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment1').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment2">Installment 2</label>
+                        <input type="number" id="installment2" class="form-control" name="installment2" formControlName="installment2" [(ngModel)]="Installmentobj.installment2"
+                          required>
+                        <div *ngIf="installmentform.controls['installment2'].errors && (installmentform.controls['installment2'].dirty || installmentform.controls['installment2'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment2').hasError('required')">installment1 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment2').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment3">Installment 3</label>
+                        <input type="number" id="installment3" class="form-control" name="installment3" formControlName="installment3" [(ngModel)]="Installmentobj.installment3"
+                          required>
+                        <div *ngIf="installmentform.controls['installment3'].errors && (installmentform.controls['installment3'].dirty || installmentform.controls['installment3'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment3').hasError('required')">installment1 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment3').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment4">Installment 4</label>
+                        <input type="number" id="installment4" class="form-control" name="installment4" formControlName="installment4" [(ngModel)]="Installmentobj.installment4"
+                          required>
+                        <div *ngIf="installmentform.controls['installment4'].errors && (installmentform.controls['installment4'].dirty || installmentform.controls['installment4'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment4').hasError('required')">installment1 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment4').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row" *ngIf="Installmentobj.InstallmentsCount ==5">
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment1">Installment 1</label>
+                        <input type="number" id="installment1" class="form-control" name="installment1" formControlName="installment1" [(ngModel)]="Installmentobj.installment1"
+                          required>
+                        <div *ngIf="installmentform.controls['installment1'].errors && (installmentform.controls['installment1'].dirty || installmentform.controls['installment1'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment1').hasError('required')">installment1 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment1').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment2">Installment 2</label>
+                        <input type="number" id="installment2" class="form-control" name="installment2" formControlName="installment2" [(ngModel)]="Installmentobj.installment2"
+                          required>
+                        <div *ngIf="installmentform.controls['installment2'].errors && (installmentform.controls['installment2'].dirty || installmentform.controls['installment2'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment2').hasError('required')">installment2 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment2').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment3">Installment 3</label>
+                        <input type="number" id="installment3" class="form-control" name="installment3" formControlName="installment3" [(ngModel)]="Installmentobj.installment3"
+                          required>
+                        <div *ngIf="installmentform.controls['installment3'].errors && (installmentform.controls['installment3'].dirty || installmentform.controls['installment3'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment3').hasError('required')">installment3 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment3').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment4">Installment 4</label>
+                        <input type="number" id="installment4" class="form-control" name="installment4" formControlName="installment4" [(ngModel)]="Installmentobj.installment4"
+                          required>
+                        <div *ngIf="installmentform.controls['installment4'].errors && (installmentform.controls['installment4'].dirty || installmentform.controls['installment4'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment4').hasError('required')">installment4 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment4').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment5">Installment 5</label>
+                        <input type="number" id="installment5" class="form-control" name="installment5" formControlName="installment5" [(ngModel)]="Installmentobj.installment5"
+                          required>
+                        <div *ngIf="installmentform.controls['installment5'].errors && (installmentform.controls['installment5'].dirty || installmentform.controls['installment5'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment5').hasError('required')">Installment5 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment5').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="row" *ngIf="Installmentobj.InstallmentsCount ==6">
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment1">Installment 1</label>
+                        <input type="number" id="installment1" class="form-control" name="installment1" formControlName="installment1" [(ngModel)]="Installmentobj.installment1"
+                          required>
+                        <div *ngIf="installmentform.controls['installment1'].errors && (installmentform.controls['installment1'].dirty || installmentform.controls['installment1'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment1').hasError('required')">installment1 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment1').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment2">Installment 2</label>
+                        <input type="number" id="installment2" class="form-control" name="installment2" formControlName="installment2" [(ngModel)]="Installmentobj.installment2"
+                          required>
+                        <div *ngIf="installmentform.controls['installment2'].errors && (installmentform.controls['installment2'].dirty || installmentform.controls['installment2'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment2').hasError('required')">installment2 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment2').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment3">Installment 3</label>
+                        <input type="number" id="installment3" class="form-control" name="installment3" formControlName="installment3" [(ngModel)]="Installmentobj.installment3"
+                          required>
+                        <div *ngIf="installmentform.controls['installment3'].errors && (installmentform.controls['installment3'].dirty || installmentform.controls['installment3'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment3').hasError('required')">installment3 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment3').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment4">Installment 4</label>
+                        <input type="number" id="installment4" class="form-control" name="installment4" formControlName="installment4" [(ngModel)]="Installmentobj.installment4"
+                          required>
+                        <div *ngIf="installmentform.controls['installment4'].errors && (installmentform.controls['installment4'].dirty || installmentform.controls['installment4'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment4').hasError('required')">installment4 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment4').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment5">Installment 5</label>
+                        <input type="number" id="installment5" class="form-control" name="installment5" formControlName="installment5" [(ngModel)]="Installmentobj.installment5"
+                          required>
+                        <div *ngIf="installmentform.controls['installment5'].errors && (installmentform.controls['installment5'].dirty || installmentform.controls['installment5'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment5').hasError('required')">Installment5 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment5').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment6">Installment 6</label>
+                        <input type="number" id="installment6" class="form-control" name="installment6" formControlName="installment6" [(ngModel)]="Installmentobj.installment6"
+                          required>
+                        <div *ngIf="installmentform.controls['installment6'].errors && (installmentform.controls['installment6'].dirty || installmentform.controls['installment6'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment6').hasError('required')">Installment6 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment6').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="row" *ngIf="Installmentobj.InstallmentsCount ==7">
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment5">Installment 5</label>
+                        <input type="number" id="installment5" class="form-control" name="installment5" formControlName="installment5" [(ngModel)]="Installmentobj.installment5"
+                          required>
+                        <div *ngIf="installmentform.controls['installment5'].errors && (installmentform.controls['installment5'].dirty || installmentform.controls['installment5'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment5').hasError('required')">Installment5 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment5').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment6">Installment 6</label>
+                        <input type="number" id="installment6" class="form-control" name="installment6" formControlName="installment6" [(ngModel)]="Installmentobj.installment6"
+                          required>
+                        <div *ngIf="installmentform.controls['installment6'].errors && (installmentform.controls['installment6'].dirty || installmentform.controls['installment6'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment6').hasError('required')">Installment6 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment6').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment7">Installment 7</label>
+                        <input type="number" id="installment7" class="form-control" name="installment7" formControlName="installment7" [(ngModel)]="Installmentobj.installment7"
+                          required>
+                        <div *ngIf="installmentform.controls['installment7'].errors && (installmentform.controls['installment7'].dirty || installmentform.controls['installment7'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment7').hasError('required')">Installment6 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment7').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row" *ngIf="Installmentobj.InstallmentsCount ==8">
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment1">Installment 1</label>
+                        <input type="number" id="installment1" class="form-control" name="installment1" formControlName="installment1" [(ngModel)]="Installmentobj.installment1"
+                          required>
+                        <div *ngIf="installmentform.controls['installment1'].errors && (installmentform.controls['installment1'].dirty || installmentform.controls['installment1'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment1').hasError('required')">installment1 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment1').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment2">Installment 2</label>
+                        <input type="number" id="installment2" class="form-control" name="installment2" formControlName="installment2" [(ngModel)]="Installmentobj.installment2"
+                          required>
+                        <div *ngIf="installmentform.controls['installment2'].errors && (installmentform.controls['installment2'].dirty || installmentform.controls['installment2'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment2').hasError('required')">installment1 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment2').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment3">Installment 3</label>
+                        <input type="number" id="installment3" class="form-control" name="installment3" formControlName="installment3" [(ngModel)]="Installmentobj.installment3"
+                          required>
+                        <div *ngIf="installmentform.controls['installment3'].errors && (installmentform.controls['installment3'].dirty || installmentform.controls['installment3'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment3').hasError('required')">installment1 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment3').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment4">Installment 4</label>
+                        <input type="number" id="installment4" class="form-control" name="installment4" formControlName="installment4" [(ngModel)]="Installmentobj.installment4"
+                          required>
+                        <div *ngIf="installmentform.controls['installment4'].errors && (installmentform.controls['installment4'].dirty || installmentform.controls['installment4'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment4').hasError('required')">installment1 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment4').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment5">Installment 5</label>
+                        <input type="number" id="installment5" class="form-control" name="installment5" formControlName="installment5" [(ngModel)]="Installmentobj.installment5"
+                          required>
+                        <div *ngIf="installmentform.controls['installment5'].errors && (installmentform.controls['installment5'].dirty || installmentform.controls['installment5'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment5').hasError('required')">Installment5 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment5').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment6">Installment 6</label>
+                        <input type="number" id="installment6" class="form-control" name="installment6" formControlName="installment6" [(ngModel)]="Installmentobj.installment6"
+                          required>
+                        <div *ngIf="installmentform.controls['installment6'].errors && (installmentform.controls['installment6'].dirty || installmentform.controls['installment6'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment6').hasError('required')">Installment6 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment6').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment7">Installment 7</label>
+                        <input type="number" id="installment7" class="form-control" name="installment7" formControlName="installment7" [(ngModel)]="Installmentobj.installment7"
+                          required>
+                        <div *ngIf="installmentform.controls['installment7'].errors && (installmentform.controls['installment7'].dirty || installmentform.controls['installment7'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment7').hasError('required')">Installment6 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment7').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment8">Installment 8</label>
+                        <input type="number" id="installment8" class="form-control" name="installment8" formControlName="installment8" [(ngModel)]="Installmentobj.installment8"
+                          required>
+                        <div *ngIf="installmentform.controls['installment8'].errors && (installmentform.controls['installment8'].dirty || installmentform.controls['installment8'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment8').hasError('required')">Installment6 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment8').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row" *ngIf="Installmentobj.InstallmentsCount ==9">
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment1">Installment 1</label>
+                        <input type="number" id="installment1" class="form-control" name="installment1" formControlName="installment1" [(ngModel)]="Installmentobj.installment1"
+                          required>
+                        <div *ngIf="installmentform.controls['installment1'].errors && (installmentform.controls['installment1'].dirty || installmentform.controls['installment1'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment1').hasError('required')">installment1 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment1').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment2">Installment 2</label>
+                        <input type="number" id="installment2" class="form-control" name="installment2" formControlName="installment2" [(ngModel)]="Installmentobj.installment2"
+                          required>
+                        <div *ngIf="installmentform.controls['installment2'].errors && (installmentform.controls['installment2'].dirty || installmentform.controls['installment2'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment2').hasError('required')">installment1 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment2').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment3">Installment 3</label>
+                        <input type="number" id="installment3" class="form-control" name="installment3" formControlName="installment3" [(ngModel)]="Installmentobj.installment3"
+                          required>
+                        <div *ngIf="installmentform.controls['installment3'].errors && (installmentform.controls['installment3'].dirty || installmentform.controls['installment3'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment3').hasError('required')">installment1 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment3').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment4">Installment 4</label>
+                        <input type="number" id="installment4" class="form-control" name="installment4" formControlName="installment4" [(ngModel)]="Installmentobj.installment4"
+                          required>
+                        <div *ngIf="installmentform.controls['installment4'].errors && (installmentform.controls['installment4'].dirty || installmentform.controls['installment4'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment4').hasError('required')">installment1 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment4').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment5">Installment 5</label>
+                        <input type="number" id="installment5" class="form-control" name="installment5" formControlName="installment5" [(ngModel)]="Installmentobj.installment5"
+                          required>
+                        <div *ngIf="installmentform.controls['installment5'].errors && (installmentform.controls['installment5'].dirty || installmentform.controls['installment5'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment5').hasError('required')">Installment5 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment5').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment6">Installment 6</label>
+                        <input type="number" id="installment6" class="form-control" name="installment6" formControlName="installment6" [(ngModel)]="Installmentobj.installment6"
+                          required>
+                        <div *ngIf="installmentform.controls['installment6'].errors && (installmentform.controls['installment6'].dirty || installmentform.controls['installment6'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment6').hasError('required')">Installment6 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment6').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment7">Installment 7</label>
+                        <input type="number" id="installment7" class="form-control" name="installment7" formControlName="installment7" [(ngModel)]="Installmentobj.installment7"
+                          required>
+                        <div *ngIf="installmentform.controls['installment7'].errors && (installmentform.controls['installment7'].dirty || installmentform.controls['installment7'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment7').hasError('required')">Installment6 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment7').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment8">Installment 8</label>
+                        <input type="number" id="installment8" class="form-control" name="installment8" formControlName="installment8" [(ngModel)]="Installmentobj.installment8"
+                          required>
+                        <div *ngIf="installmentform.controls['installment8'].errors && (installmentform.controls['installment8'].dirty || installmentform.controls['installment8'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment8').hasError('required')">Installment6 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment8').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment9">Installment 9</label>
+                        <input type="number" id="installment9" class="form-control" name="installment9" formControlName="installment9" [(ngModel)]="Installmentobj.installment9"
+                          required>
+                        <div *ngIf="installmentform.controls['installment9'].errors && (installmentform.controls['installment9'].dirty || installmentform.controls['installment9'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment9').hasError('required')">Installment6 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment9').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row" *ngIf="Installmentobj.InstallmentsCount ==10">
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment1">Installment 1</label>
+                        <input type="number" id="installment1" class="form-control" name="installment1" formControlName="installment1" [(ngModel)]="Installmentobj.installment1"
+                          required>
+                        <div *ngIf="installmentform.controls['installment1'].errors && (installmentform.controls['installment1'].dirty || installmentform.controls['installment1'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment1').hasError('required')">installment1 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment1').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment2">Installment 2</label>
+                        <input type="number" id="installment2" class="form-control" name="installment2" formControlName="installment2" [(ngModel)]="Installmentobj.installment2"
+                          required>
+                        <div *ngIf="installmentform.controls['installment2'].errors && (installmentform.controls['installment2'].dirty || installmentform.controls['installment2'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment2').hasError('required')">installment1 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment2').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment3">Installment 3</label>
+                        <input type="number" id="installment3" class="form-control" name="installment3" formControlName="installment3" [(ngModel)]="Installmentobj.installment3"
+                          required>
+                        <div *ngIf="installmentform.controls['installment3'].errors && (installmentform.controls['installment3'].dirty || installmentform.controls['installment3'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment3').hasError('required')">installment1 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment3').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment4">Installment 4</label>
+                        <input type="number" id="installment4" class="form-control" name="installment4" formControlName="installment4" [(ngModel)]="Installmentobj.installment4"
+                          required>
+                        <div *ngIf="installmentform.controls['installment4'].errors && (installmentform.controls['installment4'].dirty || installmentform.controls['installment4'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment4').hasError('required')">installment1 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment4').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment5">Installment 5</label>
+                        <input type="number" id="installment5" class="form-control" name="installment5" formControlName="installment5" [(ngModel)]="Installmentobj.installment5"
+                          required>
+                        <div *ngIf="installmentform.controls['installment5'].errors && (installmentform.controls['installment5'].dirty || installmentform.controls['installment5'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment5').hasError('required')">Installment5 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment5').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment6">Installment 6</label>
+                        <input type="number" id="installment6" class="form-control" name="installment6" formControlName="installment6" [(ngModel)]="Installmentobj.installment6"
+                          required>
+                        <div *ngIf="installmentform.controls['installment6'].errors && (installmentform.controls['installment6'].dirty || installmentform.controls['installment6'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment6').hasError('required')">Installment6 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment6').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment7">Installment 7</label>
+                        <input type="number" id="installment7" class="form-control" name="installment7" formControlName="installment7" [(ngModel)]="Installmentobj.installment7"
+                          required>
+                        <div *ngIf="installmentform.controls['installment7'].errors && (installmentform.controls['installment7'].dirty || installmentform.controls['installment7'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment7').hasError('required')">Installment6 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment7').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment8">Installment 8</label>
+                        <input type="number" id="installment8" class="form-control" name="installment8" formControlName="installment8" [(ngModel)]="Installmentobj.installment8"
+                          required>
+                        <div *ngIf="installmentform.controls['installment8'].errors && (installmentform.controls['installment8'].dirty || installmentform.controls['installment8'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment8').hasError('required')">Installment6 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment8').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment9">Installment 9</label>
+                        <input type="number" id="installment9" class="form-control" name="installment9" formControlName="installment9" [(ngModel)]="Installmentobj.installment9"
+                          required>
+                        <div *ngIf="installmentform.controls['installment9'].errors && (installmentform.controls['installment9'].dirty || installmentform.controls['installment9'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment9').hasError('required')">Installment6 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment9').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment10">Installment 10</label>
+                        <input type="number" id="installment10" class="form-control" name="installment10" formControlName="installment10" [(ngModel)]="Installmentobj.installment10"
+                          required>
+                        <div *ngIf="installmentform.controls['installment10'].errors && (installmentform.controls['installment10'].dirty || installmentform.controls['installment10'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment10').hasError('required')">Installment6 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment10').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row" *ngIf="Installmentobj.InstallmentsCount ==11">
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment1">Installment 1</label>
+                        <input type="number" id="installment1" class="form-control" name="installment1" formControlName="installment1" [(ngModel)]="Installmentobj.installment1"
+                          required>
+                        <div *ngIf="installmentform.controls['installment1'].errors && (installmentform.controls['installment1'].dirty || installmentform.controls['installment1'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment1').hasError('required')">installment1 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment1').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment2">Installment 2</label>
+                        <input type="number" id="installment2" class="form-control" name="installment2" formControlName="installment2" [(ngModel)]="Installmentobj.installment2"
+                          required>
+                        <div *ngIf="installmentform.controls['installment2'].errors && (installmentform.controls['installment2'].dirty || installmentform.controls['installment2'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment2').hasError('required')">installment1 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment2').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment3">Installment 3</label>
+                        <input type="number" id="installment3" class="form-control" name="installment3" formControlName="installment3" [(ngModel)]="Installmentobj.installment3"
+                          required>
+                        <div *ngIf="installmentform.controls['installment3'].errors && (installmentform.controls['installment3'].dirty || installmentform.controls['installment3'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment3').hasError('required')">installment1 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment3').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment4">Installment 4</label>
+                        <input type="number" id="installment4" class="form-control" name="installment4" formControlName="installment4" [(ngModel)]="Installmentobj.installment4"
+                          required>
+                        <div *ngIf="installmentform.controls['installment4'].errors && (installmentform.controls['installment4'].dirty || installmentform.controls['installment4'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment4').hasError('required')">installment1 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment4').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment5">Installment 5</label>
+                        <input type="number" id="installment5" class="form-control" name="installment5" formControlName="installment5" [(ngModel)]="Installmentobj.installment5"
+                          required>
+                        <div *ngIf="installmentform.controls['installment5'].errors && (installmentform.controls['installment5'].dirty || installmentform.controls['installment5'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment5').hasError('required')">Installment5 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment5').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment6">Installment 6</label>
+                        <input type="number" id="installment6" class="form-control" name="installment6" formControlName="installment6" [(ngModel)]="Installmentobj.installment6"
+                          required>
+                        <div *ngIf="installmentform.controls['installment6'].errors && (installmentform.controls['installment6'].dirty || installmentform.controls['installment6'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment6').hasError('required')">Installment6 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment6').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment7">Installment 7</label>
+                        <input type="number" id="installment7" class="form-control" name="installment7" formControlName="installment7" [(ngModel)]="Installmentobj.installment7"
+                          required>
+                        <div *ngIf="installmentform.controls['installment7'].errors && (installmentform.controls['installment7'].dirty || installmentform.controls['installment7'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment7').hasError('required')">Installment6 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment7').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment8">Installment 8</label>
+                        <input type="number" id="installment8" class="form-control" name="installment8" formControlName="installment8" [(ngModel)]="Installmentobj.installment8"
+                          required>
+                        <div *ngIf="installmentform.controls['installment8'].errors && (installmentform.controls['installment8'].dirty || installmentform.controls['installment8'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment8').hasError('required')">Installment6 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment8').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment9">Installment 9</label>
+                        <input type="number" id="installment9" class="form-control" name="installment9" formControlName="installment9" [(ngModel)]="Installmentobj.installment9"
+                          required>
+                        <div *ngIf="installmentform.controls['installment9'].errors && (installmentform.controls['installment9'].dirty || installmentform.controls['installment9'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment9').hasError('required')">Installment6 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment9').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment10">Installment 10</label>
+                        <input type="number" id="installment10" class="form-control" name="installment10" formControlName="installment10" [(ngModel)]="Installmentobj.installment10"
+                          required>
+                        <div *ngIf="installmentform.controls['installment10'].errors && (installmentform.controls['installment10'].dirty || installmentform.controls['installment10'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment10').hasError('required')">Installment6 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment10').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment11">Installment 11</label>
+                        <input type="number" id="installment11" class="form-control" name="installment11" formControlName="installment11" [(ngModel)]="Installmentobj.installment11"
+                          required>
+                        <div *ngIf="installmentform.controls['installment11'].errors && (installmentform.controls['installment11'].dirty || installmentform.controls['installment11'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment11').hasError('required')">Installment11 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment11').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row" *ngIf="Installmentobj.InstallmentsCount ==12">
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment1">Installment 1</label>
+                        <input type="number" id="installment1" class="form-control" name="installment1" formControlName="installment1" [(ngModel)]="Installmentobj.installment1"
+                          required>
+                        <div *ngIf="installmentform.controls['installment1'].errors && (installmentform.controls['installment1'].dirty || installmentform.controls['installment1'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment1').hasError('required')">installment1 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment1').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment2">Installment 2</label>
+                        <input type="number" id="installment2" class="form-control" name="installment2" formControlName="installment2" [(ngModel)]="Installmentobj.installment2"
+                          required>
+                        <div *ngIf="installmentform.controls['installment2'].errors && (installmentform.controls['installment2'].dirty || installmentform.controls['installment2'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment2').hasError('required')">installment1 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment2').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment3">Installment 3</label>
+                        <input type="number" id="installment3" class="form-control" name="installment3" formControlName="installment3" [(ngModel)]="Installmentobj.installment3"
+                          required>
+                        <div *ngIf="installmentform.controls['installment3'].errors && (installmentform.controls['installment3'].dirty || installmentform.controls['installment3'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment3').hasError('required')">installment1 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment3').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment4">Installment 4</label>
+                        <input type="number" id="installment4" class="form-control" name="installment4" formControlName="installment4" [(ngModel)]="Installmentobj.installment4"
+                          required>
+                        <div *ngIf="installmentform.controls['installment4'].errors && (installmentform.controls['installment4'].dirty || installmentform.controls['installment4'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment4').hasError('required')">installment1 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment4').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment5">Installment 5</label>
+                        <input type="number" id="installment5" class="form-control" name="installment5" formControlName="installment5" [(ngModel)]="Installmentobj.installment5"
+                          required>
+                        <div *ngIf="installmentform.controls['installment5'].errors && (installmentform.controls['installment5'].dirty || installmentform.controls['installment5'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment5').hasError('required')">Installment5 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment5').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment6">Installment 6</label>
+                        <input type="number" id="installment6" class="form-control" name="installment6" formControlName="installment6" [(ngModel)]="Installmentobj.installment6"
+                          required>
+                        <div *ngIf="installmentform.controls['installment6'].errors && (installmentform.controls['installment6'].dirty || installmentform.controls['installment6'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment6').hasError('required')">Installment6 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment6').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment7">Installment 7</label>
+                        <input type="number" id="installment7" class="form-control" name="installment7" formControlName="installment7" [(ngModel)]="Installmentobj.installment7"
+                          required>
+                        <div *ngIf="installmentform.controls['installment7'].errors && (installmentform.controls['installment7'].dirty || installmentform.controls['installment7'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment7').hasError('required')">Installment6 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment7').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment8">Installment 8</label>
+                        <input type="number" id="installment8" class="form-control" name="installment8" formControlName="installment8" [(ngModel)]="Installmentobj.installment8"
+                          required>
+                        <div *ngIf="installmentform.controls['installment8'].errors && (installmentform.controls['installment8'].dirty || installmentform.controls['installment8'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment8').hasError('required')">Installment6 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment8').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment9">Installment 9</label>
+                        <input type="number" id="installment9" class="form-control" name="installment9" formControlName="installment9" [(ngModel)]="Installmentobj.installment9"
+                          required>
+                        <div *ngIf="installmentform.controls['installment9'].errors && (installmentform.controls['installment9'].dirty || installmentform.controls['installment9'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment9').hasError('required')">Installment6 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment9').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment10">Installment 10</label>
+                        <input type="number" id="installment10" class="form-control" name="installment10" formControlName="installment10" [(ngModel)]="Installmentobj.installment10"
+                          required>
+                        <div *ngIf="installmentform.controls['installment10'].errors && (installmentform.controls['installment10'].dirty || installmentform.controls['installment10'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment10').hasError('required')">Installment6 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment10').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment11">Installment 11</label>
+                        <input type="number" id="installment11" class="form-control" name="installment11" formControlName="installment11" [(ngModel)]="Installmentobj.installment11"
+                          required>
+                        <div *ngIf="installmentform.controls['installment11'].errors && (installmentform.controls['installment11'].dirty || installmentform.controls['installment11'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment11').hasError('required')">Installment11 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment11').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="installment12">Installment 12</label>
+                        <input type="number" id="installment12" class="form-control" name="installment12" formControlName="installment12" [(ngModel)]="Installmentobj.installment12"
+                          required>
+                        <div *ngIf="installmentform.controls['installment12'].errors && (installmentform.controls['installment12'].dirty || installmentform.controls['installment12'].touched)">
+                          <small class="text-danger" *ngIf="installmentform.get('installment12').hasError('required')">Installment12 is required</small>
+                          <small class="text-danger" *ngIf="installmentform.get('installment12').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-actions">
+              <div class="savecl">
+                <button type="submit" class="btn btn-raised btn-raised btn-primary" [disabled]="!installmentform.valid">
+                  <i class="fa fa-check-square-o"></i> Save
+                </button>
+                <button type="button" class="btn btn-raised btn-raised btn-warning mr-1" (click)="Cancel()">
+                  <i class="ft-x"></i> Cancel
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- // Basic form layout section end -->
+
+
+<!--Extended Table starts-->
+<div class="row">
+  <div class="col-12">
+    <div class="content-header">
+      <a class="btn btn-info btn-raised font-medium-3" (click)="CreateInstallment()">Add Fee Amount </a>
+    </div>
+  </div>
+  <section id="extended">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-header">
+            <!-- <h4 class="card-title">Student List</h4> -->
+          </div>
+          <div class="card-body">
+            <div class="card-block">
+              <table class="table table-responsive text-center">
+                <thead>
+                  <tr>
+                    <th>Class Name</th>
+                    <th>Section Name</th>
+                    <th>Fee Amount</th>
+                    <th>Number of Installments</th>
+                    <th>Installment 1</th>
+                    <th>Installment 2</th>
+                    <th>Installment 3</th>
+                    <th>Installment 4</th>
+                    <th>Installment 5</th>
+                    <th>Installment 6</th>
+                    <th>Installment 7</th>
+                    <th>Installment 8</th>
+                    <th>Installment 9</th>
+                    <th>Installment 10</th>
+                    <th>Installment 11</th>
+                    <th>Installment 12</th>
+
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  <tr *ngFor='let fee of InstallmentList'>
+                    <td>{{Installmentobj.CourseName}}</td>
+                    <td> {{Installmentobj.ClassName}}</td>
+                    <td> {{Installmentobj.Amount}}</td>
+                    <td> {{Installmentobj.InstallmentsCount}}</td>
+                    <td> {{Installmentobj.installment1}}</td>
+                    <td> {{Installmentobj.installment2}}</td>
+                    <td> {{Installmentobj.installment3}}</td>
+                    <td> {{Installmentobj.installment4}}</td>
+                    <td> {{Installmentobj.installment5}}</td>
+                    <td> {{Installmentobj.installment6}}</td>
+                    <td> {{Installmentobj.installment7}}</td>
+                    <td> {{Installmentobj.installment8}}</td>
+                    <td> {{Installmentobj.installment9}}</td>
+                    <td> {{Installmentobj.installment10}}</td>
+                    <td> {{Installmentobj.installment11}</td>
+                    <td> {{Installmentobj.installment12}}</td>
+
+                    <td>
+                      <a class="success p-0" data-original-title="" title="" (click)="EditInstallment(Installmentobj)">
+                        <i class="ft-edit-2 font-medium-3 mr-2"></i>
+                      </a>
+                      <a class="danger p-0" data-original-title="" title="" (click)="DeleteInstallment(Installmentobj.installmentID)">
+                        <i class="ft-x font-medium-3 mr-2"></i>
+                      </a>
+                    </td>
+                  </tr>
+
+                  <tr *ngIf="!InstallmentList || InstallmentList.length==0">
+                    <td colspan="12">
+                      No Installmentobj Amount to display
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!--Extended Table Ends-->

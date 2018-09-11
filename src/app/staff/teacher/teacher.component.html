@@ -1,0 +1,327 @@
+<!-- Teacher form layout section start -->
+<section id="basic-form-layouts" *ngIf="displayteacher">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="content-header">Teacher Information</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title" id="basic-layout-form">Create Teacher</h4>
+    </div>
+    <div class="card-body">
+      <div class="card-block">
+        <div class="px-3">
+          <form class="form" [formGroup]="teacherform" (ngSubmit)="RegisterTeacher()">
+            <div class="form-body">
+
+
+              <h4 class="form-section">
+                <i class="ft-user"></i> Personal Info</h4>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="fname">First Name</label>
+
+                    <input type="text" id="fname" class="form-control" name="fname" formControlName="FirstName" [(ngModel)]="teacher.FirstName"
+                      required>
+                    <div *ngIf="teacherform.controls['FirstName'].errors && (teacherform.controls['FirstName'].dirty || teacherform.controls['FirstName'].touched)">
+                      <small class="text-danger" *ngIf="teacherform.get('FirstName').hasError('required')">First Name is required</small>
+                      <small class="text-danger" *ngIf="teacherform.get('FirstName').hasError('minlength') && !(teacherform.get('FirstName').hasError('pattern'))">Minimum 3 characters</small>
+                      <small class="text-danger" *ngIf="teacherform.get('FirstName').hasError('pattern')">Enter only characters</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="lname">Last Name</label>
+                    <input type="text" id="lname" class="form-control" name="lname" formControlName="LastName" [(ngModel)]="teacher.LastName"
+                      required>
+                    <div *ngIf="teacherform.controls['LastName'].errors && (teacherform.controls['LastName'].dirty || teacherform.controls['LastName'].touched)">
+                      <small class="text-danger" *ngIf="teacherform.get('LastName').hasError('required')">Last Name is required</small>
+                      <small class="text-danger" *ngIf="teacherform.get('LastName').hasError('minlength') && !(teacherform.get('LastName').hasError('pattern'))">Minimum 3 characters</small>
+                      <small class="text-danger" *ngIf="teacherform.get('LastName').hasError('pattern')">Enter only character</small>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4"></div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="email">Email</label>
+
+                    <input type="text" id="email" class="form-control" name="email" formControlName="Email" [(ngModel)]="teacher.Email"
+                      required>
+                    <div *ngIf="teacherform.controls['Email'].errors && (teacherform.controls['Email'].dirty || teacherform.controls['Email'].touched)">
+                      <small class="text-danger" *ngIf="teacherform.get('Email').hasError('required')">First Name is required</small>
+                      <small class="text-danger" *ngIf="teacherform.get('Email').hasError('minlength') && !(teacherform.get('Email').hasError('pattern'))">Minimum 3 characters</small>
+                      <small class="text-danger" *ngIf="teacherform.get('Email').hasError('pattern')">Enter only characters</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="text" id="password" class="form-control" name="password" formControlName="Password" [(ngModel)]="teacher.Password"
+                      required>
+                    <div *ngIf="teacherform.controls['Password'].errors && (teacherform.controls['Password'].dirty || teacherform.controls['Password'].touched)">
+                      <small class="text-danger" *ngIf="teacherform.get('Password').hasError('required')">Password is required</small>
+                      <small class="text-danger" *ngIf="teacherform.get('Password').hasError('minlength') && !(teacherform.get('Password').hasError('pattern'))">Minimum 3 characters</small>
+                      <small class="text-danger" *ngIf="teacherform.get('Password').hasError('pattern')">Enter only character</small>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4"></div>
+              </div>
+
+
+
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="Salary">Salary</label>
+                    <input type="tel" class="form-control" id="Salary" name="Salary" formControlName="Salary" [(ngModel)]="teacher.Salary" required>
+                    <div *ngIf="teacherform.controls['Salary'].errors && (teacherform.controls['Salary'].dirty || teacherform.controls['Salary'].touched)">
+                      <small class="text-danger" *ngIf="teacherform.get('Salary').hasError('required')">Salary is required</small>
+                      <small class="text-danger" *ngIf="teacherform.get('Salary').hasError('pattern')">Enter Valid Salary </small>
+                  <small class="text-danger" *ngIf="teacherform.get('Salary').hasError('maxlength') && !(teacherform.get('Salary').hasError('pattern'))">Enter 10 Numbers only</small>
+                      
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="Designation">Designation</label>
+                    <select id="Designation" name="Designation" class="form-control" [(ngModel)]="teacher.Designation" formControlName="Designation" required>
+                      <option disabled [ngValue]="null">Select Designation</option>
+                      <option value="HOD">HOD</option>
+                      <option value="Principal">Principal</option>
+                      <option value="Lecturer">Lecturer</option>
+                      <option value="Accountant">Accountant</option>
+                      <option value="PET">PET</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-4"></div>
+              </div>
+
+
+
+
+
+
+
+
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="date2">Date of Joining</label>
+                    <input type="date" class="form-control" id="date2" name="date2" formControlName="DateOfJoining" [(ngModel)]="teacher.DateOfJoining"
+                      required>
+                    <div *ngIf="teacherform.controls['DateOfJoining'].errors && (teacherform.controls['DateOfJoining'].dirty || teacherform.controls['DateOfJoining'].touched)">
+                      <small class="text-danger" *ngIf="teacherform.get('DateOfJoining').hasError('required')">Date Of Joining is required </small>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="ContactNumber">Contact Number</label>
+                    <input type="tel" class="form-control" id="ContactNumber" name="ContactNumber" formControlName="ContactNumber" [(ngModel)]="teacher.ContactNumber"
+                      required>
+                    <div *ngIf="teacherform.controls['ContactNumber'].errors && (teacherform.controls['ContactNumber'].dirty || teacherform.controls['ContactNumber'].touched)">
+                      <small class="text-danger" *ngIf="teacherform.get('ContactNumber').hasError('required')">Contact Number is required</small>
+                      <small class="text-danger" *ngIf="teacherform.get('ContactNumber').hasError('pattern')">Enter Valid Contact Number</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4"></div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+
+
+                  <div class="form-group">
+                    <label for="Qualification">Qualification</label>
+                    <input type="text" class="form-control" id="Qualification" name="Qualification" formControlName="Qualification" [(ngModel)]="teacher.Qualification"
+                      required>
+                    <div *ngIf="teacherform.controls['Qualification'].errors && (teacherform.controls['Qualification'].dirty || teacherform.controls['Qualification'].touched)">
+                      <small class="text-danger" *ngIf="teacherform.get('Qualification').hasError('required')">Qualification is required</small>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="Experience">Experience</label>
+                    <input type="text" class="form-control" id="Experience" name="Experience" formControlName="Experience" [(ngModel)]="teacher.Experience"
+                      required>
+                    <div *ngIf="teacherform.controls['Experience'].errors && (teacherform.controls['Experience'].dirty || teacherform.controls['Experience'].touched)">
+                      <small class="text-danger" *ngIf="teacherform.get('Experience').hasError('required')">Experience is required</small>
+                      <small class="text-danger" *ngIf="teacherform.get('Experience').hasError('pattern')">Enter only Numbers</small>
+                      <small class="text-danger" *ngIf="teacherform.get('Experience').hasError('maxlength') && !(teacherform.get('Experience').hasError('pattern'))">Enter 2 Numbers only</small>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4"></div>
+              </div>
+              <div class="row">
+                 
+                <div class="col-md-4">
+
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <div class="input-group">
+                          <!-- <input type="radio" name="Gender" class="custom-control-input"   value='Male' formControlName="Gender" [(ngModel)]='teacher.Gender'>Male
+                                <input type="radio" name='Gender' class="custom-control-input" value='Female' formControlName="Gender" [(ngModel)]='teacher.Gender'>Female -->
+                          <label class="display-inline-block custom-control custom-radio ml-1">
+                            <input type="radio" class="custom-control-input" [(ngModel)]="teacher.Gender" formControlName="Gender" name="Gender" value='Male'
+                              required>
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description ml-0">Male</span>
+                          </label>
+                          <label class="display-inline-block custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" [(ngModel)]="teacher.Gender" formControlName="Gender" name="Gender" value='Female'
+                              required>
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description ml-0">Female</span>
+                          </label>
+                          <div *ngIf="teacherform.controls['Gender'].errors && (teacherform.controls['Gender'].dirty || teacherform.controls['Gender'].touched)">
+                            <small class="text-danger" *ngIf="teacherform.get('Gender').hasError('required')">Gender is required </small>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+
+                <div class="col-md-4">
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>StaffType</label>
+                        <div class="input-group">
+                          <label class="display-inline-block custom-control custom-radio ml-1">
+                            <input type="radio" class="custom-control-input" [(ngModel)]="teacher.StaffType" formControlName="StaffType" name="StaffType"
+                              value='TeachingStaff' required>
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description ml-0">TeachingStaff</span>
+                          </label>
+                          <label class="display-inline-block custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" [(ngModel)]="teacher.StaffType" formControlName="StaffType" name="StaffType"
+                              value='NonTeachingStaff' required>
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description ml-0">NonTeachingStaff</span>
+                          </label>
+                          <div *ngIf="teacherform.controls['StaffType'].errors && (teacherform.controls['StaffType'].dirty || teacherform.controls['StaffType'].touched)">
+                            <small class="text-danger" *ngIf="teacherform.get('Gender').hasError('required')">Staff Type is required </small>
+                          </div>
+                        </div>
+                      </div>
+                 
+                </div>
+
+                <div class="col-md-4">
+                  
+                </div>
+                <div class="col-md-4">
+                </div>
+              </div>
+
+            </div>
+            <div class="form-actions">
+              <div class="savecl">
+                <button type="submit" class="btn btn-raised btn-raised btn-primary" [disabled]="!teacherform.valid">
+                  <i class="fa fa-check-square-o"></i> Save
+                </button>
+                <button type="button" class="btn btn-raised btn-raised btn-warning mr-1" (click)="Cancel()">
+                  <i class="ft-x"></i> Cancel
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- // Teacher form layout section end -->
+<!--Extended Table starts-->
+<div class="row">
+  <div class="col-12">
+    <div class="content-header" *ngIf="AddTeacherButton">
+
+    <a class="btn btn-info btn-raised font-medium-3" (click)="CreateTeacher()">+AddTeacher</a>
+
+  </div>
+  </div>
+</div>
+<section id="extended">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <!-- <h4 class="card-title">Student List</h4> -->
+        </div>
+        <div class="card-body">
+          <div class="card-block">
+            <table class="table table-responsive text-center">
+              <thead>
+                <tr>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Gender</th>
+                  <th>ContactNumber</th>
+                  <th>Experience</th>
+                  <th>DateOfJoining</th>
+                  <th>Qualification</th>
+                  <th>Salary</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <tr *ngFor='let teacher of teacherlist'>
+                  <td>{{teacher.firstName}}</td>
+                  <td> {{teacher.lastName}}</td>
+                  <td> {{teacher.gender}}</td>
+                  <td>{{teacher.contactNumber}}</td>
+                  <td>{{teacher.experience}}</td>
+                  <td>{{teacher.dateOfJoining}}</td>
+                  <td>{{teacher.qualification}}</td>
+                  <td>{{teacher.salary}}</td>
+                  <td>
+                    <a class="success p-0" data-original-title="" title="" (click)="EditTeacher(teacher)">
+                      <i class="ft-edit-2 font-medium-3 mr-2"></i>
+                    </a>
+                    <a class="danger p-0" data-original-title="" title="" (click)="DeleteTeacher(teacher.TeacherID)">
+                      <i class="ft-x font-medium-3 mr-2"></i>
+                    </a>
+                  </td>
+                </tr>
+
+                <tr *ngIf="!teacherlist || teacherlist.length==0">
+                  <td colspan="12">
+                    No teachers to display
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--Extended Table Ends-->

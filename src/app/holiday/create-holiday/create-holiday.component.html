@@ -1,0 +1,215 @@
+<!-- holiday form layout section start -->
+<section id="basic-form-layouts" *ngIf="displayholiday">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="content-header">Holiday Information</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title" id="basic-layout-form">Create Holiday</h4>
+    </div>
+    <div class="card-body">
+      <div class="card-block">
+        <div class="px-3">
+          <form class="form" [formGroup]="holidayform" (ngSubmit)="RegisterHoliday()">
+            <div class="form-body">
+
+
+              <h4 class="form-section">
+                <i class="ft-user"></i> Holiday Info</h4>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="fname">Title</label>
+
+                    <input type="text" id="fname" class="form-control" name="fname" formControlName="Title" [(ngModel)]="holiday.Title" required>
+                    <div *ngIf="holidayform.controls['Title'].errors && (holidayform.controls['Title'].dirty || holidayform.controls['Title'].touched)">
+                      <small class="text-danger" *ngIf="holidayform.get('Title').hasError('required')">Title is required</small>
+                      <small class="text-danger" *ngIf="holidayform.get('Title').hasError('minlength') && !(holidayform.get('Title').hasError('pattern'))">Minimum 3 characters</small>
+                      <small class="text-danger" *ngIf="holidayform.get('Title').hasError('pattern')">Enter only characters</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                
+                </div>
+                <div class="col-md-4">
+                </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-4">
+                      <div class="form-group">
+                          <label for="Description">Description</label>
+                          <textarea id="Description" rows="2" class="form-control" name="Description" formControlName="Description" [(ngModel)]="holiday.Description"
+                            required></textarea>
+                          <div *ngIf="holidayform.controls['Description'].errors && (holidayform.controls['Description'].dirty || holidayform.controls['Description'].touched)">
+                            <small class="text-danger" *ngIf="holidayform.get('Description').hasError('required')">Description is required </small>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                      </div>
+                      <div class="col-md-4">
+                        </div>
+                </div>
+
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>HolidayType</label>
+                    <div class="input-group">
+
+                      <label class="display-inline-block custom-control custom-radio ml-1">
+                        <input type="radio" class="custom-control-input" [(ngModel)]="holiday.HolidayType" formControlName="HolidayType" name="HolidayType"
+                          value='SingleDay' (click)="setradio('single')" required>
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description ml-0">Single Day</span>
+                      </label>
+                      <label class="display-inline-block custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" [(ngModel)]="holiday.HolidayType" formControlName="HolidayType" name="HolidayType"
+                          value='MultipleDays' (click)="setradio('multi')" required>
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description ml-0">Multiple Days</span>
+                      </label>
+                      <div *ngIf="holidayform.controls['HolidayType'].errors && (holidayform.controls['HolidayType'].dirty || holidayform.controls['HolidayType'].touched)">
+                        <small class="text-danger" *ngIf="holidayform.get('HolidayType').hasError('required')">HolidayType is required </small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4" *ngIf="singledatedisplay">
+                  <label for="Date">Date</label>
+                  <input type="text" class="form-control" id="SingleDate" name="SingleDate" bsDatepicker formControlName="SingleDate" [(ngModel)]="holiday.SingleDate">
+
+                  <!-- <small class="text-danger" *ngIf="requireddate">Date is required</small> -->
+                  
+
+
+                </div>
+                <div class="col-md-4" *ngIf="multydatedisplay">
+                  <label for="Date">From Date - To Date </label>
+                  <input type="text" class="form-control" id="MultiDate" name="MultiDate" bsDaterangepicker formControlName="MultiDate" [(ngModel)]="holiday.MultiDate">
+                  <!-- <small class="text-danger" *ngIf="requireddate">Date is required</small> -->
+                
+                </div>
+
+                <div class="col-md-4"> </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Sent via</label>
+                    <label class="custom-control custom-checkbox m-0">
+                      <input type="checkbox" class="custom-control-input" [(ngModel)]="holiday.SMS" name="SMS" formControlName="SMS" value="SMS">
+                      <span class="custom-control-indicator"></span>
+                      SMS
+                    </label>
+                    <label class="custom-control custom-checkbox m-0">
+                      <input type="checkbox" class="custom-control-input" [(ngModel)]="holiday.Mail" name="Mail" formControlName="Mail" value="Mail">
+                      <span class="custom-control-indicator"></span>
+                      Mail
+                    </label>
+                    <label class="custom-control custom-checkbox m-0">
+                      <input type="checkbox" class="custom-control-input" [(ngModel)]="holiday.AppNotification" name="AppNotification" formControlName="AppNotification"
+                        value="AppNotification">
+                      <span class="custom-control-indicator"></span>
+                      AppNotification
+                    </label>
+
+                  </div>
+                </div>
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4"></div>
+              </div>
+
+
+
+
+            </div>
+            <div class="form-actions">
+              <div class="savecl">
+                <button type="submit" class="btn btn-raised btn-raised btn-primary" [disabled]="!holidayform.valid">
+                  <i class="fa fa-check-square-o"></i> Save
+                </button>
+                <button type="button" class="btn btn-raised btn-raised btn-warning mr-1" (click)="Cancel()" >
+                  <i class="ft-x"></i> Cancel
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- // holiday form layout section end -->
+<!--Extended Table starts-->
+<div class="row" *ngIf="CreateHolidayButton">
+  <div class="col-12">
+    <div class="content-header"></div>
+
+    <a class="btn btn-info btn-raised font-medium-3" (click)="CreateHoliday()">+AddHoliday</a>
+
+
+  </div>
+</div>
+<section id="extended">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">View Scheduled Holidays List</h4>
+        </div>
+        <div class="card-body">
+          <div class="card-block">
+            <table class="table table-responsive text-center">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>HolidayType</th>
+                  <th>SingleDate</th>
+                  <th>MultiDate</th>
+                  <th>sent via</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <tr *ngFor='let holiday of holidaylist'>
+                  <td>{{holiday.Title}}</td>
+                  <td> {{holiday.LastName}}</td>
+                  <td> {{holiday.HolidayType}}</td>
+                  <td>{{holiday.SingleDate}}</td>
+                  <td>{{holiday.MultiDate}}</td>
+                  <td>{{holiday.SMS}} {{holiday.Mail}} {{holiday.AppNotification}}</td>
+                  <td>
+                    <a class="success p-0" data-original-title="" title="" (click)="EditHoliday(holiday)">
+                      <i class="ft-edit-2 font-medium-3 mr-2"></i>
+                    </a>
+                    <a class="danger p-0" data-original-title="" title="" (click)="DeleteHoliday(holiday.holidayID)">
+                      <i class="ft-x font-medium-3 mr-2"></i>
+                    </a>
+                  </td>
+                </tr>
+
+                <tr *ngIf="!holidaylist || holidaylist.length==0">
+                  <td colspan="12">
+                    No Holiday to display
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--Extended Table Ends-->

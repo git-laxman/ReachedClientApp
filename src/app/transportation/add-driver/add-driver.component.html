@@ -1,0 +1,143 @@
+<!-- Basic form layout section start -->
+<section id="basic-form-layouts" *ngIf="DisplayDriverForm">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title" id="basic-layout-form">Add Driver</h4>
+    </div>
+    <div class="card-body">
+      <div class="card-block">
+        <div class="px-3">
+          <form class="form" [formGroup]="driverform" (ngSubmit)="adddriver()">
+            <div class="form-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <h4 class="form-section">
+                    <i class="ft-user"></i> Driver Info</h4>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="Name">Driver Name</label>
+                        <input type="text" id="Name" class="form-control" name="Name" formControlName="Name" [(ngModel)]="driver.Name"
+                          required>
+                        <div *ngIf="driverform.controls['Name'].errors && (driverform.controls['Name'].dirty || driverform.controls['Name'].touched)">
+                          <small class="text-danger" *ngIf="driverform.get('Name').hasError('required')">Driver Name is required</small>
+                          <small class="text-danger" *ngIf="driverform.get('Name').hasError('minlength') && !(driverform.get('Name').hasError('pattern'))">Minimum 3 characters</small>
+                          <small class="text-danger" *ngIf="driverform.get('Name').hasError('pattern')">Enter only characters</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="ContactNo1">Contact Number 1</label>
+                        <input type="number" id="ContactNo1" class="form-control" name="ContactNo1" formControlName="ContactNo1" [(ngModel)]="driver.ContactNo1"
+                          required>
+                        <div *ngIf="driverform.controls['ContactNo1'].errors && (driverform.controls['ContactNo1'].dirty || driverform.controls['ContactNo1'].touched)">
+                          <small class="text-danger" *ngIf="driverform.get('ContactNo1').hasError('required')">Contact Num 1 is required</small>
+                          <small class="text-danger" *ngIf="driverform.get('ContactNo1').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-4">
+                          <div class="form-group">
+                            <label for="ContactNo2">Contact Number 2</label>
+                            <input type="number" id="ContactNo2" class="form-control" name="ContactNo2" formControlName="ContactNo2" [(ngModel)]="driver.ContactNo2"
+                              required>
+                            <div *ngIf="driverform.controls['ContactNo2'].errors && (driverform.controls['ContactNo2'].dirty || driverform.controls['ContactNo2'].touched)">
+                              <small class="text-danger" *ngIf="driverform.get('ContactNo2').hasError('required')">Contact Num 2 is required</small>
+                              <small class="text-danger" *ngIf="driverform.get('ContactNo2').hasError('pattern')">Enter only Numbers</small>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label for="Password">Password</label>
+                            <input type="text" id="Password" class="form-control" name="Password" formControlName="Password" [(ngModel)]="driver.Password"
+                              required>
+                            <div *ngIf="driverform.controls['Password'].errors && (driverform.controls['Password'].dirty || driverform.controls['Password'].touched)">
+                              <small class="text-danger" *ngIf="driverform.get('Password').hasError('required')">Password is required</small>
+                              <!-- <small class="text-danger" *ngIf="driverform.get('Password').hasError('pattern')">Enter only Numbers</small> -->
+                            </div>
+                          </div>
+                        </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-actions">
+              <div class="savecl">
+                <button type="submit" class="btn btn-raised btn-raised btn-primary" [disabled]="!driverform.valid">
+                  <i class="fa fa-check-square-o"></i> Save
+                </button>
+                <button type="button" class="btn btn-raised btn-raised btn-warning mr-1" (click)="Cancel()">
+                  <i class="ft-x"></i> Cancel
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- // Basic form layout section end -->
+
+<!--Extended Table starts-->
+<div class="row">
+  <div class="col-12">
+    <div class="content-header"></div>
+    <a class="btn btn-info btn-raised font-medium-3" (click)="CreateAddDriver()">Add Driver</a>
+  </div>
+</div>
+<section id="extended">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <!-- <h4 class="card-title">Student List</h4> -->
+        </div>
+        <div class="card-body">
+          <div class="card-block">
+            <table class="table table-responsive text-center">
+              <thead>
+                <tr>
+                  <th>Driver Name</th>
+                  <th>Contact Number 1</th>
+                  <th>Contact Number 2</th>
+                  <th>Password</th>
+                  
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor='let driver of driverlist'>
+                  <td>{{driver.name}}</td>
+                  <td> {{driver.contactNo1}}</td>
+                  <td> {{driver.contactNo2}}</td>
+                  <td>{{driver.password}}</td>
+                  
+                  <td>
+                    <a class="success p-0" data-original-title="" title="" (click)="EditDriver(driver)">
+                      <i class="ft-edit-2 font-medium-3 mr-2"></i>
+                    </a>
+                    <a class="danger p-0" data-original-title="" title="" (click)="removedriver(driver.DriverID)">
+                      <i class="ft-x font-medium-3 mr-2"></i>
+                    </a>
+                  </td>
+                </tr>
+                <tr *ngIf="!driverlist || driverlist.length==0">
+                  <td colspan="12">
+                    No drivers to display
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--Extended Table Ends-->

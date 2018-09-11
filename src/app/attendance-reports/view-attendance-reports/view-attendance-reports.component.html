@@ -1,0 +1,189 @@
+<!-- attendence form layout section start -->
+<section id="basic-form-layouts">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="content-header">View Attendance Information</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title" id="basic-layout-form">Class Attendance</h4>
+    </div>
+    <div class="card-body">
+      <div class="card-block">
+        <div class="px-3">
+          <form class="form" [formGroup]="attendanceform" (ngSubmit)="GenarateAttendanceReports()">
+            <div class="form-body">
+
+
+              <h4 class="form-section">
+                <i class="ft-user"></i>Attendance Info</h4>
+              <div class="row">
+
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="Class">Class</label>
+                    <select id="Class" name="Class" class="form-control" [(ngModel)]="attendance.Class" formControlName="Class" required>
+
+                      <option disabled [ngValue]="null">Select Class</option>
+                      <option value="LKG">L.K.G</option>
+                      <option value="UKG">U.K.G</option>
+                      <option value="1stClass">1st Class</option>
+                      <option value="2stClass">2nd Class</option>
+                      <option value="3rdClass">3rd Class</option>
+                      <option value="4thClass">4th Class</option>
+                      <option value="5thClass">5th Class</option>
+                      <option value="6thClass">6th Class</option>
+                      <option value="7thClass">7th Class</option>
+                      <option value="8thClass">8th Class</option>
+                      <option value="9thClass">9th Class</option>
+                      <option value="10thClass">10th Class</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="Section">Section</label>
+                    <select id="Section" name="Section" class="form-control" [(ngModel)]="attendance.Section" formControlName="Section" required>
+                      <option disabled [ngValue]="null">Select Section</option>
+                      <option value="A">A</option>
+                      <option value="B">B</option>
+                      <option value="C">C</option>
+                      <option value="D">D</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <label for="Date">Date</label>
+                  <input type="month" class="form-control" id="Date" name="Date" formControlName="Date" [(ngModel)]="attendance.Date">
+                  <div *ngIf="attendanceform.controls['Date'].errors && (attendanceform.controls['Date'].dirty || attendanceform.controls['Date'].touched)">
+                    <small class="text-danger" *ngIf="attendanceform.get('Date').hasError('required')">Date is required</small>
+                  </div>
+
+                </div>
+
+
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Select Attendence By</label>
+                    <div class="input-group">
+
+                      <label class="display-inline-block custom-control custom-radio ml-1">
+                        <input type="radio" class="custom-control-input" [(ngModel)]="attendance.AttendanceType" formControlName="AttendanceType"
+                          name="AttendanceType" value='SingleDay' (click)="setradio('single')" required>
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description ml-0">Total Class</span>
+                      </label>
+                      <label class="display-inline-block custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" [(ngModel)]="attendance.AttendanceType" formControlName="AttendanceType"
+                          name="AttendanceType" value='MultipleDays' (click)="setradio('multi')" required>
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description ml-0">Percentage Wise</span>
+                      </label>
+                      <div *ngIf="attendanceform.controls['AttendanceType'].errors && (attendanceform.controls['AttendanceType'].dirty || attendanceform.controls['AttendanceType'].touched)">
+                        <small class="text-danger" *ngIf="attendanceform.get('AttendanceType').hasError('required')">AttendanceType is required </small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-8" *ngIf="singledatedisplay"></div>
+
+                <div class="col-md-8" *ngIf="multydatedisplay">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="AttendanceFrom">AttendanceFrom %</label>
+                        <input type="tel" class="form-control" id="AttendanceFrom" name="AttendanceFrom" formControlName="AttendanceFrom" [(ngModel)]="attendance.AttendanceFrom"
+                          >
+                        <div *ngIf="attendanceform.controls['AttendanceFrom'].errors && (attendanceform.controls['AttendanceFrom'].dirty || attendanceform.controls['AttendanceFrom'].touched)">
+                          <small class="text-danger" *ngIf="attendanceform.get('AttendanceFrom').hasError('pattern')">Enter valid AttendanceFrom %</small>
+                          <small class="text-danger" *ngIf="attendanceform.get('AttendanceFrom').hasError('maxlength') && !(attendanceform.get('AttendanceFrom').hasError('pattern'))">Max 2 Numbers only</small>
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="AttendanceTo">AttendanceTo %</label>
+                        <input type="tel" class="form-control" id="AttendanceTo" name="AttendanceTo" formControlName="AttendanceTo" [(ngModel)]="attendance.AttendanceTo"
+                          >
+                        <div *ngIf="attendanceform.controls['AttendanceTo'].errors && (attendanceform.controls['AttendanceTo'].dirty || attendanceform.controls['AttendanceTo'].touched)">
+                          <small class="text-danger" *ngIf="attendanceform.get('AttendanceTo').hasError('pattern')">Enter valid AttendanceTo %</small>
+                          <small class="text-danger" *ngIf="attendanceform.get('AttendanceTo').hasError('maxlength') && !(attendanceform.get('AttendanceTo').hasError('pattern'))">Max 2 Numbers only</small>
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4"></div>
+                  </div>
+                </div>
+
+
+              </div>
+              <!-- <div class="row">
+                <div class="col-md-3">
+                  
+
+                   
+
+                </div>
+                <div class="col-md-3">
+
+                </div>
+                <div class="col-md-3">
+
+
+                </div>
+
+              </div> -->
+
+            </div>
+            <div class="form-actions">
+              <div class="savecl">
+                <button type="submit" class="btn btn-raised btn-raised btn-primary" [disabled]="!attendanceform.valid">
+                  <i class="fa fa-check-square-o"></i> View
+                </button>
+                <button type="button" class="btn btn-raised btn-raised btn-warning mr-1" (click)="Cancel()">
+                  <i class="ft-x"></i> Cancel
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- // attendance form layout section end -->
+<table id="example" class="table table-striped table-bordered" style="width:100%">
+  <thead>
+    <tr>
+      <!-- <th>Edit</th>
+      <th>Delete</th> -->
+      <th>RollNumber</th>
+      <th>FirstName</th>
+      <th>LastName</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of DataList">
+      <!-- <td>
+        <button (click)="editstudent(item)">Edit</button>
+      </td>
+      <td>
+
+        <button (click)="OnDeleteClick(item,i,deletestudent)">Delete</button>
+      </td> -->
+      <td>{{item.RollNumber}}</td>
+      <td>{{item.FirstName}}</td>
+      <td>{{item.LastName}}</td>
+
+    </tr>
+    <tr *ngIf="DataList.length==0" style="height:200px">
+      <td colspan="16">No data to display</td>
+    </tr>
+  </tbody>
+</table>

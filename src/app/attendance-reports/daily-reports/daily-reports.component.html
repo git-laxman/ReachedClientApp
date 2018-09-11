@@ -1,0 +1,99 @@
+<!-- attendence form layout section start -->
+<section id="basic-form-layouts">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="content-header">Attendance Information</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title" id="basic-layout-form">Day Attendance</h4>
+    </div>
+    <div class="card-body">
+      <div class="card-block">
+        <div class="px-3">
+          <form class="form" [formGroup]="attendanceform" (ngSubmit)="GenarateAttendanceReport()">
+            <div class="form-body">
+
+
+              <h4 class="form-section">
+                <i class="ft-user"></i>Attendance Info</h4>
+
+              <div class="row">
+
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="Class">Class</label>
+                    <select id="Class" name="Class" class="form-control"  [(ngModel)]="attendance.Class" formControlName="Class" required>
+                        
+                      <option disabled [ngValue]="null">Select Class</option>
+                      <option value="LKG">L.K.G</option>
+                      <option value="UKG">U.K.G</option>
+                      <option value="1stClass">1st Class</option>
+                      <option value="2stClass">2nd Class</option>
+                      <option value="3rdClass">3rd Class</option>
+                      <option value="4thClass">4th Class</option>
+                      <option value="5thClass">5th Class</option>
+                      <option value="6thClass">6th Class</option>
+                      <option value="7thClass">7th Class</option>
+                      <option value="8thClass">8th Class</option>
+                      <option value="9thClass">9th Class</option>
+                      <option value="10thClass">10th Class</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="Section">Section</label>
+                    <select id="Section" name="Section" class="form-control" [(ngModel)]="attendance.Section"  formControlName="Section" required>
+                      <option disabled [ngValue]="null">Select Section</option>
+                      <option value="A">A</option>
+                      <option value="B">B</option>
+                      <option value="C">C</option>
+                      <option value="D">D</option>
+                    </select>
+                  </div>
+                </div> 
+                <div class="col-md-3">
+                    <label for="Date">Date</label>
+                    <input type="text" class="form-control" id="Date" name="Date" bsDatepicker formControlName="Date" [(ngModel)]="attendance.Date">  
+                    <div *ngIf="attendanceform.controls['Date'].errors && (attendanceform.controls['Date'].dirty || attendanceform.controls['Date'].touched)">
+                        <small class="text-danger" *ngIf="attendanceform.get('Date').hasError('required')">Date is required</small>
+                      </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="AbsentRollNumbers">Absent Student Roll Numbers</label>
+                    <textarea id="AbsentRollNumbers" rows="2" class="form-control" name="AbsentRollNumbers" formControlName="AbsentRollNumbers" [(ngModel)]="attendance.AbsentRollNumbers"
+                      required></textarea>
+                    <div *ngIf="attendanceform.controls['AbsentRollNumbers'].errors && (attendanceform.controls['AbsentRollNumbers'].dirty || attendanceform.controls['AbsentRollNumbers'].touched)">
+                      <small class="text-danger" *ngIf="attendanceform.get('AbsentRollNumbers').hasError('required')">Absent RollNumbers is required </small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4">
+                </div>
+              </div>
+            </div>
+            <div class="form-actions">
+              <div class="savecl">
+                <button type="submit" class="btn btn-raised btn-raised btn-primary" [disabled]="!attendanceform.valid">
+                  <i class="fa fa-check-square-o"></i> Save
+                </button>
+                <button type="button" class="btn btn-raised btn-raised btn-warning mr-1" (click)="Cancel()">
+                  <i class="ft-x"></i> Cancel
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- // attendance form layout section end -->

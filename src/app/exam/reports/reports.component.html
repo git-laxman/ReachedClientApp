@@ -1,0 +1,142 @@
+<section id="basic-form-layouts" *ngIf="DisplayReportsform">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="content-header">Add Reports Form</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title" id="basic-layout-form">Create Exam Reports</h4>
+    </div>
+    <div class="card-body">
+      <div class="card-block">
+        <div class="px-3">
+          <form class="form" [formGroup]="Reportsform" (ngSubmit)="SaveExamReports()">
+            <div class="form-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <h4 class="form-section">
+                    <i class="ft-user"></i> Exam Reports Info</h4>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="ClassName">Class Name</label>
+                        <select id="ClassName" name="ClassName" class="form-control" [(ngModel)]="examreportobj.ClassName" formControlName="ClassName"
+                          required>
+                          <option [value]=null disabled></option>
+                          <option *ngFor="let class of classdd" [value]="class.Item1">{{class.Item2}}
+                          </option>
+                        </select>
+                        <div *ngIf="Reportsform.controls['ClassName'].errors && (Reportsform.controls['ClassName'].dirty || Reportsform.controls['ClassName'].touched)">
+                          <small class="text-danger" *ngIf="Reportsform.get('ClassName').hasError('required')">Class Name is required</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="SectionName">Section Name</label>
+                        <select id="SectionName" name="SectionName" class="form-control" [(ngModel)]="examreportobj.SectionName" formControlName="SectionName"
+                         (change)="onchangestudentlist(examreportobj)" required>
+                          <option [value]=null disabled></option>
+                          <option *ngFor="let section of sectiondd" [value]="section.Item1">{{section.Item2}}
+                          </option>
+                        </select>
+                        <div *ngIf="Reportsform.controls['SectionName'].errors && (Reportsform.controls['SectionName'].dirty || Reportsform.controls['SectionName'].touched)">
+                          <small class="text-danger" *ngIf="Reportsform.get('SectionName').hasError('required')">Section Name is required</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="row">
+  <div class="col-12">
+    <div class="content-header">
+      <a class="btn btn-info btn-raised font-medium-3" (click)="CreateScheduleExam()">Add Schedule Exam </a>
+    </div>
+  </div>
+  <section id="extended">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-header">
+          </div>
+          <div class="card-body">
+            <div class="card-block">
+              <table class="table table-responsive text-center">
+                <thead>
+                  <tr>
+                    <th>Roll Number</th>
+                    <th>Student Name</th>
+                    <th>Subject 1</th>
+                    <th>Subject 2</th>
+                    <th>Subject 3</th>
+                    <th>Subject 4</th>
+                    <th>Subject 5</th>
+                    <th>Subject 6</th>
+                    <th>Subject 7</th>
+                    <th>Subject 8</th>
+                    <th>Subject 9</th>
+                    <th>Subject 10</th>
+                    <th>Subject 11</th>
+                    <th>Subject 12</th>
+                    <th>Marks Obtained</th>
+                    <th>Percentage</th>
+                    <th>Grade</th>
+                    <th>Rank</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  <tr *ngFor='let report of ExamReportsList'>
+                    <td>{{report.RollNumber}}</td>
+                    <td>{{report.StudentName}}</td>
+                    <td>{{report.Subject1}}</td>
+                    <td>{{report.Subject2}}</td>
+                    <td>{{report.Subject3}}</td>
+                    <td>{{report.Subject4}}</td>
+                    <td>{{report.Subject5}}</td>
+                    <td>{{report.Subject6}}</td>
+                    <td>{{report.Subject7}}</td>
+                    <td>{{report.Subject8}}</td>
+                    <td>{{report.Subject9}}</td>
+                    <td>{{report.Subject10}}</td>
+                    <td>{{report.Subject11}}</td>
+                    <td>{{report.Subject12}}</td>
+                    <td>{{report.MarksObtained}}</td>
+                    <td>{{report.Percentage}}</td>
+                    <td>{{report.Grade}}</td>
+                    <td>{{report.Rank}}</td>
+                    <td>
+                      <a class="success p-0" data-original-title="" title="" (click)="EditExamReport(schedule)">
+                        <i class="ft-edit-2 font-medium-3 mr-2"></i>
+                      </a>
+                      <!-- <a class="danger p-0" data-original-title="" title="" (click)="DeleteExamReport(schedule)">
+                        <i class="ft-x font-medium-3 mr-2"></i>
+                      </a> -->
+                    </td>
+                  </tr>
+
+                  <tr *ngIf="!ExamReportsList || ExamReportsList.length==0">
+                    <td colspan="12">
+                      No Exam Reports to display
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

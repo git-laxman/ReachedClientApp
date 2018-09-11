@@ -1,0 +1,202 @@
+<!-- Basic form layout section start -->
+<section id="basic-form-layouts" *ngIf="DisplayAddrouteform">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title" id="basic-layout-form">Add Route</h4>
+    </div>
+    <div class="card-body">
+      <div class="card-block">
+        <div class="px-3">
+          <form class="form" [formGroup]="addrouteform" (ngSubmit)="Createroute()">
+            <div class="form-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <h4 class="form-section">
+                    <i class="ft-user"></i> Route Info</h4>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="BusNumber">Bus Number</label>
+                        <input type="text" id="BusNumber" class="form-control" name="BusNumber" formControlName="BusNumber" [(ngModel)]="addroute.BusNumber"
+                          required>
+                        <div *ngIf="addrouteform.controls['BusNumber'].errors && (addrouteform.controls['BusNumber'].dirty || addrouteform.controls['BusNumber'].touched)">
+                          <small class="text-danger" *ngIf="addrouteform.get('BusNumber').hasError('required')">Bus Num is required</small>
+                          <small class="text-danger" *ngIf="addrouteform.get('BusNumber').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="RouteName">Route Name</label>
+                        <input type="text" id="RouteName" class="form-control" name="RouteName" formControlName="RouteName" [(ngModel)]="addroute.RouteName"
+                          required>
+                        <div *ngIf="addrouteform.controls['RouteName'].errors && (addrouteform.controls['RouteName'].dirty || addrouteform.controls['RouteName'].touched)">
+                          <small class="text-danger" *ngIf="addrouteform.get('RouteName').hasError('required')">route Name is required</small>
+                          <small class="text-danger" *ngIf="addrouteform.get('RouteName').hasError('minlength') && !(addrouteform.get('RouteName').hasError('pattern'))">Minimum 3 characters</small>
+                          <small class="text-danger" *ngIf="addrouteform.get('RouteName').hasError('pattern')">Enter only characters</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="RouteNumber">Route Number</label>
+                        <input type="text" id="RouteNumber" class="form-control" name="RouteNumber" formControlName="RouteNumber" [(ngModel)]="addroute.RouteNumber"
+                          required>
+                        <div *ngIf="addrouteform.controls['RouteNumber'].errors && (addrouteform.controls['RouteNumber'].dirty || addrouteform.controls['RouteNumber'].touched)">
+                          <small class="text-danger" *ngIf="addrouteform.get('RouteNumber').hasError('required')">Route Num is required</small>
+                          <small class="text-danger" *ngIf="addrouteform.get('RouteNumber').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="IMEINumber">IMEI Number</label>
+                        <input type="text" id="IMEINumber" class="form-control" name="IMEINumber" formControlName="IMEINumber" [(ngModel)]="addroute.IMEINumber"
+                          required>
+                        <div *ngIf="addrouteform.controls['IMEINumber'].errors && (addrouteform.controls['IMEINumber'].dirty || addrouteform.controls['IMEINumber'].touched)">
+                          <small class="text-danger" *ngIf="addrouteform.get('IMEINumber').hasError('required')">IMEI Number is required</small>
+                          <small class="text-danger" *ngIf="addrouteform.get('IMEINumber').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="AssignToDriver">Assign To Driver</label>
+                        <select id="Class" name="AssignToDriver" class="form-control" [(ngModel)]="addroute.AssignToDriver" formControlName="AssignToDriver" required>
+                          <option [value]=null disabled></option>
+                          <option *ngFor="let assign of assigndriverdd" [value]="assign.Item1">{{assign.Item2}}
+                          </option>
+                        </select>
+                        <div *ngIf="addrouteform.controls['AssignToDriver'].errors && (addrouteform.controls['AssignToDriver'].dirty || addrouteform.controls['AssignToDriver'].touched)">
+                          <small class="text-danger" *ngIf="addrouteform.get('AssignToDriver').hasError('required')">Assign To Driver is required</small>
+                        </div>
+                        <!-- <input type="text" id="AssignToDriver" class="form-control" name="AssignToDriver" formControlName="AssignToDriver" [(ngModel)]="addroute.AssignToDriver"
+                          required>
+                        <div *ngIf="addrouteform.controls['AssignToDriver'].errors && (addrouteform.controls['AssignToDriver'].dirty || addrouteform.controls['AssignToDriver'].touched)">
+                          <small class="text-danger" *ngIf="addrouteform.get('AssignToDriver').hasError('required')">AssignToDriver is required</small>
+                          <small class="text-danger" *ngIf="addrouteform.get('AssignToDriver').hasError('minlength') && !(addrouteform.get('AssignToDriver').hasError('pattern'))">Minimum 3 characters</small>
+                          <small class="text-danger" *ngIf="addrouteform.get('AssignToDriver').hasError('pattern')">Enter only characters</small>
+                        </div> -->
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Pick Point</th>
+                            <th scope="col">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <span style="color :red" (click)="addrow()">Add Pickup Points</span>
+                              <!-- <input type="text" placeholder="Pickup point" [(ngModel)]="addroute.PickUpPoint" [hidden]="true" /> -->
+                            </td>
+                            <td>
+                              <span>
+                                <button (click)="addrow()">Add</button>
+                              </span>
+                            </td>
+                          </tr>
+                          <tr *ngFor="let field of fieldArrayName; let i = index">
+                            <td>
+                              <input type="text" placeholder="Pickup point" formControlName="PickUpPoint"  name="PickUpPoint" [(ngModel)]="addroute.PickUpPoint"  />
+                            </td>
+                            <td>
+                              <span>
+                                <button (click)="deleterow(i)">Delete</button>
+                              </span>
+                            </td>
+                            <td>
+                              <span>
+                                <button (click)="addrow()">Add</button>
+                              </span>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-actions">
+              <div class="savecl">
+                <button type="submit" class="btn btn-raised btn-raised btn-primary" [disabled]="!addrouteform.valid">
+                  <i class="fa fa-check-square-o"></i> Save
+                </button>
+                <button type="button" class="btn btn-raised btn-raised btn-warning mr-1" (click)="Cancel()">
+                  <i class="ft-x"></i> Cancel
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- // Basic form layout section end -->
+
+<!--Extended Table starts-->
+<div class="row">
+  <div class="col-12">
+    <div class="content-header"></div>
+    <a class="btn btn-info btn-raised font-medium-3" (click)="CreateAddRoute()">Add Route</a>
+  </div>
+</div>
+<section id="extended">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <!-- <h4 class="card-title">Student List</h4> -->
+        </div>
+        <div class="card-body">
+          <div class="card-block">
+            <table class="table table-responsive text-center">
+              <thead>
+                <tr>
+                  <th>BusNumber</th>
+                  <th>Route Name</th>
+                  <th>Route Number</th>
+                  <th>IMEI Number</th>
+                  <th>Assign To Driver</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor='let route of routelist'>
+                  <td>{{route.BusNumber}}</td>
+                  <td>{{route.RouteName}}</td>
+                  <td>{{route.RouteNumber}}</td>
+                  <td>{{route.IMEINumber}}</td>
+                  <td>{{route.AssignToDriver}}</td>
+                  <td>
+                    <a class="success p-0" data-original-title="" title="" (click)="EditRoute(route)">
+                      <i class="ft-edit-2 font-medium-3 mr-2"></i>
+                    </a>
+                    <a class="danger p-0" data-original-title="" title="" (click)="removeRoute(route.routeID)">
+                      <i class="ft-x font-medium-3 mr-2"></i>
+                    </a>
+                  </td>
+                </tr>
+                <tr *ngIf="!routelist || routelist.length==0">
+                  <td colspan="12">
+                    No Routes to display
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--Extended Table Ends-->

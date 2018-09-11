@@ -1,0 +1,223 @@
+<!-- Basic form layout section start -->
+<section id="basic-form-layouts">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="content-header">Concession Form</div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title" id="basic-layout-form">Add Concession</h4>
+        </div>
+        <div class="card-body">
+            <div class="card-block">
+                <div class="px-3">
+                    <form class="form" [formGroup]="concessionform">
+                        <div class="form-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4 class="form-section">
+                                        <i class="ft-user"></i> Concession Info</h4>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="ClassName">Class Name</label>
+                                                <select id="ClassName" name="ClassName" class="form-control" [(ngModel)]="newclasssearch.ClassName" formControlName="ClassName"
+                                                    required>
+                                                    <option>thth</option>
+                                                    <option>thth</option>
+                                                    <!-- <option [value]=null disabled></option>
+                                                    <option *ngFor="let class of classdd" [value]="class.Item1">{{class.Item2}}
+                                                    </option> -->
+                                                </select>
+                                                <div *ngIf="concessionform.controls['ClassName'].errors && (concessionform.controls['ClassName'].dirty || concessionform.controls['ClassName'].touched)">
+                                                    <small class="text-danger" *ngIf="concessionform.get('ClassName').hasError('required')">Class Name is required</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="SectionName">Section Name</label>
+                                                <select id="SectionName" name="SectionName" class="form-control" [(ngModel)]="newclasssearch.SectionName" formControlName="SectionName"
+                                                    (change)="onchangesection(concession)" required>
+                                                    <option>thth</option>
+                                                    <option>thth</option>
+                                                    <!-- <option [value]=null disabled></option>
+                                                    <option *ngFor="let section of sectiondd" [value]="section.Item1">{{section.Item2}}
+                                                    </option> -->
+                                                </select>
+                                                <div *ngIf="concessionform.controls['SectionName'].errors && (concessionform.controls['SectionName'].dirty || concessionform.controls['SectionName'].touched)">
+                                                    <small class="text-danger" *ngIf="concessionform.get('SectionName').hasError('required')">Section Name is required</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="form-actions">
+                            <div class="savecl">
+                                <button type="submit" class="btn btn-raised btn-raised btn-primary" [disabled]="!studentconcessionform.valid">
+                                    <i class="fa fa-check-square-o"></i> Save
+                                </button>
+                                <button type="button" class="btn btn-raised btn-raised btn-warning mr-1">
+                                    <i class="ft-x"></i> Cancel
+                                </button>
+                            </div>
+                        </div> -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- // Basic form layout section end -->
+
+<!--Extended Table starts-->
+<div class="row" *ngIf="DisplayConcessionForm">
+    <section id="extended">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <!-- <h4 class="card-title">Student List</h4> -->
+                    </div>
+                    <div class="card-body">
+                        <div class="card-block">
+                            <table class="table table-responsive text-center">
+                                <thead>
+                                    <tr>
+                                        <th>Student Name</th>
+                                        <th>Course Name</th>
+                                        <th>Actual Amount</th>
+                                        <th>Concession Amount</th>
+                                        <th>Concession Given By</th>
+                                        <th>Reason</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr *ngFor='let concession of concessionlist'>
+                                        <td>{{concession.StudentName}}</td>
+                                        <td> {{concession.CourseName}}</td>
+                                        <td> {{concession.ActualAmount}}</td>
+                                        <td> {{concession.ConcessionAmount}}</td>
+                                        <td> {{concession.ConcessionGivenBy}}</td>
+                                        <td> {{concession.Reason}}</td>
+                                        <td>
+                                            <a class="success p-0" data-original-title="" title="" (click)="openConcessionmodel(concessionmodal,concession.ConcessionID)">
+                                                Concession
+                                            </a>
+                                            <a class="danger p-0" data-original-title="" title="" (click)="DeleteConcession(concession.ConcessionID)">
+                                                <i class="ft-x font-medium-3 mr-2"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+
+                                    <tr *ngIf="!concession || concession.length==0">
+                                        <td colspan="12">
+                                            No concession to display
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<!--Extended Table Ends-->
+
+<ng-template #concessionmodal>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Student Concession</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form class="form" [formGroup]="studentconcessionform" (ngSubmit)="saveindividualstudentconcession()">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="StudentName">Student Name</label>
+                            <input type="text" id="StudentName" class="form-control" name="StudentName" formControlName="StudentName" [(ngModel)]="concessionsearch.StudentName"
+                                readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="CourseName">Course Name</label>
+                            <input type="text" id="CourseName" class="form-control" name="CourseName" formControlName="CourseName" [(ngModel)]="concessionsearch.CourseName"
+                                readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="ActualAmount">Actual Amount</label>
+                            <input type="number" id="ActualAmount" class="form-control" name="ActualAmount" formControlName="ActualAmount" [(ngModel)]="concessionsearch.ActualAmount"
+                                required>
+                            <div *ngIf="studentconcessionform.controls['ActualAmount'].errors && (studentconcessionform.controls['ActualAmount'].dirty || studentconcessionform.controls['ActualAmount'].touched)">
+                                <small class="text-danger" *ngIf="studentconcessionform.get('ActualAmount').hasError('required')">Actual Amount is required</small>
+                                <small class="text-danger" *ngIf="studentconcessionform.get('ActualAmount').hasError('pattern')">Enter only Numbers</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="ConcessionAmount">Concession Amount</label>
+                            <input type="number" id="ConcessionAmount" class="form-control" name="ConcessionAmount" formControlName="ConcessionAmount"
+                                [(ngModel)]="concessionsearch.ConcessionAmount" required>
+                            <div *ngIf="studentconcessionform.controls['ConcessionAmount'].errors && (studentconcessionform.controls['ConcessionAmount'].dirty || studentconcessionform.controls['ConcessionAmount'].touched)">
+                                <small class="text-danger" *ngIf="studentconcessionform.get('ConcessionAmount').hasError('required')">Concession Amount is required</small>
+                                <small class="text-danger" *ngIf="studentconcessionform.get('ConcessionAmount').hasError('pattern')">Enter only Numbers</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="ConcessionGivenBy">Concession Given By</label>
+                            <input type="text" id="ConcessionGivenBy" class="form-control" name="ConcessionGivenBy" formControlName="ConcessionGivenBy"
+                                [(ngModel)]="concessionsearch.ConcessionGivenBy" required>
+                            <div *ngIf="studentconcessionform.controls['ConcessionGivenBy'].errors && (studentconcessionform.controls['ConcessionGivenBy'].dirty || studentconcessionform.controls['ConcessionGivenBy'].touched)">
+                                <small class="text-danger" *ngIf="studentconcessionform.get('ConcessionGivenBy').hasError('required')">Concession Given By is required</small>
+                                <small class="text-danger" *ngIf="studentconcessionform.get('ConcessionGivenBy').hasError('minlength') && !(studentconcessionform.get('ConcessionGivenBy').hasError('pattern'))">Minimum 3 characters</small>
+                                <small class="text-danger" *ngIf="studentconcessionform.get('ConcessionGivenBy').hasError('pattern')">Enter only characters</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="Reason">Reason</label>
+                            <textarea type="text" id="Reason" class="form-control" name="Reason" formControlName="Reason" [(ngModel)]="concessionsearch.Reason"
+                                required></textarea>
+                            <div *ngIf="studentconcessionform.controls['Reason'].errors && (studentconcessionform.controls['Reason'].dirty || studentconcessionform.controls['Reason'].touched)">
+                                <small class="text-danger" *ngIf="studentconcessionform.get('Reason').hasError('required')">Course Name is required</small>
+                                <small class="text-danger" *ngIf="studentconcessionform.get('Reason').hasError('minlength') && !(studentconcessionform.get('Reason').hasError('pattern'))">Minimum 3 characters</small>
+                                <small class="text-danger" *ngIf="studentconcessionform.get('Reason').hasError('pattern')">Enter only characters</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <div class="savecl">
+                        <button type="submit" class="btn btn-raised btn-raised btn-primary" [disabled]="!studentconcessionform.valid">
+                            <i class="fa fa-check-square-o"></i> Save
+                        </button>
+                        <button type="button" class="btn btn-raised btn-raised btn-warning mr-1" (click)="modalRef.hide()">
+                            <i class="ft-x"></i> Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>

@@ -1,0 +1,255 @@
+<!-- Basic form layout section start -->
+<section id="basic-form-layouts" *ngIf="displaycommunicationform">
+    <div class="card">
+        <div class="card-body">
+            <div class="card-block">
+                <div class="px-3">
+                    <form class="form" [formGroup]="communicationform" (ngSubmit)="sendCommunication()">
+                        <div class="form-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="message">Compose Message</label>
+                                        <textarea class="form-control" id="message" name="message" formControlName="message" [(ngModel)]="communication.message"
+                                            required></textarea>
+                                        <div *ngIf="communicationform.controls['message'].errors && (communicationform.controls['message'].dirty || communicationform.controls['message'].touched)">
+                                            <small class="text-danger" *ngIf="communicationform.get('message').hasError('required')">Message is required</small>
+                                            <small class="text-danger" *ngIf="communicationform.get('message').hasError('minlength') && !(communicationform.get('message').hasError('pattern'))">Minimum 3 characters</small>
+                                            <small class="text-danger" *ngIf="communicationform.get('message').hasError('pattern')">Enter only characters</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Sent via</label>
+                                        <label class="custom-control custom-checkbox m-0">
+                                            <input type="checkbox" class="custom-control-input form-control" [(ngModel)]="communication.SMS" formControlName="SMS" name="SMS"
+                                                value="SMS">
+                                            <span class="custom-control-indicator"></span>
+                                            SMS
+                                        </label>
+                                        <label class="custom-control custom-checkbox m-0">
+                                            <input type="checkbox" class="custom-control-input form-control" [(ngModel)]="communication.Mail" formControlName="Mail"
+                                                name="Mail" value="Mail">
+                                            <span class="custom-control-indicator"></span>
+                                            Mail
+                                        </label>
+                                        <label class="custom-control custom-checkbox m-0">
+                                            <input type="checkbox" class="custom-control-input form-control" [(ngModel)]="communication.AppNotification" formControlName="AppNotification"
+                                                name="AppNotification" value="AppNotification">
+                                            <span class="custom-control-indicator"></span>
+                                            AppNotification
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Send To</label>
+                                        <div class="input-group">
+                                            <label class="display-inline-block custom-control custom-radio ml-1">
+                                                <input type="radio" class="custom-control-input" [(ngModel)]="communication.SendTo" formControlName="Individualstudent" name="Individualstudent"
+                                                    value='Individualstudent' (click)="setradio('Individualstudent')" required>
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Individual Student</span>
+                                            </label>
+                                            <label class="display-inline-block custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" [(ngModel)]="communication.SendTo" formControlName="Particularclassorsection"
+                                                    name="Particularclassorsection" value='Particularclassorsection' (click)="setradio('Particularclassorsection')"
+                                                    required>
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Particular Class Or Section</span>
+                                            </label>
+                                            <label class="display-inline-block custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" [(ngModel)]="communication.SendTo" formControlName="All" name="All" value='All'
+                                                    (click)="setradioAll('All')" required>
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">All</span>
+                                            </label>
+                                            <!-- <div *ngIf="communicationform.controls['Gender'].errors && (communicationform.controls['Gender'].dirty || communicationform.controls['Gender'].touched)">
+                                                <small class="text-danger" *ngIf="communicationform.get('Gender').hasError('required')">Gender is required </small>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="DisplayIndividualstudent">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="ClassName">Class Name</label>
+                                        <select id="ClassName" name="ClassName" class="form-control" [(ngModel)]="communication.ClassName" formControlName="ClassName">
+                                            <option [value]=null disabled></option>
+                                            <option>10th Class</option>
+                                            <!-- <option *ngFor="let class of classdd" [value]="class.Item1">{{class.Item2}}
+                                            </option> -->
+                                        </select>
+                                        <div *ngIf="communicationform.controls['ClassName'].errors && (communicationform.controls['ClassName'].dirty || communicationform.controls['ClassName'].touched)">
+                                            <small class="text-danger" *ngIf="communicationform.get('ClassName').hasError('required')">Class Name is required</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="SectionName">Section Name</label>
+                                        <select id="SectionName" name="SectionName" class="form-control" [(ngModel)]="communication.SectionName" formControlName="SectionName">
+                                            <!-- <option value="0" selected="" disabled="">Section</option> -->
+                                            <option disabled [ngValue]="null">Select Section</option>
+                                            <option value="A">A</option>
+                                            <option value="B">B</option>
+                                            <option value="C">C</option>
+                                            <option value="D">D</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="Section">Student Name</label>
+                                        <input type="text" [(ngModel)]="communication.StudentName" class="form-control" formControlName="StudentName" name="StudentName">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="DisplayParticularclassorsection">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="ClassName">Class Name</label>
+                                        <select id="ClassName" name="ClassName" class="form-control" [(ngModel)]="communication.ClassName" formControlName="ClassName">
+                                            <option [value]=null disabled></option>
+                                            <option *ngFor="let class of classdd" [value]="class.Item1">{{class.Item2}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="communicationform.controls['ClassName'].errors && (communicationform.controls['ClassName'].dirty || communicationform.controls['ClassName'].touched)">
+                                            <small class="text-danger" *ngIf="communicationform.get('ClassName').hasError('required')">Class Name is required</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="SectionName">Section Name</label>
+                                        <select id="SectionName" name="SectionName" class="form-control" [(ngModel)]="communication.SectionName" formControlName="SectionName">
+                                            <option disabled [ngValue]="null">Select Section</option>
+                                            <option value="A">A</option>
+                                            <option value="B">B</option>
+                                            <option value="C">C</option>
+                                            <option value="D">D</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Send Mode</label>
+                                        <div class="input-group">
+                                            <label class="display-inline-block custom-control custom-radio ml-1">
+                                                <input type="radio" class="custom-control-input" [(ngModel)]="communication.SendToMode" formControlName="SendToMode" name="SendToMode"
+                                                    value="SendImmediately" (click)="setradio2('SendImmediately')" required>
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Send Immediately</span>
+                                            </label>
+                                            <label class="display-inline-block custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" [(ngModel)]="communication.SendToMode" formControlName="SendToMode" name="SendToMode"
+                                                    value="Schedule" (click)="setradio1('Schedule')" required>
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Send Scheduled</span>
+                                            </label>
+                                            <!-- <div *ngIf="communicationform.controls['Gender'].errors && (communicationform.controls['Gender'].dirty || communicationform.controls['Gender'].touched)">
+                                                <small class="text-danger" *ngIf="communicationform.get('Gender').hasError('required')">Gender is required </small>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4" *ngIf="DisplayScheduleDate">
+                                    <label>Schedule Date</label>
+                                    <input type="text" class="form-control" id="Schedule" name="Schedule" bsDatepicker formControlName="Schedule" [(ngModel)]="communication.Schedule">
+                                </div>
+                            </div>
+                            <div class="row form-actions">
+                                <div class="col-md-3 savecl">
+                                    <button type="submit" class="btn btn-raised btn-raised btn-primary" [disabled]="!communicationform.valid">
+                                        <i class="fa fa-check-square-o"></i> Save
+                                    </button>
+                                </div>
+                                <button type="button" class="btn btn-raised btn-raised btn-warning mr-1" (click)="Cancel()">
+                                    <i class="ft-x"></i> Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- // Basic form layout section end -->
+
+
+<!-- // communication form layout section end -->
+<!--Extended Table starts-->
+<div class="row">
+    <div class="col-12">
+        <div class="content-header"></div>
+
+        <a class="btn btn-info btn-raised font-medium-3" (click)="Createcommunication()">+Addcommunication</a>
+
+
+    </div>
+</div>
+<section id="extended">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Communication List</h4>
+                </div>
+                <div class="card-body">
+                    <div class="card-block">
+                        <table class="table table-responsive text-center">
+                            <thead>
+                                <tr>
+                                    <th>message</th>
+                                    <th>ClassName</th>
+                                    <th>SectionName</th>
+                                    <th>StudentName</th>
+                                    <th>Send To</th>
+                                    <th>sent via</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr *ngFor='let communication of CommunicationList'>
+                                    <td>{{communication.message}}</td>
+                                    <td> {{communication.ClassName}}</td>
+                                    <td> {{communication.SectionName}}</td>
+                                    <td>{{communication.StudentName}}</td>
+                                    <td>{{communication.Individualstudent}} {{communication.Particularclassorsection}} {{communication.All}}</td>
+                                    <td>{{communication.SMS}} {{communication.Mail}} {{communication.AppNotification}}</td>
+                                    <td>
+                                        <a class="success p-0" data-original-title="" title="" (click)="Editcommunication(communication)">
+                                            <i class="ft-edit-2 font-medium-3 mr-2"></i>
+                                        </a>
+                                        <a class="danger p-0" data-original-title="" title="" (click)="Deletecommunication(communication.CommunicationID)">
+                                            <i class="ft-x font-medium-3 mr-2"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <tr *ngIf="!communicationList || communicationList.length==0">
+                                    <td colspan="12">
+                                        No communication to display
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Extended Table Ends-->

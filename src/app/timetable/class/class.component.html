@@ -1,0 +1,122 @@
+<!-- Basic form layout section start -->
+<section id="basic-form-layouts" *ngIf="displayclass">
+    <!-- <div class="row">
+      <div class="col-md-12">
+        <div class="content-header">Class & Section</div>
+      </div>
+    </div> -->
+  
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title" id="basic-layout-form">Create Class and Section</h4>
+      </div>
+      <div class="card-body">
+        <div class="card-block">
+          <div class="px-3">
+            <form class="form" [formGroup]="classform" (ngSubmit)="AddClassAndSection()">
+              <div class="form-body">
+  
+                <div class="row">
+                  <div class="col-md-6">
+                   
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="ClassName">Class</label>
+        
+                          <input type="text" id="ClassName" class="form-control" name="ClassName"  formControlName="ClassName" [(ngModel)]="class.ClassName" required>
+                          <div *ngIf="classform.controls['ClassName'].errors && (classform.controls['ClassName'].dirty || classform.controls['ClassName'].touched)">
+                            <small class="text-danger" *ngIf="classform.get('ClassName').hasError('required')">Class is required</small>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                          <div class="form-group">
+                              <label for="SectionName">Section</label>
+            
+                              <input type="text" id="SectionName" class="form-control" name="SectionName"  formControlName="SectionName" [(ngModel)]="class.SectionName" required>
+                              <div *ngIf="classform.controls['SectionName'].errors && (classform.controls['SectionName'].dirty || classform.controls['SectionName'].touched)">
+                                <small class="text-danger" *ngIf="classform.get('SectionName').hasError('required')">Section is required</small>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                  </div>
+                  <div class="col-md-6">
+                  </div>
+                </div>
+  
+              </div>
+              <div class="form-actions">
+                <div class="savecl">
+                  <button type="submit" class="btn btn-raised btn-raised btn-primary" [disabled]="!classform.valid">
+                      <i class="fa fa-check-square-o"></i> Save
+                    </button>
+                <button type="button" class="btn btn-raised btn-raised btn-warning mr-1" (click)="Cancel()">
+                  <i class="ft-x"></i> Cancel
+                </button>
+              </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- // Basic form layout section end -->
+
+  <section id="extended">
+      <div class="row">
+          <div class="col-sm-12">
+              <div class="card">
+                  <div class="card-header" *ngIf="CreateClassButton">
+                      <h4 class="card-title">Class and Section</h4>
+                      <br>
+                      <a class="btn btn-info btn-raised font-medium-1"(click)="CreateClass()">+AddClass</a>
+                  </div>
+                  <div class="card-body">
+                      <div class="card-block">
+                          <table class="table table-responsive text-center">
+                              <thead>
+                                
+                                  <tr>
+                                      <th>Class</th>
+                                      <th>Section</th>
+                                      
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  
+                                  <tr *ngFor='let class of classlist' >
+    
+                                      <td>{{class.className}}</td>
+                                      <td>{{class.sectionName}}</td>
+                                      
+                                      <td>
+                                          <!-- <a class="info p-0" data-original-title="" title="">
+                                              <i class="ft-user font-medium-3 mr-2"></i>
+                                          </a> -->
+                                          <a class="success p-0" data-original-title="" title="" (click)="EditClass(class)">
+                                              <i class="ft-edit-2 font-medium-3 mr-2"></i>
+                                          </a>
+                                          <a class="danger p-0" data-original-title="" title="" (click)="DeleteClass(class.ClassID)">
+                                              <i class="ft-x font-medium-3 mr-2"></i>
+                                          </a>
+                                      </td>
+                                  </tr>
+                                  
+                                  <tr *ngIf="!classlist || classlist.length==0">
+                                    <td colspan="2">
+                                        No class to display
+                                    </td>
+                                </tr>
+                                  
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </section>

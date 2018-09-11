@@ -1,0 +1,50 @@
+
+<div class="login-page" [@routerTransition]>
+  <div class="row justify-content-md-center">
+    <div class="col-md-4 whole">
+      <img src="assets/img/logo/logo_round.png" width="150px" class="user-avatar" />
+      <h1>Please Login...</h1>
+      <!-- <ngx-spinner> -->
+      <form role="form" [formGroup]="signinform" (ngSubmit)="login()">
+        <div class="form-content">
+          <div class="form-group">
+            <input type="text" class="form-control input-underline input-lg" id="name" placeholder="UserName" name="UserName" formControlName="UserName"
+              [(ngModel)]="adminlogin.UserName">
+            <div *ngIf="signinform.controls['UserName'].errors && (signinform.controls['UserName'].dirty || signinform.controls['UserName'].touched)">
+              <small class="text-danger" *ngIf="signinform.get('UserName').hasError('required')">User Name is required </small>
+            </div>
+          </div>
+          
+
+          <div class="form-group">
+            
+            <input type="{{inputType}}" class="form-control input-underline input-lg" name="Password" formControlName="PasswordSignin"
+              placeholder="Password" id="pwd" [(ngModel)]="adminlogin.Password">
+              <div *ngIf="signinform.controls['PasswordSignin'].errors && (signinform.controls['PasswordSignin'].dirty || signinform.controls['PasswordSignin'].touched)">
+                <small class="text-danger" *ngIf="signinform.get('PasswordSignin').hasError('required')">Password is required</small>
+              </div>
+              <div>
+                  <label class="custom-control float-right">
+                    <input type="checkbox" formControlName="PasswordSignin" [(ngModel)]="passwordCheckbox" (click)="hideShowPassword()">
+          
+                      <!-- <span class="custom-control-indicator"></span> -->
+          
+                      <span class="custom-control-description mt-3" *ngIf="!passwordCheckbox">Show Password</span>
+                      <span class="custom-control-description mt-3" *ngIf="passwordCheckbox">Hide Password</span>
+          
+                    </label>
+              </div>
+              
+          </div>
+        </div>
+        &nbsp;  &nbsp;  &nbsp;  &nbsp;  
+        <button type="submit"  class="btn rounded-btn" [disabled]="!signinform.valid">Sign In</button>
+        <!-- <a class="btn rounded-btn" [routerLink]="['/dashboard']" [disabled]="!signupform.valid"> Log in </a> -->
+         &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;
+        <a class="btn btn-link" href="/password/reset">Forgot Your Password?</a>
+      </form>
+    <!-- </ngx-spinner> -->
+    <ngx-spinner bdOpacity = 0.9 bdColor = "#333" size = "large" color = "#fff" type = "ball-clip-rotate-pulse"></ngx-spinner>
+    </div>
+  </div>
+</div>

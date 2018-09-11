@@ -1,0 +1,135 @@
+<!-- attendence form layout section start -->
+<section id="basic-form-layouts">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="content-header">Attendance Information</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title" id="basic-layout-form">Monthly Attendance</h4>
+    </div>
+    <div class="card-body">
+      <div class="card-block">
+        <div class="px-3">
+          <form class="form" [formGroup]="attendanceform" (ngSubmit)="GenarateAttendanceReport()">
+            <div class="form-body">
+
+
+              <h4 class="form-section">
+                <i class="ft-user"></i>Attendance Info</h4>
+              <div class="row">
+
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="Class">Class</label>
+                    <select id="Class" name="Class" class="form-control" [(ngModel)]="attendance.Class" formControlName="Class" required>
+
+                      <option disabled [ngValue]="null">Select Class</option>
+                      <option value="LKG">L.K.G</option>
+                      <option value="UKG">U.K.G</option>
+                      <option value="1stClass">1st Class</option>
+                      <option value="2stClass">2nd Class</option>
+                      <option value="3rdClass">3rd Class</option>
+                      <option value="4thClass">4th Class</option>
+                      <option value="5thClass">5th Class</option>
+                      <option value="6thClass">6th Class</option>
+                      <option value="7thClass">7th Class</option>
+                      <option value="8thClass">8th Class</option>
+                      <option value="9thClass">9th Class</option>
+                      <option value="10thClass">10th Class</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="Section">Section</label>
+                    <select id="Section" name="Section" class="form-control" [(ngModel)]="attendance.Section" formControlName="Section" required>
+                      <option disabled [ngValue]="null">Select Section</option>
+                      <option value="A">A</option>
+                      <option value="B">B</option>
+                      <option value="C">C</option>
+                      <option value="D">D</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <label for="Date">Date</label>
+                  <input type="month" class="form-control" id="Date" name="Date" formControlName="Date" [(ngModel)]="attendance.Date">
+                  <div *ngIf="attendanceform.controls['Date'].errors && (attendanceform.controls['Date'].dirty || attendanceform.controls['Date'].touched)">
+                    <small class="text-danger" *ngIf="attendanceform.get('Date').hasError('required')">Date is required</small>
+                  </div>
+
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <input type="file" style="display: inline-block;" (change)="incomingfile($event)" placeholder="Upload file" accept=".xlsx">
+                  <br>
+                  <br>
+                  <button type="button" class="btn btn-raised btn-primary" (click)="Upload()">Upload</button>
+
+                </div>
+                <div class="col-md-3">
+
+                </div>
+                <div class="col-md-3">
+
+
+                </div>
+
+              </div>
+
+            </div>
+            <div class="form-actions">
+              <div class="savecl">
+                <button type="submit" class="btn btn-raised btn-raised btn-primary" [disabled]="!attendanceform.valid">
+                  <i class="fa fa-check-square-o"></i> Save
+                </button>
+                <button type="button" class="btn btn-raised btn-raised btn-warning mr-1" (click)="Cancel()">
+                  <i class="ft-x"></i> Cancel
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- // attendance form layout section end -->
+<table id="example" class="table table-striped table-bordered" style="width:100%">
+  <thead>
+    <tr>
+      <!-- <th>Edit</th>
+      <th>Delete</th> -->
+      <th>RollNumber</th>
+      <th>FirstName</th>
+      <th>LastName</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of DataList">
+      <!-- <td>
+        <button (click)="editstudent(item)">Edit</button>
+      </td>
+      <td>
+
+        <button (click)="OnDeleteClick(item,i,deletestudent)">Delete</button>
+      </td> -->
+      <td>{{item.RollNumber}}</td>
+      <td>{{item.FirstName}}</td>
+      <td>{{item.LastName}}</td>
+      <td>{{item.one}}</td>
+    </tr>
+    <tr *ngIf="DataList.length==0" style="height:200px">
+      <td colspan="10">No data to display</td>
+    </tr>
+  </tbody>
+</table>

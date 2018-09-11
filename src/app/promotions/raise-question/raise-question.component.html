@@ -1,0 +1,212 @@
+<section id="basic-form-layouts" *ngIf="DisplayQuestionPromotionsForm">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="content-header">Add Question Promotions Form</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title" id="basic-layout-form">Raise a Question or Opinion Poll</h4>
+    </div>
+    <div class="card-body">
+      <div class="card-block">
+        <div class="px-3">
+          <form class="form" [formGroup]="questionPromotionsForm" (ngSubmit)="SavequestionPromotions()">
+            <div class="form-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <h4 class="form-section">
+                    <i class="ft-user"></i> Promotions Info</h4>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Question</label>
+                        <textarea class="form-control" id="Question" name="Question" formControlName="Question" [(ngModel)]="question.Question"
+                          required></textarea>
+                        <div *ngIf="questionPromotionsForm.controls['Question'].errors && (questionPromotionsForm.controls['Question'].dirty || questionPromotionsForm.controls['Question'].touched)">
+                          <small class="text-danger" *ngIf="questionPromotionsForm.get('Question').hasError('required')">Question is required</small>
+                          <!-- <small class="text-danger" *ngIf="questionPromotionsForm.get('Question').hasError('minlength') && !(questionPromotionsForm.get('Question').hasError('pattern'))">Minimum 3 characters</small>
+                              <small class="text-danger" *ngIf="questionPromotionsForm.get('Question').hasError('pattern')">Enter only characters</small> -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Answer 1</label>
+                        <input type="text" id="Answer1" class="form-control" name="Answer1" formControlName="Answer1" [(ngModel)]="question.Answer1"
+                          required>
+                        <div *ngIf="questionPromotionsForm.controls['Answer1'].errors && (questionPromotionsForm.controls['Answer1'].dirty || questionPromotionsForm.controls['Answer1'].touched)">
+                          <small class="text-danger" *ngIf="questionPromotionsForm.get('Answer1').hasError('required')">Answer 1 is required</small>
+                          <!-- <small class="text-danger" *ngIf="questionPromotionsForm.get('Answer1').hasError('minlength') && !(questionPromotionsForm.get('Answer1').hasError('pattern'))">Minimum 3 characters</small>
+                          <small class="text-danger" *ngIf="questionPromotionsForm.get('Answer1').hasError('pattern')">Enter only characters</small> -->
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Answer 2</label>
+                        <input type="text" id="Answer1" class="form-control" name="Answer2" formControlName="Answer2" [(ngModel)]="question.Answer2"
+                          required>
+                        <div *ngIf="questionPromotionsForm.controls['Answer2'].errors && (questionPromotionsForm.controls['Answer2'].dirty || questionPromotionsForm.controls['Answer2'].touched)">
+                          <small class="text-danger" *ngIf="questionPromotionsForm.get('Answer2').hasError('required')">Answer 2 is required</small>
+                          <!-- <small class="text-danger" *ngIf="questionPromotionsForm.get('Answer2').hasError('minlength') && !(questionPromotionsForm.get('Answer2').hasError('pattern'))">Minimum 3 characters</small>
+                          <small class="text-danger" *ngIf="questionPromotionsForm.get('Answer2').hasError('pattern')">Enter only characters</small> -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Answer 3</label>
+                        <input type="text" id="Answer3" class="form-control" name="Answer3" formControlName="Answer3" [(ngModel)]="question.Answer3"
+                          required>
+                        <div *ngIf="questionPromotionsForm.controls['Answer3'].errors && (questionPromotionsForm.controls['Answer3'].dirty || questionPromotionsForm.controls['Answer3'].touched)">
+                          <small class="text-danger" *ngIf="questionPromotionsForm.get('Answer3').hasError('required')">Answer 3 is required</small>
+                          <!-- <small class="text-danger" *ngIf="questionPromotionsForm.get('Answer3').hasError('minlength') && !(questionPromotionsForm.get('Answer3').hasError('pattern'))">Minimum 3 characters</small>
+                          <small class="text-danger" *ngIf="questionPromotionsForm.get('Answer3').hasError('pattern')">Enter only characters</small> -->
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Answer 4</label>
+                        <input type="text" id="Answer4" class="form-control" name="Answer4" formControlName="Answer4" [(ngModel)]="question.Answer4"
+                          required>
+                        <div *ngIf="questionPromotionsForm.controls['Answer4'].errors && (questionPromotionsForm.controls['Answer4'].dirty || questionPromotionsForm.controls['Answer4'].touched)">
+                          <small class="text-danger" *ngIf="questionPromotionsForm.get('Answer4').hasError('required')">Answer 4 is required</small>
+                          <!-- <small class="text-danger" *ngIf="questionPromotionsForm.get('Answer4').hasError('minlength') && !(questionPromotionsForm.get('Answer4').hasError('pattern'))">Minimum 3 characters</small>
+                          <small class="text-danger" *ngIf="questionPromotionsForm.get('Answer4').hasError('pattern')">Enter only characters</small> -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Send To</label>
+                        <div class="input-group">
+                          <label class="display-inline-block custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" [(ngModel)]="question.SendTo" formControlName="Particularclassorsection"
+                              name="Particularclassorsection" value='Particularclassorsection' (click)="setradio('Particularclassorsection')"
+                              required>
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description ml-0">Particular Class Or Section</span>
+                          </label>
+                          <label class="display-inline-block custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" [(ngModel)]="question.SendTo" formControlName="All" name="All" value='All'
+                            (click)="setradioAll('All')" required>
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description ml-0">All</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row" *ngIf="DisplayParticularclassorsection">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="lname">Class Name</label>
+                        <select id="Class" name="ClassName" class="form-control" [(ngModel)]="question.ClassName" formControlName="ClassName" required>
+                          <option [value]=null disabled></option>
+                          <option *ngFor="let class of classdd" [value]="class.Item1">{{class.Item2}}
+                          </option>
+                        </select>
+                        <div *ngIf="questionPromotionsForm.controls['ClassName'].errors && (questionPromotionsForm.controls['ClassName'].dirty || questionPromotionsForm.controls['ClassName'].touched)">
+                          <small class="text-danger" *ngIf="questionPromotionsForm.get('ClassName').hasError('required')">Class Name is required</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="SectionName">Section Name</label>
+                        <select id="SectionName" name="SectionName" class="form-control" [(ngModel)]="question.SectionName" formControlName="SectionName"
+                          required>
+                          <option [value]=null disabled></option>
+                          <option *ngFor="let section of sectiondd" [value]="section.Item1">{{section.Item2}}
+                          </option>
+                        </select>
+                        <div *ngIf="questionPromotionsForm.controls['SectionName'].errors && (questionPromotionsForm.controls['SectionName'].dirty || questionPromotionsForm.controls['SectionName'].touched)">
+                          <small class="text-danger" *ngIf="questionPromotionsForm.get('SectionName').hasError('required')">Section Name is required</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-actions">
+              <div class="savecl">
+                <button type="submit" class="btn btn-raised btn-raised btn-primary" [disabled]="!questionPromotionsForm.valid">
+                  <i class="fa fa-check-square-o"></i> Save
+                </button>
+                <button type="button" class="btn btn-raised btn-raised btn-warning mr-1" (click)="Cancel()">
+                  <i class="ft-x"></i> Cancel
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="row">
+  <div class="col-12">
+    <div class="content-header">
+      <a class="btn btn-info btn-raised font-medium-3" (click)="CreateQuestionPromotions()">Add Questions </a>
+    </div>
+  </div>
+  <section id="extended">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-header">
+          </div>
+          <div class="card-body">
+            <div class="card-block">
+              <table class="table table-responsive text-center">
+                <thead>
+                  <tr>
+                    <th>Question</th>
+                    <th>Answer 1</th>
+                    <th>Answer 2</th>
+                    <th>Answer 3</th>
+                    <th>Answer 4</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  <tr *ngFor='let questions of questionpromotionslist'>
+                    <td>{{questions.Question}}</td>
+                    <td> {{questions.Answer1}}</td>
+                    <td> {{questions.Answer2}}</td>
+                    <td> {{questions.Answer3}}</td>
+                    <td> {{questions.Answer4}}</td>
+                    <td>
+                      <a class="success p-0" data-original-title="" title="" (click)="Editquestions(questions)">
+                        <i class="ft-edit-2 font-medium-3 mr-2"></i>
+                      </a>
+                      <a class="danger p-0" data-original-title="" title="" (click)="Deletequestions(questions)">
+                        <i class="ft-x font-medium-3 mr-2"></i>
+                      </a>
+                    </td>
+                  </tr>
+
+                  <tr *ngIf="!questionpromotionslist || questionpromotionslist.length==0">
+                    <td colspan="12">
+                      No questions to display
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

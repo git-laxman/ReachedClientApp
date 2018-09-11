@@ -1,0 +1,359 @@
+<!-- Basic form layout section start -->
+<section id="basic-form-layouts">
+
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title" id="basic-layout-form">Create School</h4>
+    </div>
+    <div class="card-body">
+      <div class="card-block">
+        <div class="px-3">
+          <form class="form" [formGroup]="schoolform" (ngSubmit)="RegisterSchool()">
+            <div class="form-body">
+              <div class="row">
+                <div class="col-md-8">
+                  <h4 class="form-section">
+                    <i class="ft-user"></i> School Info</h4>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="Name">Name</label>
+
+                        <input type="text" id="Name" class="form-control" name="Name" formControlName="Name" [(ngModel)]="school.Name" required>
+                        <div *ngIf="schoolform.controls['Name'].errors && (schoolform.controls['Name'].dirty || schoolform.controls['Name'].touched)">
+                          <small class="text-danger" *ngIf="schoolform.get('Name').hasError('required')">Name is required</small>
+                          <small class="text-danger" *ngIf="schoolform.get('Name').hasError('minlength') && !(schoolform.get('Name').hasError('pattern'))">Minimum 3 characters</small>
+                          <small class="text-danger" *ngIf="schoolform.get('Name').hasError('pattern')">Enter only characters</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="PhoneNumber">Phone Number</label>
+                        <input type="tel" class="form-control" id="PhoneNumber" name="PhoneNumber" formControlName="PhoneNumber" [(ngModel)]="school.PhoneNumber"
+                          required>
+                        <div *ngIf="schoolform.controls['PhoneNumber'].errors && (schoolform.controls['PhoneNumber'].dirty || schoolform.controls['PhoneNumber'].touched)">
+                          <small class="text-danger" *ngIf="schoolform.get('PhoneNumber').hasError('required')">Phone Number is required</small>
+                          <small class="text-danger" *ngIf="schoolform.get('PhoneNumber').hasError('pattern')">Enter valid Phone Number</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="Address">Address</label>
+                        <textarea id="Address" rows="2" class="form-control" name="Address" formControlName="Address" [(ngModel)]="school.Address"
+                          required></textarea>
+                        <div *ngIf="schoolform.controls['Address'].errors && (schoolform.controls['Address'].dirty || schoolform.controls['Address'].touched)">
+                          <small class="text-danger" *ngIf="schoolform.get('Address').hasError('required')">Address is required </small>
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="SchoolType">School Type</label>
+                        <select id="SchoolType" name="SchoolType" class="form-control" [(ngModel)]="school.SchoolType" formControlName="SchoolType"
+                          required>
+                          <option disabled [ngValue]="null">Select School Type</option>
+                          <option value="Active">Active</option>
+                          <option value="Trail">Trail</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="SchoolCode">School Code</label>
+
+                        <input type="text" id="SchoolCode" class="form-control" name="SchoolCode" formControlName="SchoolCode" [(ngModel)]="school.SchoolCode"
+                          required>
+                        <div *ngIf="schoolform.controls['SchoolCode'].errors && (schoolform.controls['SchoolCode'].dirty || schoolform.controls['SchoolCode'].touched)">
+                          <small class="text-danger" *ngIf="schoolform.get('SchoolCode').hasError('required')">School Code is required</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="SchoolStrength">School Strength</label>
+                        <input type="tel" class="form-control" id="SchoolStrength" name="SchoolStrength" formControlName="SchoolStrength" [(ngModel)]="school.SchoolStrength"
+                          required>
+                        <div *ngIf="schoolform.controls['SchoolStrength'].errors && (schoolform.controls['SchoolStrength'].dirty || schoolform.controls['SchoolStrength'].touched)">
+                          <small class="text-danger" *ngIf="schoolform.get('SchoolStrength').hasError('required')">School Strength is required</small>
+                          <small class="text-danger" *ngIf="schoolform.get('SchoolStrength').hasError('pattern')">Enter valid School Strength</small>
+                          <small class="text-danger" *ngIf="schoolform.get('SchoolStrength').hasError('maxlength') && !(schoolform.get('SchoolStrength').hasError('pattern'))">Max 5 Numbers only</small>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                </div>
+                <div class="col-md-4">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-8">
+                  <h4 class="form-section">
+                    <i class="ft-user"></i> Administarion Info</h4>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="UserName">UserName</label>
+
+                        <input type="text" id="UserName" class="form-control" name="UserName" formControlName="UserName" [(ngModel)]="school.UserName"
+                          required>
+                        <div *ngIf="schoolform.controls['UserName'].errors && (schoolform.controls['UserName'].dirty || schoolform.controls['UserName'].touched)">
+                          <small class="text-danger" *ngIf="schoolform.get('UserName').hasError('required')">UserName is required</small>
+                          <small class="text-danger" *ngIf="schoolform.get('UserName').hasError('minlength') && !(schoolform.get('UserName').hasError('pattern'))">Minimum 3 characters</small>
+                          <small class="text-danger" *ngIf="schoolform.get('UserName').hasError('pattern')">Enter only characters</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" id="email" name="Email" formControlName="Email" [(ngModel)]="school.Email" placeholder="john@gmail.com">
+                        <div *ngIf="schoolform.controls['Email'].errors && (schoolform.controls['Email'].dirty || schoolform.controls['Email'].touched)">
+                          <small class="text-danger" *ngIf="schoolform.get('Email').hasError('required')">Email is required</small>
+                          <small class="text-danger" *ngIf="schoolform.get('Email').hasError('pattern')">Enter Valid Email ID</small>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+
+                        <label for="pwd">Password:</label>
+
+                        <label class="custom-control custom-checkbox float-right">
+                          <input type="checkbox" formControlName="showpass" id="test1" [(ngModel)]="passwordCheckbox" (click)="hideShowPassword()"
+                            class="custom-control-input">
+                          <span class="custom-control-indicator"></span>
+
+                          <span class="custom-control-description" *ngIf="!passwordCheckbox">Show Password</span>
+                          <span class="custom-control-description" *ngIf="passwordCheckbox">Hide Password</span>
+
+                        </label>
+                        <input type={{inputType}} class="form-control" name="Password" formControlName="Password" [(ngModel)]="school.Password" id="pwd"
+                          placeholder="Use Letters,Symbols and Numbers">
+                        <div *ngIf="schoolform.controls['Password'].errors && (schoolform.controls['Password'].dirty || schoolform.controls['Password'].touched)">
+                          <small class="text-danger" *ngIf="schoolform.get('Password').hasError('required')">Password is required</small>
+                          <small class="text-danger" *ngIf="schoolform.get('Password').hasError('pattern')"> Password must consists of at least 8 characters and not more than 15 characters</small>
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+
+                    </div>
+
+
+                  </div>
+
+
+
+
+                </div>
+                <div class="col-md-4">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-8">
+                  <h4 class="form-section">
+                    <i class="ft-user"></i> Services Info</h4>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="SSDate">Subscription Start Date</label>
+                        <input type="text" class="form-control" id="SSDate" name="SubscriptionStartDate" bsDatepicker formControlName="SubscriptionStartDate"
+                          [(ngModel)]="school.SubscriptionStartDate">
+                        <div *ngIf="schoolform.controls['SubscriptionStartDate'].errors && (schoolform.controls['SubscriptionStartDate'].dirty || schoolform.controls['SubscriptionStartDate'].touched)">
+                          <small class="text-danger" *ngIf="schoolform.get('SubscriptionStartDate').hasError('required')">SubscriptionStartDate is required</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="SEDate">Subscription End Date</label>
+                        <input type="text" class="form-control" id="SEDate" name="SubscriptionEndDate" bsDatepicker formControlName="SubscriptionEndDate"
+                          [(ngModel)]="school.SubscriptionEndDate">
+                        <div *ngIf="schoolform.controls['SubscriptionEndDate'].errors && (schoolform.controls['SubscriptionEndDate'].dirty || schoolform.controls['SubscriptionEndDate'].touched)">
+                          <small class="text-danger" *ngIf="schoolform.get('SubscriptionEndDate').hasError('required')">SubscriptionEndDate is required</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Services Opted By</label>
+                        <label class="custom-control custom-checkbox m-0">
+                          <input type="checkbox" class="custom-control-input" [(ngModel)]="school.Reports" name="Reports" formControlName="Reports"
+                            value="Reports">
+                          <span class="custom-control-indicator"></span>
+                          Reports
+                        </label>
+                        <label class="custom-control custom-checkbox m-0">
+                          <input type="checkbox" class="custom-control-input" [(ngModel)]="school.Payment" name="Payment" formControlName="Payment"
+                            value="Payment">
+                          <span class="custom-control-indicator"></span>
+                          Payment
+                        </label>
+                        <label class="custom-control custom-checkbox m-0">
+                          <input type="checkbox" class="custom-control-input" [(ngModel)]="school.Tracking" name="Tracking" formControlName="Tracking"
+                            value="Tracking">
+                          <span class="custom-control-indicator"></span>
+                          Tracking
+                        </label>
+                        <label class="custom-control custom-checkbox m-0">
+                          <input type="checkbox" class="custom-control-input" [(ngModel)]="school.Promotions" name="Promotions" formControlName="Promotions"
+                            value="Promotions">
+                          <span class="custom-control-indicator"></span>
+                          Promotions
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                    </div>
+
+                  </div>
+
+
+
+
+                </div>
+                <div class="col-md-4">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-8">
+                  <h4 class="form-section">
+                    <i class="ft-user"></i> Bank Info</h4>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="AccountHolderName">Account Holder Name</label>
+
+                        <input type="text" id="AccountHolderName" class="form-control" name="AccountHolderName" formControlName="AccountHolderName"
+                          [(ngModel)]="school.AccountHolderName" required>
+                        <div *ngIf="schoolform.controls['AccountHolderName'].errors && (schoolform.controls['AccountHolderName'].dirty || schoolform.controls['AccountHolderName'].touched)">
+                          <small class="text-danger" *ngIf="schoolform.get('AccountHolderName').hasError('required')">Account Holder Name is required</small>
+                          <small class="text-danger" *ngIf="schoolform.get('AccountHolderName').hasError('minlength') && !(schoolform.get('AccountHolderName').hasError('pattern'))">Minimum 3 characters</small>
+                          <small class="text-danger" *ngIf="schoolform.get('AccountHolderName').hasError('pattern')">Enter only characters</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="AccountNumber">Account Number</label>
+                        <input type="tel" class="form-control" id="AccountNumber" name="AccountNumber" formControlName="AccountNumber" [(ngModel)]="school.AccountNumber"
+                          required>
+                        <div *ngIf="schoolform.controls['AccountNumber'].errors && (schoolform.controls['AccountNumber'].dirty || schoolform.controls['AccountNumber'].touched)">
+                          <small class="text-danger" *ngIf="schoolform.get('AccountNumber').hasError('required')">Account Number is required</small>
+                          <small class="text-danger" *ngIf="schoolform.get('AccountNumber').hasError('pattern')">Enter valid Account Number</small>
+                          <small class="text-danger" *ngIf="schoolform.get('AccountNumber').hasError('maxlength') && !(schoolform.get('AccountNumber').hasError('pattern'))">Max 16 Numbers only</small>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="BankName">Bank Name</label>
+
+                        <input type="text" id="BankName" class="form-control" name="BankName" formControlName="BankName" [(ngModel)]="school.BankName"
+                          required>
+                        <div *ngIf="schoolform.controls['BankName'].errors && (schoolform.controls['BankName'].dirty || schoolform.controls['BankName'].touched)">
+                          <small class="text-danger" *ngIf="schoolform.get('BankName').hasError('required')">Bank Name is required</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="AccountType">Account Type</label>
+                        <select id="AccountType" name="AccountType" class="form-control" [(ngModel)]="school.AccountType" formControlName="AccountType"
+                          required>
+                          <option disabled [ngValue]="null">Select Account Type</option>
+                          <option value="SavingsAccoun">Savings Accoun</option>
+                          <option value="Current Account">CurrentAccount</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="IFSCCode">IFSC Code</label>
+
+                        <input type="text" id="IFSCCode" class="form-control" name="IFSCCode" formControlName="IFSCCode" [(ngModel)]="school.IFSCCode"
+                          required>
+                        <div *ngIf="schoolform.controls['IFSCCode'].errors && (schoolform.controls['IFSCCode'].dirty || schoolform.controls['IFSCCode'].touched)">
+                          <small class="text-danger" *ngIf="schoolform.get('IFSCCode').hasError('required')">IFSC Code is required</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="MerchantID">Merchant ID</label>
+                        <input type="tel" class="form-control" id="MerchantID" name="MerchantID" formControlName="MerchantID" [(ngModel)]="school.MerchantID"
+                          required>
+                        <div *ngIf="schoolform.controls['MerchantID'].errors && (schoolform.controls['MerchantID'].dirty || schoolform.controls['MerchantID'].touched)">
+                          <small class="text-danger" *ngIf="schoolform.get('MerchantID').hasError('required')">MerchantID is required</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="BankAddress">Bank Address</label>
+                        <textarea id="BankAddress" rows="2" class="form-control" name="BankAddress" formControlName="BankAddress" [(ngModel)]="school.BankAddress"
+                          required></textarea>
+                        <div *ngIf="schoolform.controls['BankAddress'].errors && (schoolform.controls['BankAddress'].dirty || schoolform.controls['BankAddress'].touched)">
+                          <small class="text-danger" *ngIf="schoolform.get('BankAddress').hasError('required')">BankAddress is required </small>
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+
+                    </div>
+                  </div>
+
+
+                </div>
+                <div class="col-md-4">
+                </div>
+              </div>
+
+            </div>
+            <div class="form-actions">
+              <div class="savecl">
+                <button type="submit" class="btn btn-raised btn-raised btn-primary" [disabled]="!schoolform.valid">
+                  <i class="fa fa-check-square-o"></i> Save
+                </button>
+                <button type="button" class="btn btn-raised btn-raised btn-warning mr-1" (click)="Cancel()">
+                  <i class="ft-x"></i> Cancel
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- // Basic form layout section end -->

@@ -1,0 +1,138 @@
+<!-- Basic form layout section start -->
+<section id="basic-form-layouts" *ngIf="DisplayAddFeeAmountForm">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="content-header">Add Fee Form</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title" id="basic-layout-form">Create Fee Amount</h4>
+    </div>
+    <div class="card-body">
+      <div class="card-block">
+        <div class="px-3">
+          <form class="form" [formGroup]="feeamountform" (ngSubmit)="savefeeamount()">
+            <div class="form-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <h4 class="form-section">
+                    <i class="ft-user"></i> Course Info</h4>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="lname">Course Name</label>
+                        <select id="Class" name="CourseName" class="form-control" [(ngModel)]="fee.CourseName" formControlName="CourseName" required>
+                          <option [value]=null disabled></option>
+                          <option *ngFor="let course of coursedd" [value]="course.Item1">{{course.Item2}}
+                          </option>
+                        </select>
+                        <div *ngIf="feeamountform.controls['CourseName'].errors && (feeamountform.controls['CourseName'].dirty || feeamountform.controls['CourseName'].touched)">
+                          <small class="text-danger" *ngIf="feeamountform.get('CourseName').hasError('required')">Course Name is required</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="lname">Class Name</label>
+                        <select id="Class" name="ClassName" class="form-control" [(ngModel)]="fee.ClassName" formControlName="ClassName" required>
+                          <option [value]=null disabled></option>
+                          <option *ngFor="let class of classdd" [value]="class.Item1">{{class.Item2}}
+                          </option>
+                        </select>
+                        <div *ngIf="feeamountform.controls['ClassName'].errors && (feeamountform.controls['ClassName'].dirty || feeamountform.controls['ClassName'].touched)">
+                          <small class="text-danger" *ngIf="feeamountform.get('ClassName').hasError('required')">Class Name is required</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="fname">Amount</label>
+                        <input type="number" id="fname" class="form-control" name="Amount" formControlName="Amount" [(ngModel)]="fee.Amount" required>
+                        <div *ngIf="feeamountform.controls['Amount'].errors && (feeamountform.controls['Amount'].dirty || feeamountform.controls['Amount'].touched)">
+                          <small class="text-danger" *ngIf="feeamountform.get('Amount').hasError('required')">Amount is required</small>
+                          <small class="text-danger" *ngIf="feeamountform.get('Amount').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-actions">
+              <div class="savecl">
+                <button type="submit" class="btn btn-raised btn-raised btn-primary" [disabled]="!feeamountform.valid">
+                  <i class="fa fa-check-square-o"></i> Save
+                </button>
+                <button type="button" class="btn btn-raised btn-raised btn-warning mr-1">
+                  <i class="ft-x"></i> Cancel
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- // Basic form layout section end -->
+
+
+<!--Extended Table starts-->
+<div class="row">
+  <div class="col-12">
+    <div class="content-header">
+      <a class="btn btn-info btn-raised font-medium-3" (click)="CreateAddFeeAmount()">Add Fee Amount </a>
+    </div>
+  </div>
+  <section id="extended">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-header">
+            <!-- <h4 class="card-title">Student List</h4> -->
+          </div>
+          <div class="card-body">
+            <div class="card-block">
+              <table class="table table-responsive text-center">
+                <thead>
+                  <tr>
+                    <th>Course Name</th>
+                    <th>Class Name</th>
+                    <th>Amount</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  <tr *ngFor='let fee of feeamountlist'>
+                    <td>{{fee.CourseName}}</td>
+                    <td> {{fee.ClassName}}</td>
+                    <td> {{fee.Amount}}</td>
+                    <td>
+                      <a class="success p-0" data-original-title="" title="" (click)="EditAddFeeAmount(fee)">
+                        <i class="ft-edit-2 font-medium-3 mr-2"></i>
+                      </a>
+                      <a class="danger p-0" data-original-title="" title="" (click)="DeleteAddFeeAmount(fee)">
+                        <i class="ft-x font-medium-3 mr-2"></i>
+                      </a>
+                    </td>
+                  </tr>
+
+                  <tr *ngIf="!feeamountlist || feeamountlist.length==0">
+                    <td colspan="12">
+                      No Fee Amount to display
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!--Extended Table Ends-->

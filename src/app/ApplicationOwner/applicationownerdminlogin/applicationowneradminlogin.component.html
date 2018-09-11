@@ -1,0 +1,73 @@
+<div class="container">
+
+  <form class="form-horizontal login" [formGroup]="signinform" (ngSubmit)="login()">
+    <div class="card">
+      <br>
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          <h2>Please Login...</h2>
+          <hr>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="username">User Name</label>
+            <input type="text" id="username" class="form-control" name="UserName" formControlName="UserName" placeholder="john@gmail.com"
+              [(ngModel)]="adminlogin.UserName">
+            <div *ngIf="signinform.controls['UserName'].errors && (signinform.controls['UserName'].dirty || signinform.controls['UserName'].touched)">
+              <small class="text-danger" *ngIf="signinform.get('UserName').hasError('required')">User Name is required </small>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-md-3"></div>
+      </div>
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          <div class="form-group ">
+            <label for="pwd">Password</label>
+            <label class="custom-control custom-checkbox float-right">
+              <input type="checkbox" formControlName="PasswordSignin" [(ngModel)]="passwordCheckbox" (click)="hideShowPassword()">
+
+              <!-- <span class="custom-control-indicator"></span> -->
+
+              <span class="custom-control-description mt-3" *ngIf="!passwordCheckbox">Show Password</span>
+              <span class="custom-control-description mt-3" *ngIf="passwordCheckbox">Hide Password</span>
+
+            </label>
+            <input type="{{inputType}}" class="form-control" name="Password" formControlName="PasswordSignin" placeholder="Password"
+              id="pwd" [(ngModel)]="adminlogin.Password">
+            <div *ngIf="signinform.controls['PasswordSignin'].errors && (signinform.controls['PasswordSignin'].dirty || signinform.controls['PasswordSignin'].touched)">
+              <small class="text-danger" *ngIf="signinform.get('PasswordSignin').hasError('required')">Password is required</small>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-md-3">
+            <div class="my-container">
+                <ngx-spinner bdOpacity = 0.9 bdColor = "#333" size = "large" color = "#fff" type = "ball-clip-rotate-pulse"></ngx-spinner>
+                <!-- <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading> -->
+            </div>
+        </div>
+      </div>
+  
+      <div class="row" style="padding-top: 1rem">
+        <div class="col-md-5"></div>
+        <div class="col-md-2">
+          
+          <button type="submit" class="btn btn-raised btn-primary" [disabled]="!signinform.valid">
+            <i class="fa fa-sign-in"></i> Login</button>
+        </div>
+        <div class="col-md-3">
+          <a class="btn btn-link" href="/password/reset">Forgot Your Password?</a>
+        </div>
+      </div>
+      <br>
+    </div>
+  </form>
+
+</div>

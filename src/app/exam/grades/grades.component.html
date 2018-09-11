@@ -1,0 +1,204 @@
+<!-- Basic form layout section start -->
+<section id="basic-form-layouts" *ngIf="DisplayAddGradeForm">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="content-header">Add Grade Form</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title" id="basic-layout-form">Create Grade</h4>
+    </div>
+    <div class="card-body">
+      <div class="card-block">
+        <div class="px-3">
+          <form class="form" [formGroup]="gradeform" (ngSubmit)="savegrade()">
+            <div class="form-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <h4 class="form-section">
+                    <i class="ft-user"></i> Grade Info</h4>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="GradePool">Grade Pool</label>
+                        <input type="text" id="GradePool" name="GradePool" class="form-control" formControlName="GradePool" [(ngModel)]="gradeobj.GradePool"
+                          required>
+                        <div *ngIf="gradeform.controls['GradePool'].errors && (gradeform.controls['GradePool'].dirty || gradeform.controls['GradePool'].touched)">
+                          <small class="text-danger" *ngIf="gradeform.get('GradePool').hasError('required')">Grade Pool is required</small>
+                          <small class="text-danger" *ngIf="gradeform.get('GradePool').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="maxmarks">Max Marks</label>
+                        <input type="text" id="maxmarks" class="form-control" name="maxmarks" formControlName="maxmarks" [(ngModel)]="gradeobj.maxmarks"
+                          required>
+                        <div *ngIf="gradeform.controls['maxmarks'].errors && (gradeform.controls['maxmarks'].dirty || gradeform.controls['maxmarks'].touched)">
+                          <small class="text-danger" *ngIf="gradeform.get('maxmarks').hasError('required')">Max Marks is required</small>
+                          <small class="text-danger" *ngIf="gradeform.get('maxmarks').hasError('pattern')">Enter only Numbers</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <table class="table table-responsive text-center">
+                  <thead>
+                    <tr>
+                      <th>Min Marks</th>
+                      <th>Max Marks</th>
+                      <th>Grade</th>
+                      <th>Remarks</th>
+                      <th>P/Fail</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- <tr>
+                      <td>
+                        <input type="number" placeholder="Min Marks" [(ngModel)]="newaddgrade.marksrangefrom" />
+                      </td>
+                      <td>
+                        <input type="number" placeholder="Max Marks" [(ngModel)]="newaddgrade.marksrangeto" />
+                      </td>
+                      <td>
+                        <input type="text" placeholder="Grade" [(ngModel)]="newaddgrade.grade" />
+                      </td>
+                      <td>
+                        <input type="text" placeholder="Remarks" [(ngModel)]="newaddgrade.remarks" />
+                      </td>
+                      <td>
+                        <select [(ngModel)]="newaddgrade.passorfail">
+                          <option></option>
+                          <option value="Pass">Pass</option>
+                          <option value="Fail">Fail</option>
+                        </select>
+                      </td>
+                      <td>
+                        <span>
+                          <button (click)="addrow()">Add</button>
+                        </span>
+                      </td>
+                    </tr> -->
+                    <tr>
+                      <td>
+                        <span style="color :red" (click)="addrow()">Add Grades</span>
+                        <!-- <input type="text" placeholder="Pickup point" [(ngModel)]="addroute.PickUpPoint" [hidden]="true" /> -->
+                      </td>
+                      <td>
+                        <span>
+                          <button (click)="addrow()">Add</button>
+                        </span>
+                      </td>
+                    </tr>
+                    <tr *ngFor="let field of fieldArrayName; let i = index" style="margin:0 0 0 15px">
+                      <td>
+                        <input type="number" placeholder="Min Marks" [(ngModel)]="gradeobj.marksrangefrom" />
+                      </td>
+                      <td>
+                        <input type="number" placeholder="Max Marks" [(ngModel)]="gradeobj.marksrangeto" />
+                      </td>
+                      <td>
+                        <input type="text" placeholder="Grade" [(ngModel)]="gradeobj.grade" />
+                      </td>
+                      <td>
+                        <input type="text" placeholder="Remarks" [(ngModel)]="gradeobj.remarks" />
+                      </td>
+                      <td>
+                        <select [(ngModel)]="gradeobj.passorfail">
+                          <option></option>
+                          <option value="Pass">Pass</option>
+                          <option value="Fail">Fail</option>
+                        </select>
+                      </td>
+                      <td>
+                        <span>
+                          <button (click)="deleterow(i)">Delete</button>
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+              </div>
+            </div>
+            <div class="form-actions">
+              <div class="savecl">
+                <button type="submit" class="btn btn-raised btn-raised btn-primary" [disabled]="!gradeform.valid">
+                  <i class="fa fa-check-square-o"></i> Save
+                </button>
+                <button type="button" class="btn btn-raised btn-raised btn-warning mr-1" (click)="Cancel()">
+                  <i class="ft-x"></i> Cancel
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- // Basic form layout section end -->
+
+
+<!--Extended Table starts-->
+<div class="row">
+  <div class="col-12">
+    <div class="content-header">
+      <a class="btn btn-info btn-raised font-medium-3" (click)="CreateAddGrade()">Add Grade </a>
+    </div>
+  </div>
+  <section id="extended">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-header">
+            <!-- <h4 class="card-title">Student List</h4> -->
+          </div>
+          <div class="card-body">
+            <div class="card-block">
+              <table class="table table-responsive text-center">
+                <thead>
+                  <tr>
+                    <th>Marks Range From</th>
+                    <th>Marks Range To</th>
+                    <th>Grade</th>
+                    <th>Remarks</th>
+                    <th>Pass or Fail</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  <tr *ngFor='let grade of gradelist'>
+                    <td> {{gradeobj.marksrangefrom}}</td>
+                    <td> {{gradeobj.marksrangeto}}</td>
+                    <td> {{gradeobj.grade}}</td>
+                    <td> {{gradeobj.remarks}}</td>
+                    <td> {{gradeobj.passorfail}}</td>
+                    <td>
+                      <a class="success p-0" data-original-title="" title="" (click)="RetieveGradeRecord(gradeobj.gradeID)">
+                        <i class="ft-edit-2 font-medium-3 mr-2"></i>
+                      </a>
+                      <a class="danger p-0" data-original-title="" title="" (click)="DeleteGrade(gradeobj.gradeID)">
+                        <i class="ft-x font-medium-3 mr-2"></i>
+                      </a>
+                    </td>
+                  </tr>
+
+                  <tr *ngIf="!gradelist || gradelist.length==0">
+                    <td colspan="12">
+                      No Grade to display
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!--Extended Table Ends-->

@@ -1,0 +1,150 @@
+<section id="basic-form-layouts" *ngIf="DisplayquestionPromotionsForm">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="content-header">Add Upload Pics Form</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <div class="card-block">
+        <div class="px-3">
+          <form class="form" [formGroup]="questionPromotionsForm" (ngSubmit)="SavequestionPromotionsForm()">
+            <div class="form-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <h4 class="form-section">
+                    <i class="ft-user"></i> Promotions Info</h4>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <input type="file" class="form-control" accept=".jpg, .jpeg, .png" (change)="changeListener($event)">
+                        <div *ngIf="questionPromotionsForm.controls['filename'].errors && (questionPromotionsForm.controls['filename'].dirty || questionPromotionsForm.controls['filename'].touched)">
+                          <small class="text-danger" *ngIf="questionPromotionsForm.get('filename').hasError('required')">filename is required</small>
+                          <!-- <small class="text-danger" *ngIf="questionPromotionsForm.get('filename').hasError('minlength') && !(questionPromotionsForm.get('filename').hasError('pattern'))">Minimum 3 characters</small>
+                                <small class="text-danger" *ngIf="questionPromotionsForm.get('filename').hasError('pattern')">Enter only characters</small> -->
+                        </div>
+                      </div>
+                    </div>
+                    <!-- <div class="col-md-4">
+                      <img *ngIf="base64Image" style="width:38%;height:83%" [src]="GetImage(amb.AmbImgPath)" />
+                    </div> -->
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Send To</label>
+                        <div class="input-group">
+                          <label class="display-inline-block custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" [(ngModel)]="upload.SendTo" formControlName="Particularclassorsection" name="Particularclassorsection"
+                              value='Particularclassorsection' (click)="setradio('Particularclassorsection')" required>
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description ml-0">Particular Class Or Section</span>
+                          </label>
+                          <label class="display-inline-block custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" [(ngModel)]="upload.SendTo" formControlName="All" name="All" (click)="setradioAll('All')"
+                              value='All' required>
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description ml-0">All</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row" *ngIf="DisplayParticularclassorsection">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="lname">Class Name</label>
+                        <select id="Class" name="ClassName" class="form-control" [(ngModel)]="upload.ClassName" formControlName="ClassName" required>
+                          <option [value]=null disabled></option>
+                          <option *ngFor="let class of classdd" [value]="class.Item1">{{class.Item2}}
+                          </option>
+                        </select>
+                        <div *ngIf="questionPromotionsForm.controls['ClassName'].errors && (questionPromotionsForm.controls['ClassName'].dirty || questionPromotionsForm.controls['ClassName'].touched)">
+                          <small class="text-danger" *ngIf="questionPromotionsForm.get('ClassName').hasError('required')">Class Name is required</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="SectionName">Section Name</label>
+                        <select id="SectionName" name="SectionName" class="form-control" [(ngModel)]="upload.SectionName" formControlName="SectionName"
+                          required>
+                          <option [value]=null disabled></option>
+                          <option *ngFor="let section of sectiondd" [value]="section.Item1">{{section.Item2}}
+                          </option>
+                        </select>
+                        <div *ngIf="questionPromotionsForm.controls['SectionName'].errors && (questionPromotionsForm.controls['SectionName'].dirty || questionPromotionsForm.controls['SectionName'].touched)">
+                          <small class="text-danger" *ngIf="questionPromotionsForm.get('SectionName').hasError('required')">Section Name is required</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-actions">
+              <div class="savecl">
+                <button type="submit" class="btn btn-raised btn-raised btn-primary" [disabled]="!questionPromotionsForm.valid">
+                  <i class="fa fa-check-square-o"></i> Save
+                </button>
+                <button type="button" class="btn btn-raised btn-raised btn-warning mr-1" (click)="Cancel()">
+                  <i class="ft-x"></i> Cancel
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="row">
+  <div class="col-12">
+    <div class="content-header">
+      <a class="btn btn-info btn-raised font-medium-3" (click)="CreateUploadPics()">Add filenames </a>
+    </div>
+  </div>
+  <section id="extended">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-header">
+          </div>
+          <div class="card-body">
+            <div class="card-block">
+              <table class="table table-responsive text-center">
+                <thead>
+                  <tr>
+                    <th>filename</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  <tr *ngFor='let filenames of uploadlist'>
+                    <td>{{GetImage(filenames.filename)}}</td>
+                    <td>
+                      <a class="success p-0" data-original-title="" title="" (click)="Editupload(filenames)">
+                        <i class="ft-edit-2 font-medium-3 mr-2"></i>
+                      </a>
+                      <a class="danger p-0" data-original-title="" title="" (click)="Deleteupload(filenames)">
+                        <i class="ft-x font-medium-3 mr-2"></i>
+                      </a>
+                    </td>
+                  </tr>
+
+                  <tr *ngIf="!uploadlist || uploadlist.length==0">
+                    <td colspan="12">
+                      No Uploads to display
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
