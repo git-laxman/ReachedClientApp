@@ -24,14 +24,14 @@ export class GlobalApi {
 
   // student
   public SingleStudentRegister: string = this.domain + 'api/createStudent';
-  public GetSingleStudentList: string = this.domain + 'api/getallStudents?SchoolOrganizationID=3';
+  public GetSingleStudentList: string = this.domain + 'api/getallStudents?SchoolOrganizationID=4';
   public GetSingleStudent: string = this.domain + 'api/Student/GetSingleStudent';
   public UpdateSingleStudent: string = this.domain + 'api/Student/UpdateStudent';
   public DeleteSingleStudent: string = this.domain + 'api/Student/DeleteSingleStudent';
 
   // class and section
   public AddClassAndSection: string = this.domain + 'api/createClassSection';
-  public GetClassList: string = this.domain + 'api/getAllClassSections?SchoolOrganizationID=3';
+  public GetClassList: string = this.domain + 'api/getAllClassSections?SchoolOrganizationID=4';
   public UpdateClassAndSection: string = this.domain + 'api/Class/UpdateClassAndSection';
   public GetClass: string = this.domain + 'api/Class/GetClass';
   public DeleteClassAndSection: string = this.domain + 'api/Class/DeleteClassAndSection';
@@ -39,14 +39,14 @@ export class GlobalApi {
 
   // teacher
   public RegisterTeacher: string = this.domain + 'api/createStaff';
-  public GetTeachers: string = this.domain + 'api/getAllStaff?SchoolOrganizationID=3';
+  public GetTeachers: string = this.domain + 'api/getAllStaff?SchoolOrganizationID=4';
   public UpdateTeacher: string = this.domain + 'api/Teacher/UpdateTeacher';
   public GetTeacher: string = this.domain + 'api/Class/GetClass';
   public DeleteTeacher: string = this.domain + 'api/Teacher/DeleteTeacher';
 
   // subject
   public AddSubject: string = this.domain + 'api/createSubjects';
-  public GetSubjects: string = this.domain + 'api/getAllSubjects?SchoolOrganizationID=3';
+  public GetSubjects: string = this.domain + 'api/getAllSubjects?SchoolOrganizationID=4';
   public UpdateSubject: string = this.domain + 'api/Subject/UpdateSubject';
   public GetSubject: string = this.domain + 'api/Subject/GetSubject';
   public DeleteSubject: string = this.domain + 'api/Subject/DeleteSubject';
@@ -92,7 +92,7 @@ export class GlobalApi {
 
   /// driver
   public savedriver: string = this.domain + 'api/createDriver';
-  public getdriverlist: string = this.domain + 'api/getAllDrivers?SchoolOrganizationID=3';
+  public getdriverlist: string = this.domain + 'api/getAllDrivers?SchoolOrganizationID=4';
   public GetSingleDriver: string = this.domain + 'api/Transport/getsingledriverdetails';
   public UpdateSingleDriver: string = this.domain + 'api/Transport/updatedriverdetails';
   public DeleteDriver: string = this.domain + 'api/Transport/removedriverdetails';
