@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit {
         labels: ["Present", "Absent"],
         datasets: [{
           label: "Total Strength",
-          backgroundColor: ["#75ff1a", "#ff9422"],
+          backgroundColor: ["#050567", "#ff9422"],
           data: [2478,5267]
         }]
       },
@@ -36,7 +36,7 @@ export class DashboardComponent implements OnInit {
       labels: ["Present", "Absent"],
       datasets: [{
         label: "Total Strength",
-        backgroundColor: ["#75ff1a", "#ff9422"],
+        backgroundColor: ["#050567", "#ff9422"],
         data: [300,21]
       }]
     },

@@ -33,6 +33,7 @@
     "@types/xlsx": "0.0.36",
     "angular-calendar": "^0.21.3",
     "angular-oauth2-oidc": "^4.0.2",
+    "angular2-jwt": "^0.2.3",
     "bootstrap": "4.0.0-beta",
     "bourbon": "^4.3.4",
     "chart.js": "^2.7.2",
