@@ -2,6 +2,8 @@
   z-index: 1; // required to make the shadow overlap the below content (need is visible in mobile drawer overlay)
   border: 0;
   border-radius: 0;
+  background-color: white;
+  box-shadow: 0 3px 12px -2px #00000059;
 
   .navbar-brand {
     position: relative;

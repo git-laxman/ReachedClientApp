@@ -6,3 +6,19 @@
 .gap-top{
 margin-top: 25px;
 }
+.head{
+    font-weight: bolder;
+    text-align: center;
+    background-color: #d0fbc7b0;
+    font-size: 25px;
+    padding: 10px;
+    border-radius: 30px;
+   // box-shadow: 0 2px 6px -2px #f74343b5;
+    text-shadow: 1px 1px 5px #9a9a9a;
+}
+.imgstyle{
+    width: 70px;
+            float: right;
+          -webkit-filter: drop-shadow(2px 3px 5px #c3bbbb);
+           filter: drop-shadow(2px 3px 5px #c3bbbb);
+}
