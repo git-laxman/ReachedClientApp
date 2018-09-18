@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit {
         labels: ["Present", "Absent"],
         datasets: [{
           label: "Total Strength",
-          backgroundColor: ["#050567", "#ff9422"],
+          backgroundColor: ["#2efd12", "#ff9422"],
           data: [2478,5267]
         }]
       },
@@ -36,11 +36,12 @@ export class DashboardComponent implements OnInit {
       labels: ["Present", "Absent"],
       datasets: [{
         label: "Total Strength",
-        backgroundColor: ["#050567", "#ff9422"],
+        backgroundColor: ["#2efd12", "#ff9422"],
         data: [300,21]
       }]
     },
     options: {
+     
       // title: {
       //   display: true,
       //   text: 'Total Strength of the Staff'
@@ -57,48 +58,69 @@ export class DashboardComponent implements OnInit {
           datasets: [{
               label: 'Pass Percentage',
               data: [92, 100, 34, 83, 25, 55, 61, 82, 45, 67],
-              backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-                  'rgba(255, 159, 64, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-                  'rgba(255, 159, 64, 0.2)'
-              ],
-              borderColor: [
-                  'rgba(255,99,132,1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(255,99,132,1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(153, 102, 255, 1)',
-                  'rgba(255, 159, 64, 1)',
-                  'rgba(153, 102, 255, 1)',
-                  'rgba(255, 159, 64, 1)'
-              ],
-              borderWidth: 1,
-           
-          }]
+              backgroundColor: "#67e5ff",
+              borderColor: "#00b7d2",
+              borderWidth: 1
+          },
+
+          {
+            label: 'Attendance Percentage',
+            data: [45, 66, 72, 32, 82, 51, 71, 39, 75, 90],
+            backgroundColor: "#ffa8a8",
+            borderColor: "#f95b5b",
+            borderWidth: 1
+          }
+        ]
       },
       options: {
           scales: {
+              xAxes: [{
+                barPercentage: 0.9,
+                categoryPercentage:0.7
+              }],
               yAxes: [{
                   ticks: {
+                    min: 0,
+                    max: 100,
+                    stepSize: 20,
                       beginAtZero:true
                   }
-              }]
+              }],
+              tooltips: {
+                enabled: true,
+                mode: 'single',
+                callbacks: {
+                  //title: function(tooltipItem, data) {
+                   // return "Login History";
+          
+                  //}, // This returns the hour range for the tool tip, and - Now for the current hour
+                  title: function(tooltipItem, data) {
+                    if (tooltipItem.index == 23) {
+                      return data.labels[tooltipItem.index] + " - Now";
+                    } else {
+                      return data.labels[tooltipItem.index] + " - " + data.labels[(tooltipItem.index) + 1];
+                    }
+                  },
+                  // This sets the label for the tool tip for the number of either successfully logged on users
+                  // or failed users
+                  label: function(tooltipItem, data) {
+                    var successCount = data.datasets[0].data[tooltipItem.index];
+                    var failCount = data.datasets[1].data[tooltipItem.index];
+                    return "Success: " + successCount + "\n Distinct: " + failCount;
+                  }
+                }
+              }
           }
       }
   }) 
 
   
 
+  
+
   }
+ 
+  
   
 
 }
